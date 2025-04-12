@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     float timer;
 
     Rigidbody2D rb;
+
+    public GameColor enemyColor;
     
     // Start is called before the first frame update
     void Awake(){
