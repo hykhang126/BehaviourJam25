@@ -1,17 +1,24 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
- 
+using UnityEngine.Serialization;
+
 public class PlayerController : MonoBehaviour
 {
     PlayerControls controls;
     Vector2 move;
     Rigidbody2D rb;
+    
+    // Dash
     public float speed = 10f;
     public float dashSpeed = 20f;
     public float dashCooldown = 3f; // Cooldown time between dashes in seconds
-    private float dashTime = 0f;
+    private float dashTime;
     private Vector2 dashVector = Vector2.zero; // Vector to store the dash direction
+    
+    // Attack
+    [SerializeField] private Player player;
 
     void Awake()
     {
@@ -31,12 +38,22 @@ public class PlayerController : MonoBehaviour
 
         // Dash
         controls.Player.Dash.performed += ctx => Dash();
+        
+        // Attack
+        controls.Player.Fire.performed += HandleShoot;
     }
-    
+
+    private void OnDestroy()
+    {
+        // Attack
+        controls.Player.Fire.performed -= HandleShoot;
+    }
+
     private void OnEnable()
     {
         controls.Player.Enable();
     }
+    
     private void OnDisable()
     {
         controls.Player.Disable();
@@ -53,6 +70,11 @@ public class PlayerController : MonoBehaviour
         dashTime = dashCooldown; // Reset the cooldown timer
         Vector2 dir = move.normalized;
         dashVector = dir * dashSpeed;
+    }
+
+    private void HandleShoot(InputAction.CallbackContext context)
+    {
+        player.TryShoot(Input.mousePosition);
     }
     
     void FixedUpdate()

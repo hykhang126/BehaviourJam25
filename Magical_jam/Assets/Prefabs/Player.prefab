@@ -113,6 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7277709363797054526}
   - component: {fileID: 7549041778833700098}
+  - component: {fileID: 18154719979440341}
   - component: {fileID: 3773818598775845539}
   - component: {fileID: 1643819292734749714}
   - component: {fileID: 3752123285093063412}
@@ -156,8 +157,25 @@ MonoBehaviour:
   moveSpeed: 10
   jumpForce: 0
   HUD: {fileID: 0}
-  _playerBody: {fileID: 7894472832680753255}
+  playerBody: {fileID: 7894472832680753255}
+  attachedGun: {fileID: 1989616614844165598}
   health: 3
+--- !u!114 &18154719979440341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909555274014226511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b94c0d68e0545e4ba3130c510e8614a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  dashSpeed: 2
+  dashCooldown: 3
+  player: {fileID: 7549041778833700098}
 --- !u!50 &3773818598775845539
 Rigidbody2D:
   serializedVersion: 5
@@ -173,7 +191,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -268,7 +286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6594501740717402074
 Transform:
   m_ObjectHideFlags: 0
@@ -296,7 +314,7 @@ GameObject:
   - component: {fileID: 4992541082362203646}
   - component: {fileID: 1989616614844165598}
   m_Layer: 6
-  m_Name: BulletSpawnPoint
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,6 +333,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7255201759582819541}
   - {fileID: 2552385645453050390}
   m_Father: {fileID: 6100328027782155389}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -330,9 +349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4df44d313319ce2409fa47a94dcb81ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 2860354110332360455}
   player: {fileID: 7549041778833700098}
   bulletPrefab: {fileID: 1192747416667966142, guid: ff45c701d3386584794dde714b1b6a5d, type: 3}
+  bulletSpawnPoint: {fileID: 7255201759582819541}
+  reloadCooldown: 5
 --- !u!1 &3754165725527303633
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +472,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!1 &5973689335862614812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7255201759582819541}
+  m_Layer: 6
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7255201759582819541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973689335862614812}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.545, y: -0.248, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4992541082362203646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7823851156584631376
 GameObject:
   m_ObjectHideFlags: 0
