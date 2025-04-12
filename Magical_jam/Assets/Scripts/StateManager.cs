@@ -13,7 +13,7 @@ public class StateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CurrentState.Update();
+        CurrentState?.Update();
     }
 
     public void SwitchState(State newState)
