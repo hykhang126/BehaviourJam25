@@ -9,6 +9,7 @@ using Combat;
  
 public class PlayerController : MonoBehaviour
 {
+    Player player;
     PlayerControls controls;
     Vector2 move;
     Rigidbody2D rb;
@@ -19,9 +20,6 @@ public class PlayerController : MonoBehaviour
     public float dashCooldown = 3f; // Cooldown time between dashes in seconds
     private float dashTime;
     private Vector2 dashVector = Vector2.zero; // Vector to store the dash direction
-    
-    // Attack
-    [SerializeField] private Player player;
 
     void Awake()
     {
