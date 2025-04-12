@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
+using Combat;
+
 public class Player : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
@@ -10,12 +12,19 @@ public class Player : MonoBehaviour
     [SerializeField] private Gun attachedGun;
     [SerializeField] private int health;
     [SerializeField] float moveSpeed;
-    [SerializeField] float jumpForce;
-    
-    private Rigidbody2D rb;
+
+    [FormerlySerializedAs("_characterBody")] [SerializeField] private Transform _playerBody;
+
+    [SerializeField] bool isHit;
+
     Animator animator;
-    bool isHit;
-    
+
+    Rigidbody2D rb;
+
+    SpriteRenderer spriteRenderer;
+
+    [SerializeField] private LevelColor _currentColor;
+
     //Awake is called before the game even starts.
     void Awake()
     {
@@ -41,6 +50,24 @@ public class Player : MonoBehaviour
             HUD.GameOver();
             Destroy(this.gameObject);
         }
+    }
+
+    // Update the player's color based on the current level color
+    public void UpdatePlayerColor(LevelColor newColor)
+    {
+        _currentColor = newColor;
+        Debug.Log("Player color updated to: " + _currentColor);
+    }
+
+    // Get the current color of the player
+    public LevelColor GetPlayerColor()
+    {
+        return _currentColor;
+    }
+
+    // Set if the player is hit
+    public void SetIsHit(bool hit){
+        isHit = hit;
     }
 
     // Start is called before the first frame update
@@ -95,3 +122,4 @@ public class Player : MonoBehaviour
         attachedGun.Shoot(playerCamera.ScreenToViewportPoint(mouseScreenPointPosition));
     }
 }
+

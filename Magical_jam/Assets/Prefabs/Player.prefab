@@ -138,7 +138,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7894472832680753255}
-  - {fileID: 7129838881534763965}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7549041778833700098
@@ -161,22 +160,11 @@ MonoBehaviour:
   health: 3
   moveSpeed: 10
   jumpForce: 0
---- !u!114 &18154719979440341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909555274014226511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b94c0d68e0545e4ba3130c510e8614a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  dashSpeed: 2
-  dashCooldown: 3
-  player: {fileID: 7549041778833700098}
+  HUD: {fileID: 0}
+  _playerBody: {fileID: 0}
+  health: 3
+  isHit: 0
+  _currentColor: 0
 --- !u!50 &3773818598775845539
 Rigidbody2D:
   serializedVersion: 5
@@ -533,14 +521,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7823851156584631376}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.208452, y: 1.508684, z: 0.087569684}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6594501740717402074}
+  - {fileID: 7129838881534763965}
   m_Father: {fileID: 7277709363797054526}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 31.724, z: 0}
 --- !u!212 &1255798220715151535
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -624,12 +613,12 @@ Transform:
   m_GameObject: {fileID: 7922120533806864601}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.014663759, w: -0.9998925}
-  m_LocalPosition: {x: 0.81, y: 0.65, z: -0.06}
+  m_LocalPosition: {x: 0.8099997, y: 0.6499989, z: -0.06}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6871114707975065805}
-  m_Father: {fileID: 7277709363797054526}
+  m_Father: {fileID: 7894472832680753255}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -358.32}
 --- !u!95 &757744767240747328
 Animator:

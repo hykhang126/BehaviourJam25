@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = System.Random;
 
 namespace Combat
 {
     public class LevelColorManager : MonoBehaviour
     {
+        
+        /// <summary>
+        /// COLOR CHANGED EVENT
+        /// </summary>
+        public UnityEvent<LevelColor> OnLevelColorChanged;
+        //----------------------------------------------------------
+
         private struct LevelData
         {
             public LevelColor LevelColor;
@@ -83,6 +91,8 @@ namespace Combat
             var nextLevelColor = _upcomingLevelColors.Dequeue();
             var nextLevelDataIndex = _levelData.FindIndex(x => x.LevelColor == nextLevelColor);
             _currentLevelDataIndex = nextLevelDataIndex;
+
+            OnLevelColorChanged?.Invoke(nextLevelColor);
             
             if (nextLevelDataIndex == -1)
             {

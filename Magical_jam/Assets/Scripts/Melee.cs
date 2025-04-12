@@ -6,12 +6,21 @@ public class Melee : MonoBehaviour
 {
     Player player;
 
+    Animator animator;
+
     [SerializeField] GameObject meleeCapsuleCenter;
 
     bool isAttacking;
     
     void Awake(){
         player = GetComponentInParent<Player>();
+
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found on the player object.");
+        }
+
         isAttacking = false;
     }
 
@@ -19,15 +28,13 @@ public class Melee : MonoBehaviour
         return isAttacking;
     }
 
-    public void flipMeleeCapsuleCenter(){
-        meleeCapsuleCenter.transform.localPosition = new Vector3(meleeCapsuleCenter.transform.localPosition.x-14, meleeCapsuleCenter.transform.localPosition.y, meleeCapsuleCenter.transform.localPosition.z);
-    }
-
-    public void unFlipMeleeCapsuleCenter(){
-        meleeCapsuleCenter.transform.localPosition = new Vector3(meleeCapsuleCenter.transform.localPosition.x+14, meleeCapsuleCenter.transform.localPosition.y, meleeCapsuleCenter.transform.localPosition.z);
+    public void shouldFlipMeleeCapsuleCenter(){
+        // Check mouse position to see if we should flip the sprite
     }
 
     public void Attack(){
+        if(isAttacking) return; // Prevents multiple attacks at once
+        animator.SetTrigger("Action"); // Trigger the attack animation
         isAttacking = true;
         Collider2D[] colliders = Physics2D.OverlapCapsuleAll(meleeCapsuleCenter.transform.position,new Vector2(3,2),CapsuleDirection2D.Vertical,0);
         foreach(Collider2D c in colliders){
