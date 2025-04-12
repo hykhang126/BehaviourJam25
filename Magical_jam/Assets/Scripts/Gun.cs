@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -17,11 +18,14 @@ public class Gun : MonoBehaviour
     
     public void Shoot(Vector3 mousePosition)
     {
-        var trajectoryVector = mousePosition - transform.rotation.eulerAngles;
-        var prefabAngle = Vector3.Angle(trajectoryVector, Vector3.right);
-        var prefabRotation = Quaternion.Euler(0f, 0f, prefabAngle);
+        var trajectoryVector = mousePosition - bulletSpawnPoint.transform.position;
+        trajectoryVector.Normalize();
+        trajectoryVector.z = 0f;
+
+        Quaternion prefabRotation = Quaternion.Euler( 0, 0, 
+                                Mathf.Atan2 ( trajectoryVector.y, trajectoryVector.x ) * Mathf.Rad2Deg );
         
-        var bullet = Instantiate(bulletPrefab, transform.position, prefabRotation);
+        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, prefabRotation);
         bullet.GetComponent<Bullet>().Initialize(trajectoryVector);
     }
 }

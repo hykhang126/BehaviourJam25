@@ -39,10 +39,10 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Rigidbody2D component not found on the player object.");
         }
 
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         if (animator == null)
         {
-            Debug.LogError("Animator component not found on the player object.");
+            Debug.LogError("Animator component not found on the player's child object.");
         }
 
         melee = GetComponentInChildren<Melee>();
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case LevelColor.Green:
                 melee.Attack();
-                
+                animator.SetTrigger("MeleeAttack");
                 Debug.Log("Melee performed! " + GetType());
                 break;
             default:

@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
             return;
         }
         
-        attachedGun.Shoot(playerCamera.ScreenToViewportPoint(mouseScreenPointPosition));
+        attachedGun.Shoot(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition));
     }
 }
 
