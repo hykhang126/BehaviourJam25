@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private HUD HUD;
     [SerializeField] private Transform playerBody;
+    [SerializeField] private Transform playerArm;
     [SerializeField] private Gun attachedGun;
     [SerializeField] private int health;
     [SerializeField] float moveSpeed;
@@ -67,11 +68,20 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        // Change player rotation
-        bool flipPlayer = Input.mousePosition.x < playerCamera.WorldToScreenPoint(transform.position).x;
-        var playerRotation = playerBody.rotation;
-        playerRotation.y = flipPlayer ? 180f : 0f;
-        playerBody.rotation = playerRotation;
+        var playerScreenPointPosition = playerCamera.WorldToScreenPoint(transform.position);
+        
+        // Update player rotation
+        var flipPlayer = Input.mousePosition.x < playerScreenPointPosition.x;
+        var playerBodyRotation = playerBody.rotation;
+        playerBodyRotation.y = flipPlayer ? 180f : 0f;
+        playerBody.rotation = playerBodyRotation;
+        
+        // Update arm rotation
+        var armVector = Input.mousePosition - playerScreenPointPosition;
+        var armVectorAbs = new Vector3(Mathf.Abs(armVector.x), Mathf.Abs(armVector.y), Mathf.Abs(armVector.z));
+        var armAngle = Vector3.Angle(armVectorAbs, Vector3.right);
+        var armRotationZ = (armVector.y >= 0 ? 1 : -1) * armAngle;
+        playerArm.rotation = Quaternion.Euler(0f, playerBodyRotation.y, armRotationZ);
     }
 
     public void TryShoot(Vector3 mouseScreenPointPosition)
