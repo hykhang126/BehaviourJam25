@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Combat;
+using Enemies;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] private Level levelManager;
+    [SerializeField] private Transform weaponProjectileContainer;
+    
     public GameObject enemyPrefab; // Drag your enemy prefab here in the inspector
     public Transform[] enemySpawnPoints; // The point where the enemy will spawn
     public float spawnInterval; // Time between spawns
@@ -21,7 +26,8 @@ public class SpawnManager : MonoBehaviour
     {
         if (currentEnemyCount == -1 || currentEnemyCount < maxEnemies)
         {
-            Instantiate(enemyPrefab, enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length)].position, Quaternion.identity);
+            var enemy = Instantiate(enemyPrefab, enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length)].position, Quaternion.identity);
+            enemy.GetComponent<Enemy>().Initialize(levelManager.player, weaponProjectileContainer);
             currentEnemyCount = (currentEnemyCount == -1) ? 1 : currentEnemyCount + 1;
         }
     }

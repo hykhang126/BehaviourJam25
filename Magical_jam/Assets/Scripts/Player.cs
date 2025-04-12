@@ -5,15 +5,14 @@ using Combat;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Collider2D playerCollider;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private HUD HUD;
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform playerArm;
     [SerializeField] private Gun attachedGun;
-    [SerializeField] private int health;
+    [SerializeField] private float health;
     [SerializeField] float moveSpeed;
-
-    [FormerlySerializedAs("_characterBody")] [SerializeField] private Transform _playerBody;
 
     [SerializeField] bool isHit;
 
@@ -32,7 +31,7 @@ public class Player : MonoBehaviour
     }
 
     // Get health
-    public int getHealth()
+    public float getHealth()
     {
         return health;
     }
@@ -40,18 +39,18 @@ public class Player : MonoBehaviour
     // TakeDamage
     // This function is called when the player takes damage
     // It decreases the player's health by 1 and updates the HUD
-    public void TakeDamage()
+    public void TakeDamage(float damageTaken = 1)
     {
-        health--;
-        HUD.lowerHealth();
+        health -= damageTaken;
+        /*HUD.lowerHealth();*/
         isHit = true;
-        if (health == 0)
+        if (health <= 0)
         {
             HUD.GameOver();
             Destroy(this.gameObject);
         }
     }
-
+    
     // Update the player's color based on the current level color
     public void UpdatePlayerColor(LevelColor newColor)
     {
