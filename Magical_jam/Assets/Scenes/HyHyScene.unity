@@ -323,11 +323,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e374fae7fe1742a0bf8ad755e31a1460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnLevelColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1502041038}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: UpdatePlayerColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _levelColorSwapCooldown: 5
   _areLevelColorsRandomized: 0
-  _levelColorOrder: 
+  _levelColorOrder: 010000000200000003000000
   _minNumberOfLevelsLoaded: 3
-  _textTest: {fileID: 0}
+  _textTest: {fileID: 1530074767}
 --- !u!1 &387871220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1076,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7277709363797054526, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
   m_PrefabInstance: {fileID: 2094713037}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1502041038 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
+  m_PrefabInstance: {fileID: 2094713037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502041025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b63e08c55304dbe642d62ba2643a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1502041040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502041025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b94c0d68e0545e4ba3130c510e8614a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  dashSpeed: 1
+  dashCooldown: 3
 --- !u!1 &1529938515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,6 +1209,17 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   m_ComponentOwner: {fileID: 387871221}
+--- !u!114 &1530074767 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 39400286620416422, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+  m_PrefabInstance: {fileID: 426269687}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1624063116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,7 +1237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1624063117
 Transform:
   m_ObjectHideFlags: 0
@@ -1511,6 +1563,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1865622040 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7894472832680753255, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
+  m_PrefabInstance: {fileID: 2094713037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1879837259 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4561116347701430897, guid: 65381d9088b70264694e3bc55310952a, type: 3}
@@ -1533,6 +1590,18 @@ PrefabInstance:
     - target: {fileID: 909555274014226511, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2166350286605484541, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
+      propertyPath: dashSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2166350286605484541, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
+      propertyPath: dashCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773818598775845539, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7277709363797054526, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1579,13 +1648,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1879837259}
     - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
+      propertyPath: _playerBody
+      value: 
+      objectReference: {fileID: 1865622040}
+    - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 93682129}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 909555274014226511, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1502041040}
   m_SourcePrefab: {fileID: 100100000, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

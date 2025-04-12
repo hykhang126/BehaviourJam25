@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
+using Combat;
+
 public class Player : MonoBehaviour
 {
     [SerializeField] Camera playerCamera;
@@ -8,18 +10,18 @@ public class Player : MonoBehaviour
 
     [SerializeField] float moveSpeed;
 
-    [SerializeField] float jumpForce;
-
     [SerializeField] HUD HUD;
+
+    [FormerlySerializedAs("_characterBody")] [SerializeField] private Transform _playerBody;
+
+    [SerializeField] int health;
+    [SerializeField] bool isHit;
 
     Animator animator;
 
     SpriteRenderer spriteRenderer;
-    [FormerlySerializedAs("_characterBody")] [SerializeField] private Transform _playerBody;
 
-    bool isHit;
-
-    [SerializeField] int health;
+    [SerializeField] private LevelColor _currentColor;
 
     //Awake is called before the game even starts.
     void Awake(){
@@ -43,6 +45,24 @@ public class Player : MonoBehaviour
             HUD.GameOver();
             Destroy(this.gameObject);
         }
+    }
+
+    // Update the player's color based on the current level color
+    public void UpdatePlayerColor(LevelColor newColor)
+    {
+        _currentColor = newColor;
+        Debug.Log("Player color updated to: " + _currentColor);
+    }
+
+    // Get the current color of the player
+    public LevelColor GetPlayerColor()
+    {
+        return _currentColor;
+    }
+
+    // Set if the player is hit
+    public void SetIsHit(bool hit){
+        isHit = hit;
     }
 
     // Start is called before the first frame update
@@ -74,5 +94,13 @@ public class Player : MonoBehaviour
         var playerRotation = _playerBody.rotation;
         playerRotation.y = flipPlayer ? 180f : 0f;
         _playerBody.rotation = playerRotation;
+    }
+
+    // On Destroy
+    private void OnDestroy()
+    {
+        // Perform any cleanup or additional actions here
+        // For example, you can log a message or trigger an event
+        Debug.Log("Player object destroyed.");
     }
 }

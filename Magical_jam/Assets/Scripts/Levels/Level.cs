@@ -1,10 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using Combat;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Level : MonoBehaviour
 {
+    /// <summary>
+    /// SINGLETON
+    /// </summary>
+    public static Level Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    /// SINGLETON
+
     [SerializeField] private LevelColorManager _levelColorManager;
     
     public Transform[] spawnPoints;
@@ -34,7 +54,7 @@ public class Level : MonoBehaviour
     public void Update()
     {
         // Check if the player has reached the end of the level
-        if (spawnManagers[currentRoomIndex].currentEnemyCount == spawnManagers[currentRoomIndex].maxEnemies - 1)
+        if (spawnManagers.Length > 0 && spawnManagers[currentRoomIndex].currentEnemyCount == spawnManagers[currentRoomIndex].maxEnemies - 1)
         {
             spawnManagers[currentRoomIndex].gameObject.SetActive(false);
             // Move to the next room
