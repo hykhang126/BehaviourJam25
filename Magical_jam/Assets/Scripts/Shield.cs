@@ -5,6 +5,9 @@ public class Shield : MonoBehaviour
 {
     Collider2D sc;
 
+    public LayerMask playerLayer; // Layer for the player
+    public LayerMask bulletLayer; // Layer for the bullets
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,8 +17,9 @@ public class Shield : MonoBehaviour
             Debug.LogError("Collider2D component not found on the shield object.");
         }
 
-        // SetApplicationVariable this collider to ignore player collisions
-        Physics2D.IgnoreCollision(sc, GetComponentInParent<Collider2D>(), true);
+        // Disable collisions between the shield and player/bullet layers
+        Physics2D.IgnoreLayerCollision(playerLayer, sc.gameObject.layer, true); // Ignore shield-player collision
+        Physics2D.IgnoreLayerCollision(bulletLayer, sc.gameObject.layer, true); // Ignore shield-bullet collision
     }
 
     public void DisableShield()

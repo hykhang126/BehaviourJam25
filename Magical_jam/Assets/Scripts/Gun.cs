@@ -19,8 +19,14 @@ public class Gun : MonoBehaviour
     public void Shoot(Vector3 mousePosition)
     {
         var trajectoryVector = mousePosition - bulletSpawnPoint.transform.position;
-        trajectoryVector.Normalize();
         trajectoryVector.z = 0f;
+        // if the vector maginitude is too small, magnify it
+        if (trajectoryVector.magnitude < 1.0f)
+        {
+            trajectoryVector *= 10f;
+        }
+
+        trajectoryVector.Normalize();
 
         Quaternion prefabRotation = Quaternion.Euler( 0, 0, 
                                 Mathf.Atan2 ( trajectoryVector.y, trajectoryVector.x ) * Mathf.Rad2Deg );

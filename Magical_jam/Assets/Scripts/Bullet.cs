@@ -26,8 +26,6 @@ public class Bullet : MonoBehaviour
         ricochet = 0;
         rb.linearVelocity = Vector2.zero;
 
-        Physics2D.IgnoreCollision(sc, GetComponentInParent<Collider2D>(), true);
-
         // Set the bullet to be destroyed after 5 seconds
         Destroy(gameObject, 5f);
     }
