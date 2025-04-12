@@ -1,12 +1,15 @@
 using Combat;
+using Levels;
 using UnityEngine;
 
 namespace Enemies
 {
-    public class Enemy : MonoBehaviour
+    public abstract class Enemy : MonoBehaviour
     {
         [Header(nameof(Enemy))]
-        [SerializeField] protected Rigidbody2D rigidBody2D;
+        [SerializeField] protected Rigidbody2D enemyRigidbody;
+        [SerializeField] private Collider2D enemyCollider;
+        [SerializeField] private LevelColor levelColor;
         [SerializeField] private float health;
         [SerializeField] protected float moveSpeed;
         [SerializeField] private float attackRange;
@@ -18,6 +21,9 @@ namespace Enemies
         private float lastAttackTime;
         protected Vector2 playerPosition;
         protected Transform weaponProjectileContainer;
+
+        public Collider2D EnemyCollider => enemyCollider;
+        public LevelColor LevelColor => levelColor;
         
         public void Initialize(Player player, Transform weaponProjectileContainer)
         {
@@ -85,7 +91,7 @@ namespace Enemies
         
         public void Death()
         {
-            rigidBody2D.freezeRotation = false;
+            enemyRigidbody.freezeRotation = false;
             currentState = EnemyState.Dead;
             Destroy(this);
         }

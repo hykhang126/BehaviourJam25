@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Combat;
+using Levels;
+using UnityEngine;
 
 namespace Enemies
 {

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Weapons
+namespace Utility
 {
     public class LavaPool : MonoBehaviour
     {

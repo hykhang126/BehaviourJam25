@@ -1,4 +1,4 @@
-﻿namespace Combat
+﻿namespace Levels
 {
     public enum LevelColor
     {
@@ -6,6 +6,7 @@
         Red = 1,
         Blue = 2,
         Green = 3,
-        Black = 4,
+        Yellow = 4,
+        Black = 5,
     }
 }

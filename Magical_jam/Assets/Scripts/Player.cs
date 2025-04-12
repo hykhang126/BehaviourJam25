@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 using Combat;
+using Levels;
 
 public class Player : MonoBehaviour
 {

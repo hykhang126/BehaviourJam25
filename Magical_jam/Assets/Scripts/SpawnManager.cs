@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Combat;
 using Enemies;
+using Levels;
 using UnityEngine;
+using Utility;
 
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private Level levelManager;
+    [SerializeField] private List<SewerGrate> sewerGrates;
     [SerializeField] private Transform weaponProjectileContainer;
     
     public GameObject enemyPrefab; // Drag your enemy prefab here in the inspector
@@ -24,11 +27,24 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if (currentEnemyCount == -1 || currentEnemyCount < maxEnemies)
+        if (currentEnemyCount != -1 && currentEnemyCount >= maxEnemies)
         {
-            var enemy = Instantiate(enemyPrefab, enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length)].position, Quaternion.identity);
-            enemy.GetComponent<Enemy>().Initialize(levelManager.player, weaponProjectileContainer);
-            currentEnemyCount = (currentEnemyCount == -1) ? 1 : currentEnemyCount + 1;
+            return;
+        }
+        
+        var enemy = Instantiate(enemyPrefab, enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length)].position, Quaternion.identity).GetComponent<Enemy>();
+        enemy.Initialize(levelManager.player, weaponProjectileContainer);
+        currentEnemyCount = (currentEnemyCount == -1) ? 1 : currentEnemyCount + 1;
+        
+        // Ignore collisions with each sewer grate for blue enemies only
+        if (enemy.LevelColor is not LevelColor.Blue)
+        {
+            return;
+        }
+        
+        foreach (var sewerGrate in sewerGrates)
+        {
+            Physics2D.IgnoreCollision(sewerGrate.SewerGrateCollider, enemy.EnemyCollider);
         }
     }
 

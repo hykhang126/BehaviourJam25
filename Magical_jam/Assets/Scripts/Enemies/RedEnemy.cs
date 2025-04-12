@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Combat;
+using Levels;
+using UnityEngine;
 
 namespace Enemies
 {
@@ -15,7 +17,7 @@ namespace Enemies
             base.MoveTowardsPlayer();
 
             var trajectory = playerPosition - (Vector2)transform.position;
-            rigidBody2D.linearVelocity = trajectory * (Time.fixedDeltaTime * moveSpeed);
+            enemyRigidbody.linearVelocity = trajectory * (Time.fixedDeltaTime * moveSpeed);
             
             SpawnLavaPool();
         }
