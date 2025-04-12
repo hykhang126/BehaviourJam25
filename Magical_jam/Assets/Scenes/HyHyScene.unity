@@ -279,6 +279,55 @@ Transform:
   - {fileID: 1529938516}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &295313463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 295313464}
+  - component: {fileID: 295313465}
+  m_Layer: 0
+  m_Name: LevelColorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &295313464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295313463}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1624063117}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295313465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295313463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e374fae7fe1742a0bf8ad755e31a1460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelColorSwapCooldown: 5
+  _areLevelColorsRandomized: 0
+  _levelColorOrder: 
+  _minNumberOfLevelsLoaded: 3
+  _textTest: {fileID: 0}
 --- !u!1 &387871220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1198,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 295313464}
   m_Father: {fileID: 812248143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1624063118
@@ -1164,7 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e50a5121075bb478c183759f0d44c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelColorManager: {fileID: 0}
+  _levelColorManager: {fileID: 295313465}
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     PlayerControls controls;
     Vector2 move;
     Rigidbody2D rb;
+    Animator animator;
     public float speed = 10f;
     public float dashSpeed = 20f;
     public float dashCooldown = 3f; // Cooldown time between dashes in seconds
@@ -23,6 +24,12 @@ public class PlayerController : MonoBehaviour
         if (rb == null)
         {
             Debug.LogError("Rigidbody2D component not found on the player object.");
+        }
+
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found on the player object.");
         }
 
         // Movement
@@ -51,6 +58,7 @@ public class PlayerController : MonoBehaviour
             return; // Exit the method if dash is on cooldown
         }
         dashTime = dashCooldown; // Reset the cooldown timer
+        animator.SetBool("Dashing", true); // Trigger the dash animation
         Vector2 dir = move.normalized;
         dashVector = dir * dashSpeed;
     }
@@ -66,5 +74,17 @@ public class PlayerController : MonoBehaviour
             dashTime -= Time.fixedDeltaTime;
             dashVector = Vector2.Lerp(dashVector, Vector2.zero, Time.fixedDeltaTime * 5f); // Gradually reduce the dash vector to zero
         }
+        else
+        {
+            dashVector = Vector2.zero; // Reset the dash vector when cooldown is over
+        }
+
+        // Update the animator parameters based on movement
+        if (dashVector.magnitude <= 0.5f)
+        {
+            animator.SetBool("Dashing", false); // Reset the dash animation when not dashing
+        }
+        // Update the speed parameter in the animator
+        animator.SetFloat("Speed", move.magnitude); // Set the speed parameter based on movement input
     }
 }
