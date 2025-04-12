@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     Animator animator;
 
     SpriteRenderer spriteRenderer;
+    [FormerlySerializedAs("_characterBody")] [SerializeField] private Transform _playerBody;
 
     bool isHit;
 
@@ -69,6 +71,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         bool flipPlayer = Input.mousePosition.x < playerCamera.WorldToScreenPoint(transform.position).x;
-        spriteRenderer.flipX = flipPlayer;
+        var playerRotation = _playerBody.rotation;
+        playerRotation.y = flipPlayer ? 180f : 0f;
+        _playerBody.rotation = playerRotation;
     }
 }
