@@ -22,8 +22,6 @@ public class Player : MonoBehaviour
     //Awake is called before the game even starts.
     void Awake(){
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
         isHit = false;
     }
 
@@ -48,6 +46,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         if(playerCamera == null){
             playerCamera = Camera.main;
         }
@@ -68,8 +68,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var characterRotation = transform.rotation;
-        characterRotation.y = Input.mousePosition.x < playerCamera.WorldToScreenPoint(transform.position).x ? 180f : 0f;
-        transform.rotation = characterRotation;
+        bool flipPlayer = Input.mousePosition.x < playerCamera.WorldToScreenPoint(transform.position).x;
+        spriteRenderer.flipX = flipPlayer;
     }
 }
