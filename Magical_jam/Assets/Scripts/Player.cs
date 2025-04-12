@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 using Combat;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -17,19 +18,15 @@ public class Player : MonoBehaviour
 
     [SerializeField] bool isHit;
 
-    Animator animator;
+    PlayerController playerController;
+
+    Melee melee;
 
     Rigidbody2D rb;
 
-    SpriteRenderer spriteRenderer;
+    [SerializeField] Shield shield;
 
     [SerializeField] private LevelColor _currentColor;
-
-    //Awake is called before the game even starts.
-    void Awake()
-    {
-        isHit = false;
-    }
 
     // Get health
     public int getHealth()
@@ -37,22 +34,8 @@ public class Player : MonoBehaviour
         return health;
     }
 
-    // TakeDamage
-    // This function is called when the player takes damage
-    // It decreases the player's health by 1 and updates the HUD
-    public void TakeDamage()
-    {
-        health--;
-        HUD.lowerHealth();
-        isHit = true;
-        if (health == 0)
-        {
-            HUD.GameOver();
-            Destroy(this.gameObject);
-        }
-    }
-
     // Update the player's color based on the current level color
+    // Subscribe to OnLevelColorChanged event
     public void UpdatePlayerColor(LevelColor newColor)
     {
         _currentColor = newColor;
@@ -73,16 +56,24 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize the player controller
+        playerController = GetComponent<PlayerController>();
+        if (playerController == null)
+        {
+            playerController = gameObject.AddComponent<PlayerController>();
+        }
+
+        melee = GetComponentInChildren<Melee>();
+        if (melee == null)
+        {
+            Debug.LogError("Melee component not found in the children of the player object.");
+        }
+        // Hide the melee obj
+        melee.gameObject.SetActive(false);
+
         if (playerCamera == null)
         {
             playerCamera = Camera.main;
-        }
-
-        // Initialize the animator component
-        animator = GetComponent<Animator>();
-        if (animator == null)
-        {
-            animator = gameObject.AddComponent<Animator>();
         }
 
         // Initialize the rigidbody component
@@ -91,6 +82,13 @@ public class Player : MonoBehaviour
         {
             rb = gameObject.AddComponent<Rigidbody2D>();
         }
+
+        if (shield == null)
+        {
+            shield = GetComponentInChildren<Shield>();
+        }
+
+        isHit = false;
     }
     
     void Update()
@@ -109,8 +107,65 @@ public class Player : MonoBehaviour
         var armAngle = Vector3.Angle(armVectorAbs, Vector3.right);
         var armRotationZ = (armVector.y >= 0 ? 1 : -1) * armAngle;
         playerArm.rotation = Quaternion.Euler(0f, playerBodyRotation.y, armRotationZ);
+
+        // Update shield collider
+        if (_currentColor != LevelColor.Blue)
+        {
+            shield.DisableShield();
+        }
     }
 
+    
+    // TakeDamage
+    // This function is called when the player takes damage
+    // It decreases the player's health by 1 and updates the HUD
+    public void TakeDamage()
+    {
+        health--;
+        HUD.lowerHealth();
+        isHit = true;
+        if (health == 0)
+        {
+            HUD.GameOver();
+            Destroy(this.gameObject);
+        }
+    }
+
+    /// FIRE ACTION LOGIC
+    /// This function is called when the player presses the fire button
+    public void FireAction()
+    {
+        // More logic depending on the color
+        switch (_currentColor)
+        {
+            // Red is shoot
+            case LevelColor.Red:
+                TryShoot(Input.mousePosition);
+                break;
+            // Blue is block
+            case LevelColor.Blue:
+                TryBlock();
+                break;
+            // Green is 
+            case LevelColor.Green:
+                break;
+            // Yellow is melee
+            case LevelColor.Yellow:
+                // Perform action for yellow color
+                melee.gameObject.SetActive(true);
+                melee.Attack();
+                Debug.Log("Melee performed! " + GetType());
+                break;
+            // Black is flashlight
+            case LevelColor.Black:
+                // Perform action for black color
+                break;
+            default:
+                Debug.Log("No action defined for this color.");
+                break;
+        }
+    }
+    
     public void TryShoot(Vector3 mouseScreenPointPosition)
     {
         if (!attachedGun)
@@ -120,6 +175,18 @@ public class Player : MonoBehaviour
         }
         
         attachedGun.Shoot(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition));
+    }
+
+    
+    private void TryBlock()
+    {
+        if (!shield)
+        {
+            Debug.LogError($"No shield attached to player {gameObject.name}.");
+            return;
+        }
+
+        shield.EnableShield();
     }
 }
 

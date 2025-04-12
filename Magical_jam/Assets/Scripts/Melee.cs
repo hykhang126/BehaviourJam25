@@ -34,7 +34,7 @@ public class Melee : MonoBehaviour
 
     public void Attack(){
         if(isAttacking) return; // Prevents multiple attacks at once
-        animator.SetTrigger("Action"); // Trigger the attack animation
+        animator.SetTrigger("Melee"); // Trigger the attack animation
         isAttacking = true;
         Collider2D[] colliders = Physics2D.OverlapCapsuleAll(meleeCapsuleCenter.transform.position,new Vector2(3,2),CapsuleDirection2D.Vertical,0);
         foreach(Collider2D c in colliders){
@@ -49,6 +49,9 @@ public class Melee : MonoBehaviour
 
     public void EndAttack(){
         isAttacking = false;
+
+        // Disable this object
+        gameObject.SetActive(false);
     }
     
     // Start is called before the first frame update
@@ -60,6 +63,6 @@ public class Melee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

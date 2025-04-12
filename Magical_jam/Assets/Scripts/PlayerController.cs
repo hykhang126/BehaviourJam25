@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     Vector2 move;
     Rigidbody2D rb;
     Animator animator;
-    Melee melee;
     public float speed = 10f;
     public float dashSpeed = 2f;
     public float dashCooldown = 3f; // Cooldown time between dashes in seconds
@@ -43,12 +42,6 @@ public class PlayerController : MonoBehaviour
         if (animator == null)
         {
             Debug.LogError("Animator component not found on the player's child object.");
-        }
-
-        melee = GetComponentInChildren<Melee>();
-        if (melee == null)
-        {
-            Debug.LogError("Melee component not found in the children of the player object.");
         }
 
         // Movement
@@ -86,32 +79,10 @@ public class PlayerController : MonoBehaviour
         dashVector = dir * dashSpeed;
     }
 
-    private void HandleShoot()
-    {
-        player.TryShoot(Input.mousePosition);
-    }
-
     // Action depending on the color
     void FireAction()
     {
-        // More logic depending on the color
-        switch (player.GetPlayerColor())
-        {
-            case LevelColor.Red:
-                HandleShoot();
-                break;
-            case LevelColor.Blue:
-                // Perform action for blue color
-                break;
-            case LevelColor.Green:
-                melee.Attack();
-                animator.SetTrigger("MeleeAttack");
-                Debug.Log("Melee performed! " + GetType());
-                break;
-            default:
-                Debug.Log("No action defined for this color.");
-                break;
-        }
+        if (player) player.FireAction();
     }
     
     void FixedUpdate()

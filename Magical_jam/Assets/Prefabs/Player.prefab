@@ -113,6 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7277709363797054526}
   - component: {fileID: 7549041778833700098}
+  - component: {fileID: 8401433004866362306}
   - component: {fileID: 3773818598775845539}
   - component: {fileID: 1643819292734749714}
   m_Layer: 6
@@ -157,9 +158,24 @@ MonoBehaviour:
   attachedGun: {fileID: 1989616614844165598}
   health: 3
   moveSpeed: 10
-  _playerBody: {fileID: 0}
+  _playerBody: {fileID: 7894472832680753255}
   isHit: 0
   _currentColor: 0
+--- !u!114 &8401433004866362306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909555274014226511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b94c0d68e0545e4ba3130c510e8614a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  dashSpeed: 1
+  dashCooldown: 3
 --- !u!50 &3773818598775845539
 Rigidbody2D:
   serializedVersion: 5
@@ -226,7 +242,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4.8, y: 9.6}
-    newSize: {x: 1, y: 2}
+    newSize: {x: 4.8, y: 9.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -479,6 +495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7894472832680753255}
   - component: {fileID: 1255798220715151535}
+  - component: {fileID: 7438826115632069871}
   m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
@@ -558,6 +575,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7438826115632069871
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823851156584631376}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3141c00ae87864042ba4c4d728603978, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7922120533806864601
 GameObject:
   m_ObjectHideFlags: 0
