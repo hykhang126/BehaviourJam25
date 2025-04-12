@@ -68,6 +68,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spriteRenderer.flipX = Input.mousePosition.x < playerCamera.WorldToScreenPoint(transform.position).x;
+        var characterRotation = transform.rotation;
+        characterRotation.y = Input.mousePosition.x < playerCamera.WorldToScreenPoint(transform.position).x ? 180f : 0f;
+        transform.rotation = characterRotation;
     }
 }
