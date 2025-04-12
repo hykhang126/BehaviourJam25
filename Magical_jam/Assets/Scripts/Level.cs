@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Combat;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    [SerializeField] private LevelColorManager _levelColorManager;
+    
     public Transform[] spawnPoints;
 
     public SpawnManager[] spawnManagers;
