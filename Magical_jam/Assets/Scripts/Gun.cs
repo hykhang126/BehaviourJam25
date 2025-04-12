@@ -1,29 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Principal;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] GameObject spawnPoint;
-
-    [SerializeField] Player player;
-
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] private Player player;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private float reloadCooldown = 5f;
     
-    // Start is called before the first frame update
     void Start()
     {
-        
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        
     }
-
-    public void Shoot(){
-        GameObject bullet = Instantiate(bulletPrefab,spawnPoint.transform.position,transform.rotation);
+    
+    public void Shoot(Vector3 mousePosition)
+    {
+        var trajectoryVector = mousePosition - transform.rotation.eulerAngles;
+        var prefabAngle = Vector3.Angle(trajectoryVector, Vector3.right);
+        var prefabRotation = Quaternion.Euler(0f, 0f, prefabAngle);
+        
+        var bullet = Instantiate(bulletPrefab, transform.position, prefabRotation);
+        bullet.GetComponent<Bullet>().Initialize(trajectoryVector);
     }
 }
