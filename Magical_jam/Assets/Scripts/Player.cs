@@ -68,6 +68,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        spriteRenderer.flipX = Input.mousePosition.x < playerCamera.WorldToScreenPoint(transform.position).x;
     }
 }
