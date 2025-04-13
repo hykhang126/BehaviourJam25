@@ -18,15 +18,17 @@ namespace Enemies
         [SerializeField] protected float attackCooldown;
         [Header("Knockback when hit should be small 0.5f - 1.5f")]
         [SerializeField] private float knockbackForce;
-        
-        private EnemyState currentState;
+
+        protected EnemyState currentState;
         protected Player player;
-        private float lastAttackTime;
+        protected float lastAttackTime;
         protected Vector2 playerPosition;
+        protected Vector2 normalizedTrajectoryToPlayer;
         protected Transform weaponProjectileContainer;
 
         public Collider2D EnemyCollider => enemyCollider;
         public LevelColor LevelColor => levelColor;
+        public float AttackDamage => attackDamage;
         
         public void Initialize(Player player, Transform weaponProjectileContainer)
         {
@@ -81,15 +83,18 @@ namespace Enemies
         protected virtual void MoveTowardsPlayer()
         {
             playerPosition = player.transform.position;
+            normalizedTrajectoryToPlayer = (playerPosition - (Vector2)transform.position).normalized;
+            enemyRigidbody.linearVelocity = normalizedTrajectoryToPlayer * (Time.fixedDeltaTime * moveSpeed);
+            spriteRenderer.flipX = playerPosition.x < transform.position.x;
         }
 
-        private bool IsNearPlayer()
+        protected bool IsNearPlayer()
         {
             var distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
             return distanceToPlayer <= attackRange;
         }
 
-        private void TryAttackPlayer()
+        protected virtual void TryAttackPlayer()
         {
             if (!IsNearPlayer() || Time.time - lastAttackTime < attackCooldown || currentState is not EnemyState.Attacking)
             {
