@@ -40,6 +40,19 @@ namespace Enemies
             currentState = EnemyState.Attacking;
         }
 
+        private void Start()
+        {
+            if (!player) 
+            {
+                player = FindFirstObjectByType<Player>();
+                if (!player)
+                {
+                    Debug.LogError("Player not found in the scene.");
+                    Destroy(this);
+                }
+            }
+        }
+
         private void Update()
         {
             if (!player)
