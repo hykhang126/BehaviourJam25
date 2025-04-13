@@ -8,4 +8,9 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("HyHyScene");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
