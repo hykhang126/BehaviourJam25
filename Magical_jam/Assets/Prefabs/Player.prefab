@@ -161,7 +161,7 @@ MonoBehaviour:
   moveSpeed: 10
   isHit: 0
   shield: {fileID: 3956620223896769112}
-  _currentColor: 2
+  _currentColor: 1
 --- !u!50 &3773818598775845539
 Rigidbody2D:
   serializedVersion: 5

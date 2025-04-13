@@ -24,9 +24,13 @@ public class Player : MonoBehaviour
 
     Rigidbody2D rb;
 
+    Animator animator;
+
     [SerializeField] Shield shield;
 
     [SerializeField] private LevelColor _currentColor;
+
+    
     public bool IsHit => isHit;
 
     //Awake is called before the game even starts.
@@ -46,7 +50,14 @@ public class Player : MonoBehaviour
     // It decreases the player's health by 1 and updates the HUD
     public void TakeDamage(float damageTaken = 1)
     {
+        if (isHit)
+        {
+            return;
+        }
+
         health -= damageTaken;
+        // Animator
+        animator.SetTrigger("isHit");
         /*HUD.lowerHealth();*/
         isHit = true;
         if (health <= 0)
@@ -109,6 +120,12 @@ public class Player : MonoBehaviour
             shield = GetComponentInChildren<Shield>();
         }
 
+        animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found in the children of the player object.");
+        }
+
         isHit = false;
     }
     
@@ -136,22 +153,6 @@ public class Player : MonoBehaviour
             shield.TurnOffShieldSprite();
         }
         
-    }
-
-    
-    // TakeDamage
-    // This function is called when the player takes damage
-    // It decreases the player's health by 1 and updates the HUD
-    public void TakeDamage()
-    {
-        health--;
-        HUD.lowerHealth();
-        isHit = true;
-        if (health == 0)
-        {
-            HUD.GameOver();
-            Destroy(this.gameObject);
-        }
     }
 
     /// FIRE ACTION LOGIC
