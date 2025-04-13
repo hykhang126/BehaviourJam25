@@ -326,7 +326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &295313464
 Transform:
   m_ObjectHideFlags: 0
@@ -1610,7 +1610,7 @@ MonoBehaviour:
   sewerGrates:
   - {fileID: 926904965}
   weaponProjectileContainer: {fileID: 14325752}
-  enemyPrefab: {fileID: 2800850533861119925, guid: e13e217569d3c054a8a5ff56ad8668df, type: 3}
+  enemyPrefab: {fileID: 2800850533861119925, guid: 20d587c84dcd6ee40b835dffbf0a7155, type: 3}
   enemySpawnPoints:
   - {fileID: 768588428}
   spawnInterval: 10

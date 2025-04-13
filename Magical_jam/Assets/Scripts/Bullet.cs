@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private int maxRicochet;
 
-    [SerializeField] private bool shotByPlayer;
+    [SerializeField] private bool shotByPlayer = true;
     
     // Components
     Rigidbody2D rb;

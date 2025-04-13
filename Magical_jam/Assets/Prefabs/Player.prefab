@@ -160,7 +160,7 @@ MonoBehaviour:
   health: 3
   moveSpeed: 10
   isHit: 0
-  shield: {fileID: 0}
+  shield: {fileID: 3956620223896769112}
   _currentColor: 0
 --- !u!50 &3773818598775845539
 Rigidbody2D:
