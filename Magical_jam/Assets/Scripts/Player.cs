@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] float moveSpeed;
 
-    [SerializeField] bool isHit;
+    public bool isHit;
 
     PlayerController playerController;
 

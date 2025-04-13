@@ -26,6 +26,8 @@ namespace Enemies
 
         public Collider2D EnemyCollider => enemyCollider;
         public LevelColor LevelColor => levelColor;
+
+        public SpriteRenderer SpriteRenderer => GetComponentInChildren<SpriteRenderer>();
         
         public void Initialize(Player player, Transform weaponProjectileContainer)
         {
@@ -80,6 +82,17 @@ namespace Enemies
         protected virtual void MoveTowardsPlayer()
         {
             playerPosition = player.transform.position;
+
+            // Flip sprite dependiong on player position
+            if (playerPosition.x < transform.position.x)
+            {
+                SpriteRenderer.flipX = true;
+            }
+            else
+            {
+                SpriteRenderer.flipX = false;
+            }
+
         }
 
         private bool IsNearPlayer()

@@ -61,10 +61,17 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Enemy") && !shotByPlayer)
+        {
+            return;
+        }
+
         // Player damage
         if (collision.gameObject.CompareTag("Player") && !shotByPlayer)
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            Player player = collision.gameObject.GetComponent<Player>();
+            if (!player.isHit) 
+                player.TakeDamage(damage);
             Destroy(gameObject);
         }
 
@@ -89,6 +96,10 @@ public class Bullet : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
             trajectory = rotation * reflectDir;
             rb.linearVelocity = trajectory * speed;
+
+            // Rotate the bullet to face the new direction
+            float angleToRotate = Mathf.Atan2(trajectory.y, trajectory.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0, 0, angleToRotate);
             
             ricochet++;
         }

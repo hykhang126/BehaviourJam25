@@ -13,6 +13,8 @@ public class Shield : MonoBehaviour
 
     public int playerLayer = 6; // Layer for the player
 
+    public Transform hand;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -62,21 +64,23 @@ public class Shield : MonoBehaviour
         if (spriteRenderer)
             spriteRenderer.enabled = false; // Disable the sprite renderer
     }
-
-    // On collision with enemy, trigger their dameage
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    //Collision for static colliders
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().TakeDamage(1); // Example damage amount
-            Debug.Log("Shield hit by enemy: " + collision.name);
-            // Example: collision.GetComponent<Enemy>().TakeDamage(damageAmount);
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(10); // Example damage amount
+            Debug.Log("Shield hit by enemy: " + collision.gameObject.name);
         }
-        else if (collision.CompareTag("Bullet"))
+    }
+
+    void FixedUpdate()
+    {
+        // Move to parent location
+        if (hand != null)
         {
-            // Trigger bullet damage logic here
-            Debug.Log("Shield hit by bullet: " + collision.name);
-            // Example: collision.GetComponent<Bullet>().Destroy();
+            transform.position = hand.position;
         }
     }
 }
