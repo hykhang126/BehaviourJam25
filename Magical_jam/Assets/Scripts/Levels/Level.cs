@@ -37,7 +37,7 @@ public class Level : MonoBehaviour
 
     public Player player;
 
-    private int _currentColorIndex = 0;
+    [SerializeField] private int _currentColorIndex = 0;
 
     [SerializeField] private LevelColor _currentLevelColor;
     public LevelColor CurrentLevelColor
@@ -53,6 +53,7 @@ public class Level : MonoBehaviour
     public void UpdateCurrentColor(LevelColor newColor)
     {
         _currentLevelColor = newColor;
+        PlayAudio(_currentColorIndex);
     }
 
     public void Start()
@@ -81,8 +82,7 @@ public class Level : MonoBehaviour
                 return;
             }
 
-            // Play the sound automatically at start (optional)
-            PlayAudio(_currentColorIndex);
+
         }
     }
 
