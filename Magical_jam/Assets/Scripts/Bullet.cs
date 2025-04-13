@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float damage;
     [SerializeField] private float speed;
     [SerializeField] private int maxRicochet;
+
+    [SerializeField] private bool shotByPlayer;
     
     // Components
     Rigidbody2D rb;
@@ -27,6 +29,9 @@ public class Bullet : MonoBehaviour
         sc = GetComponent<CircleCollider2D>();
         ricochet = 0;
         rb.linearVelocity = Vector2.zero;
+
+        // Set the bullet to be destroyed after 5 seconds
+        Destroy(gameObject, 5f);
     }
     
     void FixedUpdate()
@@ -36,12 +41,20 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && shotByPlayer)
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             Destroy(gameObject);
         }
+
+        // Player damage
+        if (collision.gameObject.CompareTag("Player") && !shotByPlayer)
+        {
+            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
         
+        // Ricochet
         if (ricochet == maxRicochet)
         {
             Destroy(gameObject);
