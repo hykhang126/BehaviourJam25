@@ -85,7 +85,16 @@ namespace Enemies
             playerPosition = player.transform.position;
             normalizedTrajectoryToPlayer = (playerPosition - (Vector2)transform.position).normalized;
             enemyRigidbody.linearVelocity = normalizedTrajectoryToPlayer * (Time.fixedDeltaTime * moveSpeed);
-            spriteRenderer.flipX = playerPosition.x < transform.position.x;
+
+            // Flip sprite dependiong on player position
+            if (playerPosition.x < transform.position.x)
+            {
+                SpriteRenderer.flipX = true;
+            }
+            else
+            {
+                SpriteRenderer.flipX = false;
+            }
         }
 
         protected bool IsNearPlayer()
