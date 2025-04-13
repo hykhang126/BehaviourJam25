@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = System.Random;
 
 namespace Enemies
@@ -55,25 +51,24 @@ namespace Enemies
                 return;
             }
             
-            // If player is found, run and attack.
+            // If player is found, run into range and attack.
             if (foundPlayer && !isAttacking && Time.time - attackCooldownTimer > attackCooldown)
             {
-                Debug.LogError("black enemy CAN ATTACK");
                 isAttacking = true;
             }
             
             if (isAttacking)
             {
-                // for some reason never gets into range
-                if (Vector2.Distance(playerPosition, transform.position) > attackRange)
+                var playerTransformPosition = (Vector2)player.transform.position;
+                var enemyTransformPosition = (Vector2)transform.position;
+                
+                if (Vector2.Distance(playerTransformPosition, enemyTransformPosition) > attackRange)
                 {
-                    enemyRigidbody.linearVelocity = ((Vector2)player.transform.position - (Vector2)transform.position).normalized * (Time.fixedDeltaTime * runSpeed);
+                    enemyRigidbody.linearVelocity = (playerTransformPosition - enemyTransformPosition).normalized * (Time.fixedDeltaTime * runSpeed);
                     spriteRenderer.flipX = playerPosition.x < transform.position.x;
-                    Debug.LogError($"black enemy IS ATTACKING = player {(Vector2)player.transform.position} & transform {(Vector2)transform.position} & vel = {enemyRigidbody.linearVelocity}");
                     return;
                 }
                 
-                Debug.LogError("black enemy ATTACKED");
                 player.TakeDamage(attackDamage);
                 foundPlayer = false;
                 isAttacking = false;
@@ -96,15 +91,11 @@ namespace Enemies
             {
                 randomMovementCooldownTimer = Time.time;
                 randomMovementLerpVariable = 0;
-                Debug.LogError("black enemy FINDING NEW TRAJECTORY");
             }
             
             enemyRigidbody.linearVelocity = currentMovementTrajectory * (Time.fixedDeltaTime * moveSpeed);
             spriteRenderer.flipX = enemyRigidbody.linearVelocity.x < 0;
             
-            Debug.DrawRay(transform.position, currentMovementTrajectory, Color.red, 5f);
-            
-            // If the two vectors are similar, trigger to attack player.
             if (IsPlayerWithinVision())
             {
                 foundPlayer = true;
