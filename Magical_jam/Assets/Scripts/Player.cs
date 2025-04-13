@@ -197,7 +197,7 @@ public class Player : MonoBehaviour
             return;
         }
         
-        attachedGun.Shoot(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition));
+        attachedGun.Shoot(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition), GetType().ToString());
     }
 
     

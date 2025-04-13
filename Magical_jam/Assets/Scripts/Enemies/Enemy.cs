@@ -53,22 +53,22 @@ namespace Enemies
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!player)
             {
                 Debug.LogError("Player is not active.");
                 Destroy(this);
             }
-            
-            if (currentState is EnemyState.Dormant or EnemyState.Dead)
-            {
-                return;
-            }
 
             if (health <= 0)
             {
                 Death();
+            }
+            
+            if (currentState is EnemyState.Dormant or EnemyState.Dead)
+            {
+                return;
             }
             
             MoveTowardsPlayer();
@@ -100,13 +100,19 @@ namespace Enemies
         public void TakeDamage(float damageTaken)
         {
             health -= damageTaken;
+
+            // Knockback effect
+            var knockbackDirection = (Vector2)transform.position - playerPosition;
+            knockbackDirection.Normalize();
+            enemyRigidbody.AddForce(knockbackDirection * 5f, ForceMode2D.Impulse);
         }
         
         public void Death()
         {
             enemyRigidbody.freezeRotation = false;
             currentState = EnemyState.Dead;
-            Destroy(this);
+            // Destroy the enemy object after a delay
+            Destroy(gameObject, 3f);
         }
     }
 }

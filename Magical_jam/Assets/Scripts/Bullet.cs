@@ -18,11 +18,20 @@ public class Bullet : MonoBehaviour
     private Vector3 trajectory;
     private int ricochet;
 
-    public void Initialize(Vector3 trajectory)
+    public void Initialize(Vector3 trajectory, string bulletOwner)
     {
-        this.trajectory = trajectory;
+        if (bulletOwner.Contains("Player"))
+        {
+            shotByPlayer = true;
+        }
+        else if (bulletOwner.Contains("Enemy"))
+        {
+            shotByPlayer = false;
+        }
+        
+        // Set the trajectory of the bullet
+        this.trajectory = trajectory.normalized;
     }
-    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
