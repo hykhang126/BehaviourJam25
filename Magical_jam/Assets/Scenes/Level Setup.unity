@@ -1234,6 +1234,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2bcc8070ba37fbc498c0e33661cd0fde, type: 3}
   - {fileID: 8300000, guid: af0ba49e81dbc39498b33aa7fdda5415, type: 3}
   player: {fileID: 1502041038}
+  _currentLevelColor: 0
 --- !u!82 &1624063119
 AudioSource:
   m_ObjectHideFlags: 0
