@@ -239,13 +239,16 @@ public class Player : MonoBehaviour
                 break;
             // Green is 
             case LevelColor.Green:
+                            // Perform action for yellow color
+                melee.gameObject.SetActive(true);
+                melee.Attack();
+                
+
                 break;
             // Yellow is melee
             case LevelColor.Yellow:
-                // Perform action for yellow color
-                melee.gameObject.SetActive(true);
-                melee.Attack();
-                Debug.Log("Melee performed! " + GetType());
+
+
                 break;
             // Black is flashlight
             case LevelColor.Black:
