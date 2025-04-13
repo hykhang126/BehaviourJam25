@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         if (dashTime > 0f)
         {
             dashTime -= Time.fixedDeltaTime;
-            dashVector = Vector2.Lerp(dashVector, Vector2.zero, Time.fixedDeltaTime * 5f); // Gradually reduce the dash vector to zero
+            dashVector = Vector2.Lerp(dashVector, Vector2.zero, Time.fixedDeltaTime * 12f); // Gradually reduce the dash vector to zero
         }
         else
         {
