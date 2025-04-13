@@ -8,6 +8,7 @@ namespace Enemies
     public class GreenEnemy : Enemy
     {
         [Header(nameof(GreenEnemy))]
+        [SerializeField] private Transform enemyBody;
         [SerializeField] private PunchFist punchFist;
         
         protected override void MoveTowardsPlayer()
@@ -18,7 +19,13 @@ namespace Enemies
                 return;
             }
             
-            base.MoveTowardsPlayer();
+            playerPosition = player.transform.position;
+            normalizedTrajectoryToPlayer = (playerPosition - (Vector2)transform.position).normalized;
+            enemyRigidbody.linearVelocity = normalizedTrajectoryToPlayer * (Time.fixedDeltaTime * moveSpeed);
+            
+            var enemyBodyRotation = enemyBody.rotation;
+            enemyBodyRotation.y = playerPosition.x < transform.position.x ? 180f : 0f;
+            enemyBody.rotation = enemyBodyRotation;
         }
 
         protected override void TryAttackPlayer()

@@ -23,17 +23,15 @@ namespace Utility
         
         public bool IsPunching => isPunching;
 
-        private void Awake()
-        {
-            startPosition = transform.localPosition;
-        }
-
         public void Initialize(Player player, Vector2 normalizedTrajectoryToPlayer)
         {
             this.player = player;
-            endPosition = startPosition + normalizedTrajectoryToPlayer * distance;
             isPunching = true;
             punchStartTime = Time.time;
+            startPosition = transform.position;
+            endPosition = startPosition + normalizedTrajectoryToPlayer * distance;
+            /*var isFlipped = player.transform.position.x < transform.position.x;
+            endPosition.y *= isFlipped ? -1f : 1f;*/
         }
 
         private void Update()
@@ -52,7 +50,7 @@ namespace Utility
             var currentCurveRatio = (Time.time - punchStartTime) / duration;
             var currentCurvePosition = GetCurvePositionFromRatio(currentCurveRatio);
             var currentTransformPosition = Vector2.Lerp(startPosition, endPosition, currentCurvePosition);
-            transform.localPosition = currentTransformPosition;
+            transform.position = currentTransformPosition;
         }
 
         private float GetCurvePositionFromRatio(float ratio)
@@ -63,7 +61,7 @@ namespace Utility
         private void FinishPunch()
         {
             isPunching = false;
-            transform.localPosition = startPosition;
+            transform.position = startPosition;
             OnFinished?.Invoke();
         }
 
