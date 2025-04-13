@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Destructible
+  - Shield
   layers:
   - Default
   - TransparentFX

@@ -17,6 +17,7 @@ namespace Enemies
             base.MoveTowardsPlayer();
 
             var trajectory = playerPosition - (Vector2)transform.position;
+            trajectory.Normalize();
             enemyRigidbody.linearVelocity = trajectory * (Time.fixedDeltaTime * moveSpeed);
             
             SpawnLavaPool();

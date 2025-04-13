@@ -15,6 +15,8 @@ namespace Enemies
         [SerializeField] private float attackRange;
         [SerializeField] private float attackDamage;
         [SerializeField] private float attackCooldown;
+        [Header("Knockback when hit should be small 0.5f - 1.5f")]
+        [SerializeField] private float knockbackForce;
         
         private EnemyState currentState;
         private Player player;
@@ -53,22 +55,22 @@ namespace Enemies
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!player)
             {
                 Debug.LogError("Player is not active.");
                 Destroy(this);
             }
-            
-            if (currentState is EnemyState.Dormant or EnemyState.Dead)
-            {
-                return;
-            }
 
             if (health <= 0)
             {
                 Death();
+            }
+            
+            if (currentState is EnemyState.Dormant or EnemyState.Dead)
+            {
+                return;
             }
             
             MoveTowardsPlayer();
@@ -100,13 +102,19 @@ namespace Enemies
         public void TakeDamage(float damageTaken)
         {
             health -= damageTaken;
+
+            // Knockback effect
+            var knockbackDirection = (Vector2)transform.position - playerPosition;
+            knockbackDirection.Normalize();
+            transform.position += (Vector3)knockbackDirection * knockbackForce;
         }
         
         public void Death()
         {
             enemyRigidbody.freezeRotation = false;
             currentState = EnemyState.Dead;
-            Destroy(this);
+            // Destroy the enemy object after a delay
+            Destroy(gameObject, 2f);
         }
     }
 }

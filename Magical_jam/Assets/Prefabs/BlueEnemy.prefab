@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7218387977919534807}
   - component: {fileID: 7431476227741332777}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 943779258991555487}
   - component: {fileID: 4800772989411193993}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 8149608419796857355}
   - component: {fileID: 1181669545835133422}
   - component: {fileID: 7185461264111737214}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: BlueEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -217,10 +217,13 @@ MonoBehaviour:
   enemyCollider: {fileID: 4800772989411193993}
   levelColor: 2
   health: 50
-  moveSpeed: 35
+  moveSpeed: 125
   attackRange: 1
   attackDamage: 1
   attackCooldown: 3
+  knockbackForce: 0.75
+  projectilePrefab: {fileID: 1192747416667966142, guid: ff45c701d3386584794dde714b1b6a5d, type: 3}
+  projectileCooldown: 3
 --- !u!50 &1181669545835133422
 Rigidbody2D:
   serializedVersion: 5
@@ -243,7 +246,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
