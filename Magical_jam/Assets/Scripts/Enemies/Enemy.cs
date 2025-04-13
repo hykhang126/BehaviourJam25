@@ -15,6 +15,8 @@ namespace Enemies
         [SerializeField] private float attackRange;
         [SerializeField] private float attackDamage;
         [SerializeField] private float attackCooldown;
+        [Header("Knockback when hit should be small 0.5f - 1.5f")]
+        [SerializeField] private float knockbackForce;
         
         private EnemyState currentState;
         private Player player;
@@ -104,7 +106,7 @@ namespace Enemies
             // Knockback effect
             var knockbackDirection = (Vector2)transform.position - playerPosition;
             knockbackDirection.Normalize();
-            enemyRigidbody.AddForce(knockbackDirection * 5f, ForceMode2D.Impulse);
+            transform.position += (Vector3)knockbackDirection * knockbackForce;
         }
         
         public void Death()
@@ -112,7 +114,7 @@ namespace Enemies
             enemyRigidbody.freezeRotation = false;
             currentState = EnemyState.Dead;
             // Destroy the enemy object after a delay
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 2f);
         }
     }
 }

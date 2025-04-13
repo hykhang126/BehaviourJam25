@@ -211,5 +211,10 @@ public class Player : MonoBehaviour
 
         shield.EnableShield();
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision with: " + collision.gameObject.name);
+    }
 }
 

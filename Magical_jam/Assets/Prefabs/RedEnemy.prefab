@@ -217,10 +217,11 @@ MonoBehaviour:
   enemyCollider: {fileID: 4800772989411193993}
   levelColor: 1
   health: 50
-  moveSpeed: 25
+  moveSpeed: 100
   attackRange: 1
   attackDamage: 0.1
   attackCooldown: 3
+  knockbackForce: 0.5
   lavaPoolPrefab: {fileID: 5205888642912483777, guid: 00706da32cd802743b93f9dc3cb0a11a, type: 3}
   lavaPoolCooldown: 3
 --- !u!50 &1181669545835133422
