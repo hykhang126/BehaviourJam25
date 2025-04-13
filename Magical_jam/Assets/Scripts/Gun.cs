@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
     {
     }
     
-    public void Shoot(Vector3 mousePosition)
+    public void Shoot(Vector3 mousePosition, string bulletOwner)
     {
         var trajectoryVector = mousePosition - bulletSpawnPoint.transform.position;
         trajectoryVector.z = 0f;
@@ -32,6 +32,6 @@ public class Gun : MonoBehaviour
                                 Mathf.Atan2 ( trajectoryVector.y, trajectoryVector.x ) * Mathf.Rad2Deg );
         
         var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, prefabRotation);
-        bullet.GetComponent<Bullet>().Initialize(trajectoryVector);
+        bullet.GetComponent<Bullet>().Initialize(trajectoryVector, bulletOwner);
     }
 }

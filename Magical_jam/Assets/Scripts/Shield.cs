@@ -79,10 +79,4 @@ public class Shield : MonoBehaviour
             // Example: collision.GetComponent<Bullet>().Destroy();
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

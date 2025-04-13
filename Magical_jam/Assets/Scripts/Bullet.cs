@@ -18,14 +18,28 @@ public class Bullet : MonoBehaviour
     private Vector3 trajectory;
     private int ricochet;
 
-    public void Initialize(Vector3 trajectory)
+    public void Initialize(Vector3 trajectory, string bulletOwner, float speed = 2000f, float damage = 10f)
     {
-        this.trajectory = trajectory;
+        if (bulletOwner.Contains("Player"))
+        {
+            shotByPlayer = true;
+        }
+        else if (bulletOwner.Contains("Enemy"))
+        {
+            shotByPlayer = false;
+        }
+        
+        // Set the trajectory of the bullet
+        this.trajectory = trajectory.normalized;
+
+        rb = GetComponent<Rigidbody2D>();
     }
-    
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
         sc = GetComponent<CircleCollider2D>();
         ricochet = 0;
         rb.linearVelocity = Vector2.zero;
@@ -53,6 +67,13 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<Player>().TakeDamage(damage);
             Destroy(gameObject);
         }
+
+        // if hit shield, change shotByPlayer to true
+        if (collision.gameObject.CompareTag("Shield") && !shotByPlayer)
+        {
+            shotByPlayer = true;
+            // Player shield hit sfx
+        }
         
         // Ricochet
         if (ricochet == maxRicochet)
@@ -61,14 +82,13 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            if (Mathf.Abs(rb.linearVelocity.y) < 1)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, -transform.rotation.eulerAngles.z);
-            }
-            else if (Math.Abs(rb.linearVelocity.x) < 1)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 180 - transform.rotation.eulerAngles.z);
-            }
+            // Ricochet opposite way with a small angle deviation
+            Vector2 normal = collision.contacts[0].normal;
+            Vector2 reflectDir = Vector2.Reflect(trajectory, normal);
+            float angle = UnityEngine.Random.Range(-10f, 10f);
+            Quaternion rotation = Quaternion.Euler(0, 0, angle);
+            trajectory = rotation * reflectDir;
+            rb.linearVelocity = trajectory * speed;
             
             ricochet++;
         }
