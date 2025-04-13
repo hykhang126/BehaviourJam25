@@ -12,11 +12,12 @@ public class Bullet : MonoBehaviour
     
     // Components
     Rigidbody2D rb;
-    CircleCollider2D sc;
+    CapsuleCollider2D collider;
     
     // Data
     private Vector3 trajectory;
     private int ricochet;
+    private bool isActive;
 
     public void Initialize(Vector3 trajectory, string bulletOwner, float speed = 2000f, float damage = 10f)
     {
@@ -40,9 +41,10 @@ public class Bullet : MonoBehaviour
         {
             rb = GetComponent<Rigidbody2D>();
         }
-        sc = GetComponent<CircleCollider2D>();
+        collider = GetComponent<CapsuleCollider2D>();
         ricochet = 0;
         rb.linearVelocity = Vector2.zero;
+        isActive = true;
 
         // Set the bullet to be destroyed after 5 seconds
         Destroy(gameObject, 5f);
@@ -51,6 +53,24 @@ public class Bullet : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = trajectory * (Time.fixedDeltaTime * speed);
+
+        if (shotByPlayer)
+        {
+            isActive = true;
+        }
+        
+        if (!isActive)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+            
+        gameObject.SetActive(true);
+    }
+    
+    public void SetActive(bool active)
+    {
+        isActive = active;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -61,16 +81,26 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Enemy") && !shotByPlayer)
+        {
+            return;
+        }
+
         // Player damage
         if (collision.gameObject.CompareTag("Player") && !shotByPlayer)
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            Player player = collision.gameObject.GetComponent<Player>();
+            if (!player.isHit) 
+                player.TakeDamage(damage);
             Destroy(gameObject);
         }
 
         // if hit shield, change shotByPlayer to true
         if (collision.gameObject.CompareTag("Shield") && !shotByPlayer)
         {
+            // Disable the bullet collider layer exclusion
+            collider.excludeLayers = 0;
+
             shotByPlayer = true;
             // Player shield hit sfx
         }
@@ -89,6 +119,10 @@ public class Bullet : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
             trajectory = rotation * reflectDir;
             rb.linearVelocity = trajectory * speed;
+
+            // Rotate the bullet to face the new direction
+            float angleToRotate = Mathf.Atan2(trajectory.y, trajectory.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0, 0, angleToRotate);
             
             ricochet++;
         }

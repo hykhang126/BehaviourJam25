@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] float moveSpeed;
 
-    [SerializeField] bool isHit;
+    public bool isHit;
 
     PlayerController playerController;
 
@@ -24,10 +24,17 @@ public class Player : MonoBehaviour
 
     Rigidbody2D rb;
 
+    Animator animator;
+
+    PlayerWeaponAnimCon playerWeaponAnimController;
+
     [SerializeField] Shield shield;
 
     [SerializeField] private LevelColor _currentColor;
+
+    
     public bool IsHit => isHit;
+    public Collider2D PlayerCollider => playerCollider;
 
     //Awake is called before the game even starts.
     void Awake()
@@ -46,7 +53,14 @@ public class Player : MonoBehaviour
     // It decreases the player's health by 1 and updates the HUD
     public void TakeDamage(float damageTaken = 1)
     {
+        if (isHit)
+        {
+            return;
+        }
+
         health -= damageTaken;
+        // Animator
+        animator.SetTrigger("isHit");
         /*HUD.lowerHealth();*/
         isHit = true;
         if (health <= 0)
@@ -109,6 +123,17 @@ public class Player : MonoBehaviour
             shield = GetComponentInChildren<Shield>();
         }
 
+        animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found in the children of the player object.");
+        }
+
+        if (playerWeaponAnimController == null)
+        {
+            playerWeaponAnimController = GetComponentInChildren<PlayerWeaponAnimCon>();
+        }
+
         isHit = false;
     }
     
@@ -135,23 +160,21 @@ public class Player : MonoBehaviour
             shield.DisableShield();
             shield.TurnOffShieldSprite();
         }
-        
-    }
 
-    
-    // TakeDamage
-    // This function is called when the player takes damage
-    // It decreases the player's health by 1 and updates the HUD
-    public void TakeDamage()
-    {
-        health--;
-        HUD.lowerHealth();
-        isHit = true;
-        if (health == 0)
+        // Update gun sprite
+        if (_currentColor != LevelColor.Red)
         {
-            HUD.GameOver();
-            Destroy(this.gameObject);
+            playerWeaponAnimController.DisableGun();
         }
+        else
+        {
+            playerWeaponAnimController.EnableGun();
+        }
+
+        // Check if moving to trigger gun and shield bash animation
+        playerWeaponAnimController.SetFloatAnimation("Speed", moveSpeed);
+        shield.SetShieldFloat("Speed", moveSpeed);
+        
     }
 
     /// FIRE ACTION LOGIC
@@ -197,6 +220,7 @@ public class Player : MonoBehaviour
             return;
         }
         
+        playerWeaponAnimController.SetTriggerAnimation("Shoot");
         attachedGun.Shoot(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition), GetType().ToString());
     }
 
@@ -215,6 +239,19 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision with: " + collision.gameObject.name);
+    }
+
+    internal void SetPlayerSpeed(float magnitude)
+    {
+        moveSpeed = magnitude;
+    }
+
+    internal void SetShieldBool(string value, bool state)
+    {
+        if (shield != null && value != null)
+        {
+            shield.SetShieldBool(value, state); // Set the trigger for the shield animation
+        }
     }
 }
 

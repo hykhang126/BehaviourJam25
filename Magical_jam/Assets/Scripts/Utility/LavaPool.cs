@@ -13,16 +13,26 @@ namespace Utility
         private float spawnTime;
         private float currentDamage;
         private float damageDecrement;
+        private bool isActive;
 
         private void Awake()
         {
             spawnTime = Time.time;
             currentDamage = maxDamage;
             damageDecrement = maxDamage / destroyTime;
+            isActive = true;
         }
 
         private void Update()
         {
+            if (!isActive)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+            
+            gameObject.SetActive(true);
+            
             if (Time.time - spawnTime < destroyTime)
             {
                 currentDamage -= damageDecrement * Time.deltaTime;
@@ -30,6 +40,11 @@ namespace Utility
             }
             
             Destroy(gameObject);
+        }
+
+        public void SetActive(bool active)
+        {
+            isActive = active;
         }
         
         private void OnTriggerEnter2D(Collider2D other)

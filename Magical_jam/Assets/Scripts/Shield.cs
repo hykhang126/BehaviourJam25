@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 using Enemies;
+using System;
 
 public class Shield : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Shield : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     public int playerLayer = 6; // Layer for the player
+
+    public Transform hand;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,7 +45,6 @@ public class Shield : MonoBehaviour
     public void DisableShield()
     {
         sc.enabled = false; // Disable the shield collider
-        animator.SetTrigger("ShieldOff"); // Trigger the shield off animation
     }
 
     public void EnableShield()
@@ -53,7 +55,6 @@ public class Shield : MonoBehaviour
             spriteRenderer.enabled = true; // Enable the sprite renderer
 
         sc.enabled = true; // Enable the shield collider
-        animator.SetTrigger("ShieldOn"); // Trigger the shield on animation
     }
 
     // Turn off shield sprite
@@ -63,20 +64,45 @@ public class Shield : MonoBehaviour
             spriteRenderer.enabled = false; // Disable the sprite renderer
     }
 
-    // On collision with enemy, trigger their dameage
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Set trigger for shield animation
+    public void SetShieldTrigger(string triggerName)
     {
-        if (collision.CompareTag("Enemy"))
+        if (animator != null && triggerName != null)
         {
-            collision.GetComponent<Enemy>().TakeDamage(1); // Example damage amount
-            Debug.Log("Shield hit by enemy: " + collision.name);
-            // Example: collision.GetComponent<Enemy>().TakeDamage(damageAmount);
+            animator.SetTrigger(triggerName); // Set the trigger for the shield animation
         }
-        else if (collision.CompareTag("Bullet"))
+    }
+
+    // Set bool for shield animation
+    public void SetShieldBool(string value, bool state)
+    {
+        if (animator != null && value != null)
+            animator.SetBool(value, state); // Set the bool for the shield animation
+    }
+
+    // Set float for shield animation
+    public void SetShieldFloat(string value, float state)
+    {
+        if (animator != null && value != null)
+            animator.SetFloat(value, state); // Set the float for the shield animation
+    }
+    
+    //Collision for static colliders
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            // Trigger bullet damage logic here
-            Debug.Log("Shield hit by bullet: " + collision.name);
-            // Example: collision.GetComponent<Bullet>().Destroy();
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(10); // Example damage amount
+            Debug.Log("Shield hit by enemy: " + collision.gameObject.name);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // Move to parent location
+        if (hand != null)
+        {
+            transform.position = hand.position;
         }
     }
 }
