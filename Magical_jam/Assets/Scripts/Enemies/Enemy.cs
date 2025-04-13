@@ -11,7 +11,7 @@ namespace Enemies
         [SerializeField] protected Rigidbody2D enemyRigidbody;
         [SerializeField] private Collider2D enemyCollider;
         [SerializeField] private LevelColor levelColor;
-        [SerializeField] private float health;
+        [SerializeField] protected float health;
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float attackRange;
         [SerializeField] protected float attackDamage;

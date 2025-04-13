@@ -30,8 +30,6 @@ namespace Utility
             punchStartTime = Time.time;
             startPosition = transform.position;
             endPosition = startPosition + normalizedTrajectoryToPlayer * distance;
-            /*var isFlipped = player.transform.position.x < transform.position.x;
-            endPosition.y *= isFlipped ? -1f : 1f;*/
         }
 
         private void Update()
