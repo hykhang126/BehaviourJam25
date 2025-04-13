@@ -598,6 +598,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3769014070023176254, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4561116347701430897, guid: 65381d9088b70264694e3bc55310952a, type: 3}
       propertyPath: player
       value: 
@@ -1260,6 +1264,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: af0ba49e81dbc39498b33aa7fdda5415, type: 3}
   - {fileID: 8300000, guid: af0ba49e81dbc39498b33aa7fdda5415, type: 3}
   player: {fileID: 1502041038}
+  _currentColorIndex: 0
   _currentLevelColor: 0
 --- !u!82 &1624063119
 AudioSource:
