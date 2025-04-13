@@ -29,13 +29,15 @@ namespace Enemies
                 Debug.LogError("Lava pool prefab not set.");
                 return;
             }
-            
-            if (Time.time - lastLavaPoolSpawnTime > lavaPoolCooldown)
+
+            if (!(Time.time - lastLavaPoolSpawnTime > lavaPoolCooldown))
             {
-                lastLavaPoolSpawnTime = Time.time;
-                var lavaPool = Instantiate(lavaPoolPrefab, transform.position, transform.rotation);
-                lavaPool.transform.SetParent(weaponProjectileContainer);
+                return;
             }
+            
+            lastLavaPoolSpawnTime = Time.time;
+            var lavaPool = Instantiate(lavaPoolPrefab, transform.position, transform.rotation);
+            lavaPool.transform.SetParent(weaponProjectileContainer);
         }
     }
 }

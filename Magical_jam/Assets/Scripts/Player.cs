@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private LevelColor _currentColor;
 
+    public bool IsHit => isHit;
+
     //Awake is called before the game even starts.
     void Awake()
     {

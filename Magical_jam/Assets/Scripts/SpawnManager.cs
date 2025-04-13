@@ -44,6 +44,11 @@ public class SpawnManager : MonoBehaviour
         
         foreach (var sewerGrate in sewerGrates)
         {
+            if (!sewerGrate)
+            {
+                continue;
+            }
+            
             Physics2D.IgnoreCollision(sewerGrate.SewerGrateCollider, enemy.EnemyCollider);
         }
     }
