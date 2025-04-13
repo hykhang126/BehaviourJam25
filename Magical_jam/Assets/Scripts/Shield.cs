@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 using Enemies;
+using System;
 
 public class Shield : MonoBehaviour
 {
@@ -44,7 +45,6 @@ public class Shield : MonoBehaviour
     public void DisableShield()
     {
         sc.enabled = false; // Disable the shield collider
-        animator.SetTrigger("ShieldOff"); // Trigger the shield off animation
     }
 
     public void EnableShield()
@@ -55,7 +55,6 @@ public class Shield : MonoBehaviour
             spriteRenderer.enabled = true; // Enable the sprite renderer
 
         sc.enabled = true; // Enable the shield collider
-        animator.SetTrigger("ShieldOn"); // Trigger the shield on animation
     }
 
     // Turn off shield sprite
@@ -63,6 +62,29 @@ public class Shield : MonoBehaviour
     {
         if (spriteRenderer)
             spriteRenderer.enabled = false; // Disable the sprite renderer
+    }
+
+    // Set trigger for shield animation
+    public void SetShieldTrigger(string triggerName)
+    {
+        if (animator != null && triggerName != null)
+        {
+            animator.SetTrigger(triggerName); // Set the trigger for the shield animation
+        }
+    }
+
+    // Set bool for shield animation
+    public void SetShieldBool(string value, bool state)
+    {
+        if (animator != null && value != null)
+            animator.SetBool(value, state); // Set the bool for the shield animation
+    }
+
+    // Set float for shield animation
+    public void SetShieldFloat(string value, float state)
+    {
+        if (animator != null && value != null)
+            animator.SetFloat(value, state); // Set the float for the shield animation
     }
     
     //Collision for static colliders

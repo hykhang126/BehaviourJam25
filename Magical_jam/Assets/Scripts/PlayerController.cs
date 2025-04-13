@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
         }
         dashTime = dashCooldown; // Reset the cooldown timer
         animator.SetBool("Dashing", true); // Trigger the dash animation
+        player.SetShieldBool("Dashing", true);
         player.SetIsHit(true); // Set the hit state to true
         Vector2 dir = move.normalized;
         dashVector = dir * dashSpeed;
@@ -106,9 +107,11 @@ public class PlayerController : MonoBehaviour
         if (dashVector.magnitude <= 0.1f)
         {
             animator.SetBool("Dashing", false); // Reset the dash animation when not dashing
+            player.SetShieldBool("Dashing", false); // Reset the shield trigger when not dashing
             player.SetIsHit(false); // Reset the hit state when not dashing
         }
         // Update the speed parameter in the animator
         animator.SetFloat("Speed", move.magnitude); // Set the speed parameter based on movement input
+        player.SetPlayerSpeed(move.magnitude); // Set the player's speed based on movement input
     }
 }
