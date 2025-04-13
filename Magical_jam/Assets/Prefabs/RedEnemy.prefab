@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d619936372204c74b2e969e35f536652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 7431476227741332777}
   enemyRigidbody: {fileID: 1181669545835133422}
   enemyCollider: {fileID: 4800772989411193993}
   levelColor: 1

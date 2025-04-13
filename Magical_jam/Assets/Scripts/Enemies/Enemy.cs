@@ -7,17 +7,18 @@ namespace Enemies
     public abstract class Enemy : MonoBehaviour
     {
         [Header(nameof(Enemy))]
+        [SerializeField] protected SpriteRenderer spriteRenderer;
         [SerializeField] protected Rigidbody2D enemyRigidbody;
         [SerializeField] private Collider2D enemyCollider;
         [SerializeField] private LevelColor levelColor;
         [SerializeField] private float health;
         [SerializeField] protected float moveSpeed;
-        [SerializeField] private float attackRange;
-        [SerializeField] private float attackDamage;
-        [SerializeField] private float attackCooldown;
+        [SerializeField] protected float attackRange;
+        [SerializeField] protected float attackDamage;
+        [SerializeField] protected float attackCooldown;
         
         private EnemyState currentState;
-        private Player player;
+        protected Player player;
         private float lastAttackTime;
         protected Vector2 playerPosition;
         protected Transform weaponProjectileContainer;
@@ -39,7 +40,7 @@ namespace Enemies
             lastAttackTime = Time.time;
             currentState = EnemyState.Attacking;
         }
-
+        
         private void Start()
         {
             if (!player) 
@@ -53,7 +54,7 @@ namespace Enemies
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!player)
             {

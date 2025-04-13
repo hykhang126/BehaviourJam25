@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1407221023, guid: a7dda37eff1187c44a19a175ead9e80a, type: 3}
-  m_Color: {r: 0.15294117, g: 0.38443097, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -174,11 +174,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7496476180899592813}
-  - component: {fileID: 8149608419796857355}
+  - component: {fileID: 9157859836388597017}
   - component: {fileID: 1181669545835133422}
   - component: {fileID: 7185461264111737214}
   m_Layer: 6
-  m_Name: BlueEnemy
+  m_Name: BlackEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ Transform:
   - {fileID: 943779258991555487}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8149608419796857355
+--- !u!114 &9157859836388597017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,18 +210,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2800850533861119925}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6699378135bc4c1781cd68ea5119f690, type: 3}
+  m_Script: {fileID: 11500000, guid: a838f9bf62e1478db799091f53e3c072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7431476227741332777}
   enemyRigidbody: {fileID: 1181669545835133422}
   enemyCollider: {fileID: 4800772989411193993}
-  levelColor: 2
-  health: 50
-  moveSpeed: 35
-  attackRange: 1
-  attackDamage: 1
-  attackCooldown: 3
+  levelColor: 5
+  health: 9999
+  moveSpeed: 3
+  attackRange: 3
+  attackDamage: 3
+  attackCooldown: 5
+  lerpSpeed: 6
+  runSpeed: 300
+  randomMovementTrajectoryDuration: 6
+  randomMovementTrajectoryCooldown: 3
+  stunDuration: 0
 --- !u!50 &1181669545835133422
 Rigidbody2D:
   serializedVersion: 5

@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      1920x1080-white-solid-color-background_0: -3894141534357323830
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

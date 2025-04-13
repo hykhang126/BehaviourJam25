@@ -12,8 +12,9 @@ namespace Enemies
         {
             base.MoveTowardsPlayer();
 
-            var trajectory = playerPosition - (Vector2)transform.position;
+            var trajectory = (playerPosition - (Vector2)transform.position).normalized;
             enemyRigidbody.linearVelocity = trajectory * (Time.fixedDeltaTime * moveSpeed);
+            spriteRenderer.flipX = playerPosition.x < transform.position.x;
         }
     }
 }
