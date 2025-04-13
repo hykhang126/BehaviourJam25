@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Levels;
 
 public class HUD : MonoBehaviour
 {
@@ -13,18 +14,21 @@ public class HUD : MonoBehaviour
 
     [SerializeField] GameObject gameOver;
 
+    public Slider weaponTempSlider;
 
-
-    public void barked(){
-        barkIcon.enabled = false;
+    // Make singleton
+    public static HUD instance;
+    private void Awake()
+    {
+        instance = this;
     }
 
-    public void canBark(){
-        barkIcon.enabled=true;
-    }
+    public LevelColor _currentColor;
 
-    public void lowerHealth(){
-        /*healthDisplay[player.getHealth()].gameObject.SetActive(false);*/
+    // SUBSCRIPTIONS TO EVENT OnColorChange
+    public void UpdateCurrentColor(LevelColor newColor)
+    {
+        _currentColor = newColor;
     }
 
     public void GameOver(){

@@ -39,7 +39,7 @@ public class Level : MonoBehaviour
 
     private int _currentColorIndex = 0;
 
-    private LevelColor _currentLevelColor;
+    [SerializeField] private LevelColor _currentLevelColor;
     public LevelColor CurrentLevelColor
     {
         get => _currentLevelColor;
@@ -50,7 +50,7 @@ public class Level : MonoBehaviour
     }
     // Update the level's color based on the current level color
     // Subscribe to OnLevelColorChanged event
-    public void UpdatePlayerColor(LevelColor newColor)
+    public void UpdateCurrentColor(LevelColor newColor)
     {
         _currentLevelColor = newColor;
     }
