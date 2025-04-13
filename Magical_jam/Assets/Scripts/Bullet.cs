@@ -46,7 +46,15 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             Destroy(gameObject);
         }
+
+        // Player damage
+        if (collision.gameObject.CompareTag("Player") && !shotByPlayer)
+        {
+            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
         
+        // Ricochet
         if (ricochet == maxRicochet)
         {
             Destroy(gameObject);
