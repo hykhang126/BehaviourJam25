@@ -377,7 +377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &295313464
 Transform:
   m_ObjectHideFlags: 0
@@ -424,7 +424,6 @@ MonoBehaviour:
   _areLevelColorsRandomized: 0
   _levelColorOrder: 010000000200000003000000
   _minNumberOfLevelsLoaded: 3
-  _textTest: {fileID: 1530074767}
 --- !u!1001 &426269687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -527,6 +526,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2176979467084559427, guid: 65381d9088b70264694e3bc55310952a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769014070023176254, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4561116347701430897, guid: 65381d9088b70264694e3bc55310952a, type: 3}
@@ -1264,17 +1267,6 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &1530074767 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 39400286620416422, guid: 65381d9088b70264694e3bc55310952a, type: 3}
-  m_PrefabInstance: {fileID: 426269687}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1624063116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,18 +1315,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelColorManager: {fileID: 295313465}
+  spawnManager: {fileID: 0}
+  enemyData:
+  - LevelColor: 1
+    HUDColor: {r: 0, g: 0, b: 0, a: 0}
+    SpawnObject: {fileID: 0}
+    BackgroundMusic: {fileID: 8300000, guid: 3ca6d9171900f8aa18f05ee9d8628c46, type: 3}
+    SpawnCooldown: 0
+    MaxEnemies: 0
+  - LevelColor: 2
+    HUDColor: {r: 0, g: 0, b: 0, a: 0}
+    SpawnObject: {fileID: 0}
+    BackgroundMusic: {fileID: 8300000, guid: 4e72f73477fa3ca078751e040e11d0ba, type: 3}
+    SpawnCooldown: 0
+    MaxEnemies: 0
+  - LevelColor: 0
+    HUDColor: {r: 0, g: 0, b: 0, a: 0}
+    SpawnObject: {fileID: 0}
+    BackgroundMusic: {fileID: 8300000, guid: 26347f11c3ee8560f9ad94c47a0480f8, type: 3}
+    SpawnCooldown: 0
+    MaxEnemies: 0
+  - LevelColor: 0
+    HUDColor: {r: 0, g: 0, b: 0, a: 0}
+    SpawnObject: {fileID: 0}
+    BackgroundMusic: {fileID: 8300000, guid: 5a3999eff6f80cc21b01bea9f61b23fb, type: 3}
+    SpawnCooldown: 0
+    MaxEnemies: 0
+  - LevelColor: 0
+    HUDColor: {r: 0, g: 0, b: 0, a: 0}
+    SpawnObject: {fileID: 0}
+    BackgroundMusic: {fileID: 8300000, guid: d1a5984a98d391089b957a072f9d8cda, type: 3}
+    SpawnCooldown: 0
+    MaxEnemies: 0
+  audioSource: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
+  player: {fileID: 1502041038}
+  currentColor: 0
   spawnPoints:
   - {fileID: 1823765704}
   spawnManagers: []
   bgmClips:
-  - {fileID: 8300000, guid: 3ca6d9171900f8aa18f05ee9d8628c46, type: 3}
+  - {fileID: 8300000, guid: 7702f1ffbcb2a86469d1308e6d02cc16, type: 3}
   - {fileID: 8300000, guid: 3ca6d9171900f8aa18f05ee9d8628c46, type: 3}
   - {fileID: 8300000, guid: 4e72f73477fa3ca078751e040e11d0ba, type: 3}
   - {fileID: 8300000, guid: 26347f11c3ee8560f9ad94c47a0480f8, type: 3}
   - {fileID: 8300000, guid: 5a3999eff6f80cc21b01bea9f61b23fb, type: 3}
   - {fileID: 8300000, guid: d1a5984a98d391089b957a072f9d8cda, type: 3}
-  player: {fileID: 1502041038}
-  _currentLevelColor: 0
 --- !u!82 &1624063119
 AudioSource:
   m_ObjectHideFlags: 0

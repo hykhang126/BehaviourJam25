@@ -7,23 +7,23 @@ public class MainMenu : MonoBehaviour
     public static MainMenu instance;
     private AudioSource audioSource;
 
-    // void Awake()
-    // {
-    //     if(instance == null)
-    //     {
-    //         instance = this;
-    //         DontDestroyOnLoad(gameObject);
-    //     }
-    //     else
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    // }
+    void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void PlayGame()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.Stop();
+        // audioSource = GetComponent<AudioSource>();
+        // audioSource.Stop();
         SceneManager.LoadSceneAsync("HyHySceneSetMusic");
         
     }

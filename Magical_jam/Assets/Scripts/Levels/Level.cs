@@ -45,19 +45,20 @@ public class Level : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private Player player;
     
-    private LevelColor currentColor;
+    [SerializeField] private LevelColor currentColor;
     
     public Player Player => player;
     
     public Transform[] spawnPoints;
 
     public SpawnManager[] spawnManagers;
+    
 
     public AudioClip[] bgmClips;
 
-    [SerializeField] private int _currentColorIndex = 0;
+    private int _currentColorIndex = 0;
 
-    [SerializeField] private LevelColor _currentLevelColor;
+    private LevelColor _currentLevelColor;
     public LevelColor CurrentLevelColor
     {
         get => _currentLevelColor;
@@ -78,7 +79,7 @@ public class Level : MonoBehaviour
     public void Start()
     {
         _levelColorManager.OnLevelColorChanged.AddListener(HandleLevelColorChanged);
-        
+    
         _levelColorManager.Initialize();
         spawnManager.Initialize();
         
@@ -104,10 +105,11 @@ public class Level : MonoBehaviour
 
     private void PlayAudio()
     {
-        audioSource.clip = GetLevelData(currentColor).BackgroundMusic;
+        // audioSource.clip = bgmClips[musicIndex];
+        audioSource.resource = GetLevelData(currentColor).BackgroundMusic;
 
         // Plays the AudioClip assigned to the AudioSource
-        if (audioSource.clip != null)
+        if (audioSource.resource != null)
         {
             audioSource.Play();
         }
@@ -121,7 +123,6 @@ public class Level : MonoBehaviour
     {
         currentColor = levelColor;
         spawnManager.SetLevelColor(levelColor);
-        
         PlayAudio();
     }
 }
