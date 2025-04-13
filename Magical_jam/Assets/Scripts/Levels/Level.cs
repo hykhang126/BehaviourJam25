@@ -54,9 +54,6 @@ public class Level : MonoBehaviour
     public SpawnManager[] spawnManagers;
 
     public AudioClip[] bgmClips;
-    private AudioSource audioSource;
-
-    public Player player;
 
     [SerializeField] private int _currentColorIndex = 0;
 
@@ -74,7 +71,7 @@ public class Level : MonoBehaviour
     public void UpdateCurrentColor(LevelColor newColor)
     {
         _currentLevelColor = newColor;
-        PlayAudio(_currentColorIndex);
+        PlayAudio();
         currentColor = newColor;
     }
 
@@ -90,21 +87,7 @@ public class Level : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Check if the player has reached the end of the level
-        if (spawnManagers.Length > 0 && spawnManagers[_currentColorIndex].currentEnemyCount == spawnManagers[_currentColorIndex].maxEnemies)
-        {
-            spawnManagers[_currentColorIndex].gameObject.SetActive(false);
-            // NEVER Move to the next room
-            // currentRoomIndex++;
-            if (_currentColorIndex >= spawnPoints.Length)
-            {
-                // End of the level
-                Debug.Log("End of the level");
-                return;
-            }
-
-
-        }
+        spawnManagers[_currentColorIndex].gameObject.SetActive(false);
         _levelColorManager.OnLevelColorChanged.RemoveAllListeners();
     }
 
