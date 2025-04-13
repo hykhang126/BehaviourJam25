@@ -618,6 +618,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 93682129}
+    - target: {fileID: 6374446005526701595, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_PixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118283481869226820, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7304109958113599962, guid: 532d556f6d4f5354994fbe4e6b23962d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3789324479913499527, guid: 65381d9088b70264694e3bc55310952a, type: 3}
@@ -1667,6 +1675,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: af0ba49e81dbc39498b33aa7fdda5415, type: 3}
   - {fileID: 8300000, guid: af0ba49e81dbc39498b33aa7fdda5415, type: 3}
   player: {fileID: 1502041038}
+  _currentLevelColor: 0
 --- !u!82 &1624063119
 AudioSource:
   m_ObjectHideFlags: 0
