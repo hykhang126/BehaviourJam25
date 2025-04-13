@@ -7,27 +7,29 @@ namespace Enemies
     public abstract class Enemy : MonoBehaviour
     {
         [Header(nameof(Enemy))]
+        [SerializeField] protected SpriteRenderer spriteRenderer;
         [SerializeField] protected Rigidbody2D enemyRigidbody;
         [SerializeField] private Collider2D enemyCollider;
         [SerializeField] private LevelColor levelColor;
-        [SerializeField] private float health;
+        [SerializeField] protected float health;
         [SerializeField] protected float moveSpeed;
-        [SerializeField] private float attackRange;
-        [SerializeField] private float attackDamage;
-        [SerializeField] private float attackCooldown;
+        [SerializeField] protected float attackRange;
+        [SerializeField] protected float attackDamage;
+        [SerializeField] protected float attackCooldown;
         [Header("Knockback when hit should be small 0.5f - 1.5f")]
         [SerializeField] private float knockbackForce;
-        
-        private EnemyState currentState;
-        private Player player;
-        private float lastAttackTime;
+
+        protected EnemyState currentState;
+        protected Player player;
+        protected float lastAttackTime;
         protected Vector2 playerPosition;
+        protected Vector2 normalizedTrajectoryToPlayer;
         protected Transform weaponProjectileContainer;
 
         public Collider2D EnemyCollider => enemyCollider;
         public LevelColor LevelColor => levelColor;
-
         public SpriteRenderer SpriteRenderer => GetComponentInChildren<SpriteRenderer>();
+        public float AttackDamage => attackDamage;
         
         public void Initialize(Player player, Transform weaponProjectileContainer)
         {
@@ -43,7 +45,7 @@ namespace Enemies
             lastAttackTime = Time.time;
             currentState = EnemyState.Attacking;
         }
-
+        
         private void Start()
         {
             if (!player) 
@@ -93,15 +95,18 @@ namespace Enemies
                 SpriteRenderer.flipX = false;
             }
 
+            normalizedTrajectoryToPlayer = (playerPosition - (Vector2)transform.position).normalized;
+            enemyRigidbody.linearVelocity = normalizedTrajectoryToPlayer * (Time.fixedDeltaTime * moveSpeed);
+            spriteRenderer.flipX = playerPosition.x < transform.position.x;
         }
 
-        private bool IsNearPlayer()
+        protected bool IsNearPlayer()
         {
             var distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
             return distanceToPlayer <= attackRange;
         }
 
-        private void TryAttackPlayer()
+        protected virtual void TryAttackPlayer()
         {
             if (!IsNearPlayer() || Time.time - lastAttackTime < attackCooldown || currentState is not EnemyState.Attacking)
             {

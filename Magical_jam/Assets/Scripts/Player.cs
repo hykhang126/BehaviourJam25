@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
 
     
     public bool IsHit => isHit;
+    public Collider2D PlayerCollider => playerCollider;
 
     //Awake is called before the game even starts.
     void Awake()
