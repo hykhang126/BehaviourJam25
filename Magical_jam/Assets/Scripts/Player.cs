@@ -26,12 +26,15 @@ public class Player : MonoBehaviour
 
     Animator animator;
 
+    PlayerWeaponAnimCon playerWeaponAnimController;
+
     [SerializeField] Shield shield;
 
     [SerializeField] private LevelColor _currentColor;
 
     
     public bool IsHit => isHit;
+    public Collider2D PlayerCollider => playerCollider;
 
     //Awake is called before the game even starts.
     void Awake()
@@ -126,6 +129,11 @@ public class Player : MonoBehaviour
             Debug.LogError("Animator component not found in the children of the player object.");
         }
 
+        if (playerWeaponAnimController == null)
+        {
+            playerWeaponAnimController = GetComponentInChildren<PlayerWeaponAnimCon>();
+        }
+
         isHit = false;
     }
     
@@ -152,6 +160,20 @@ public class Player : MonoBehaviour
             shield.DisableShield();
             shield.TurnOffShieldSprite();
         }
+
+        // Update gun sprite
+        if (_currentColor != LevelColor.Red)
+        {
+            playerWeaponAnimController.DisableGun();
+        }
+        else
+        {
+            playerWeaponAnimController.EnableGun();
+        }
+
+        // Check if moving to trigger gun and shield bash animation
+        playerWeaponAnimController.SetFloatAnimation("Speed", moveSpeed);
+        shield.SetShieldFloat("Speed", moveSpeed);
         
     }
 
@@ -198,6 +220,7 @@ public class Player : MonoBehaviour
             return;
         }
         
+        playerWeaponAnimController.SetTriggerAnimation("Shoot");
         attachedGun.Shoot(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition), GetType().ToString());
     }
 
@@ -216,6 +239,19 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision with: " + collision.gameObject.name);
+    }
+
+    internal void SetPlayerSpeed(float magnitude)
+    {
+        moveSpeed = magnitude;
+    }
+
+    internal void SetShieldBool(string value, bool state)
+    {
+        if (shield != null && value != null)
+        {
+            shield.SetShieldBool(value, state); // Set the trigger for the shield animation
+        }
     }
 }
 

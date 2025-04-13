@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7185573491142403562}
   - component: {fileID: 1918937550254331858}
   - component: {fileID: 3741426449325267696}
-  - component: {fileID: 5487361690368990101}
+  - component: {fileID: 6684462332985715975}
   m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
@@ -29,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192747416667966142}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0005128549, w: 0.99999994}
+  m_LocalPosition: {x: 5.19, y: -1.868, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.38887846, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.059}
 --- !u!212 &4889948883257668582
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -152,8 +152,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.8, y: 0.4}
+  m_Offset: {x: 8.1496376e-10, y: 0.013816409}
+  m_Size: {x: 0.9999999, y: 0.889274}
   m_Direction: 1
 --- !u!114 &3741426449325267696
 MonoBehaviour:
@@ -168,10 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  speed: 750
+  speed: 1200
   maxRicochet: 3
   shotByPlayer: 1
---- !u!95 &5487361690368990101
+--- !u!95 &6684462332985715975
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -181,7 +181,7 @@ Animator:
   m_GameObject: {fileID: 1192747416667966142}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6cfceb4f6cf556d498a3150c82b7f98f, type: 2}
+  m_Controller: {fileID: 9100000, guid: f3b975b1c73061c42a3b9edde41c27d2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
