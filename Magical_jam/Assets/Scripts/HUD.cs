@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Levels;
 using TMPro;
+using Combat;
 
 public class HUD : MonoBehaviour
 {
@@ -72,23 +73,13 @@ public class HUD : MonoBehaviour
     {
         currentColorText.text = _currentColor.ToString(); // Update the current color text to the player's color
         // Change text color depoending on the current color
-        switch (_currentColor)
+        currentColorText.color = _currentColor switch
         {
-            case LevelColor.Red:
-                currentColorText.color = Color.red;
-                break;
-            case LevelColor.Green:
-                currentColorText.color = Color.green;
-                break;
-            case LevelColor.Blue:
-                currentColorText.color = Color.blue;
-                break;
-            case LevelColor.Yellow:
-                currentColorText.color = Color.yellow;
-                break;
-            default:
-                currentColorText.color = Color.black; // Default color if no match
-                break;
-        }
+            LevelColor.Red => Color.red,
+            LevelColor.Green => Color.green,
+            LevelColor.Blue => Color.blue,
+            LevelColor.Yellow => Color.yellow,
+            _ => Color.black,// Default color if no match
+        };
     }
 }

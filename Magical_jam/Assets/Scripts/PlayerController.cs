@@ -90,6 +90,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 movement = speed * Time.deltaTime * new Vector2(move.x, move.y) + dashVector;
+        // clamp postion to -100 to 100
+        if (transform.position.x < -100 || transform.position.x > 100 || transform.position.y < -100 || transform.position.y > 100)
+        {
+            movement = Vector2.zero; // Stop the player from moving outside the bounds
+        }
         transform.Translate(movement, Space.World);
 
         // Update the dash cooldown timer
