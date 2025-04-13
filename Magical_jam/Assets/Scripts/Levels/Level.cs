@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Combat;
+using Levels;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,40 +37,52 @@ public class Level : MonoBehaviour
 
     public Player player;
 
-    public GameObject agentBK;
+    private int _currentColorIndex = 0;
 
-    private static int currentRoomIndex = 0;
+    private LevelColor _currentLevelColor;
+    public LevelColor CurrentLevelColor
+    {
+        get => _currentLevelColor;
+        set
+        {
+            _currentLevelColor = value;
+        }
+    }
+    // Update the level's color based on the current level color
+    // Subscribe to OnLevelColorChanged event
+    public void UpdatePlayerColor(LevelColor newColor)
+    {
+        _currentLevelColor = newColor;
+    }
 
     public void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        currentRoomIndex = 0;
+        _currentColorIndex = 0;
         // Spawn the player at the first spawn point
-        SpawnPlayer(currentRoomIndex);
+        SpawnPlayer(_currentColorIndex);
 
         // Play the sound automatically at start (optional)
-        PlayAudio(currentRoomIndex);
+        PlayAudio(_currentColorIndex);
     }
 
     public void Update()
     {
         // Check if the player has reached the end of the level
-        if (spawnManagers.Length > 0 && spawnManagers[currentRoomIndex].currentEnemyCount == spawnManagers[currentRoomIndex].maxEnemies - 1)
+        if (spawnManagers.Length > 0 && spawnManagers[_currentColorIndex].currentEnemyCount == spawnManagers[_currentColorIndex].maxEnemies)
         {
-            spawnManagers[currentRoomIndex].gameObject.SetActive(false);
-            // Move to the next room
-            currentRoomIndex++;
-            if (currentRoomIndex >= spawnPoints.Length)
+            spawnManagers[_currentColorIndex].gameObject.SetActive(false);
+            // NEVER Move to the next room
+            // currentRoomIndex++;
+            if (_currentColorIndex >= spawnPoints.Length)
             {
                 // End of the level
                 Debug.Log("End of the level");
                 return;
             }
-            // Spawn the player at the next spawn point
-            SpawnPlayer(currentRoomIndex);
 
             // Play the sound automatically at start (optional)
-            PlayAudio(currentRoomIndex);
+            PlayAudio(_currentColorIndex);
         }
     }
 
@@ -78,10 +91,6 @@ public class Level : MonoBehaviour
     {
         Transform spawnPoint = spawnPoints[index];
         player.transform.position = spawnPoint.position;
-        agentBK.transform.position = spawnPoint.position;
-        currentRoomIndex = index;
-        // set the spawner to be active
-        spawnManagers[index].gameObject.SetActive(true);
     }
 
     public void PlayAudio(int index)

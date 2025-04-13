@@ -61,7 +61,6 @@ public class Player : MonoBehaviour
     public void UpdatePlayerColor(LevelColor newColor)
     {
         _currentColor = newColor;
-        Debug.Log("Player color updated to: " + _currentColor);
     }
 
     // Get the current color of the player
@@ -134,7 +133,9 @@ public class Player : MonoBehaviour
         if (_currentColor != LevelColor.Blue)
         {
             shield.DisableShield();
+            shield.TurnOffShieldSprite();
         }
+        
     }
 
     
