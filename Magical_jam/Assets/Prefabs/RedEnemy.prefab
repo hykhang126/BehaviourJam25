@@ -246,7 +246,7 @@ MonoBehaviour:
   attackCooldown: 3
   knockbackForce: 0.5
   lavaPoolPrefab: {fileID: 5205888642912483777, guid: 00706da32cd802743b93f9dc3cb0a11a, type: 3}
-  lavaPoolCooldown: 3
+  lavaPoolCooldown: 1
 --- !u!50 &1181669545835133422
 Rigidbody2D:
   serializedVersion: 5

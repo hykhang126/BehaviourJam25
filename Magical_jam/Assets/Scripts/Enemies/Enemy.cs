@@ -1,11 +1,15 @@
+using System;
 using Combat;
 using Levels;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Enemies
 {
     public abstract class Enemy : MonoBehaviour
     {
+        public event Action<Enemy> OnDeath;
+        
         [Header(nameof(Enemy))]
         [SerializeField] protected SpriteRenderer spriteRenderer;
         [SerializeField] protected Rigidbody2D enemyRigidbody;
@@ -73,11 +77,21 @@ namespace Enemies
             
             if (currentState is EnemyState.Dormant or EnemyState.Dead)
             {
+                enemyRigidbody.linearVelocity = Vector2.zero;
+                gameObject.SetActive(false);
                 return;
             }
             
             MoveTowardsPlayer();
             TryAttackPlayer();
+            
+            ToggleProjectiles(true);
+            gameObject.SetActive(true);
+        }
+
+        protected virtual void ToggleProjectiles(bool toggle)
+        {
+            
         }
 
         protected virtual void MoveTowardsPlayer()
@@ -89,11 +103,11 @@ namespace Enemies
             // Flip sprite dependiong on player position
             if (playerPosition.x < transform.position.x)
             {
-                SpriteRenderer.flipX = true;
+                spriteRenderer.flipX = true;
             }
             else
             {
-                SpriteRenderer.flipX = false;
+                spriteRenderer.flipX = false;
             }
         }
 
@@ -123,6 +137,13 @@ namespace Enemies
             knockbackDirection.Normalize();
             transform.position += (Vector3)knockbackDirection * knockbackForce;
         }
+
+        public void SetEnemyState(EnemyState enemyState)
+        {
+            currentState = enemyState;
+            ToggleProjectiles(false);
+            gameObject.SetActive(enemyState is EnemyState.Attacking);
+        }
         
         public void Death()
         {
@@ -130,6 +151,7 @@ namespace Enemies
             currentState = EnemyState.Dead;
             // Destroy the enemy object after a delay
             Destroy(gameObject, 2f);
+            OnDeath?.Invoke(this);
         }
     }
 }

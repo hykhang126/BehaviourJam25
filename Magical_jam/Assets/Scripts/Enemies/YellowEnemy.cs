@@ -23,8 +23,18 @@ namespace Enemies
             {
                 Death();
             }
+
+            if (currentState is EnemyState.Dormant or EnemyState.Dead)
+            {
+                StopDashing();
+                enemyRigidbody.linearVelocity = Vector2.zero;
+                gameObject.SetActive(false);
+                return;
+            }
             
             TryAttackPlayer();
+            
+            gameObject.SetActive(true);
         }
 
         protected override void TryAttackPlayer()
