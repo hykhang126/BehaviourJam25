@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7431476227741332777}
   m_Layer: 9
   m_Name: Visual
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1407221023, guid: a7dda37eff1187c44a19a175ead9e80a, type: 3}
-  m_Color: {r: 0.09807763, g: 0.7169812, b: 0.3098204, a: 1}
+  m_Sprite: {fileID: 4060230332810720544, guid: 16768a35063498f4d95c9b7723c1db38, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3, y: 8.85}
+  m_Size: {x: 1.3125, y: 1.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -97,10 +97,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 943779258991555487}
-  - component: {fileID: 4800772989411193993}
+  - component: {fileID: 8868310846436752561}
   m_Layer: 9
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,14 +114,14 @@ Transform:
   m_GameObject: {fileID: 1724998715142940986}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.03, y: 0.58, z: 0}
+  m_LocalScale: {x: 1.0600444, y: 1.0600444, z: 1.0600444}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7496476180899592813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &4800772989411193993
-BoxCollider2D:
+--- !u!58 &8868310846436752561
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -154,18 +154,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.08582032, y: 0.1223979}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 8.85}
-    newSize: {x: 3, y: 8.85}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 3.8034518, y: 9.601767}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!1 &2800850533861119925
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +185,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.7727494, y: -2.5764556, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7218387977919534807}
@@ -216,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7431476227741332777}
   enemyRigidbody: {fileID: 1181669545835133422}
-  enemyCollider: {fileID: 4800772989411193993}
+  enemyCollider: {fileID: 8868310846436752561}
   levelColor: 3
   health: 50
   moveSpeed: 40
@@ -291,13 +281,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: PunchFist
       objectReference: {fileID: 0}
+    - target: {fileID: 5205888642912483777, guid: 307450d6e0a4c0a4d9ba823e99e72221, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133056758867492842, guid: 307450d6e0a4c0a4d9ba823e99e72221, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133056758867492842, guid: 307450d6e0a4c0a4d9ba823e99e72221, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6133056758867492842, guid: 307450d6e0a4c0a4d9ba823e99e72221, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.41
+      value: 1.086
       objectReference: {fileID: 0}
     - target: {fileID: 6133056758867492842, guid: 307450d6e0a4c0a4d9ba823e99e72221, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.34
+      value: 3.21
       objectReference: {fileID: 0}
     - target: {fileID: 6133056758867492842, guid: 307450d6e0a4c0a4d9ba823e99e72221, type: 3}
       propertyPath: m_LocalPosition.z

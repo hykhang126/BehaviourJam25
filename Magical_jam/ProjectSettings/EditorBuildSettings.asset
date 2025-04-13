@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 3199a817981573f62872aeb503853bed
   - enabled: 1
+    path: Assets/Scenes/AmandaScene.unity
+    guid: 663605c35cff5ca4b8b651db9071429c
+  - enabled: 1
     path: Assets/Scenes/HyHyScene.unity
     guid: 0009dff76437c1e4f843a46c440f5402
   - enabled: 1

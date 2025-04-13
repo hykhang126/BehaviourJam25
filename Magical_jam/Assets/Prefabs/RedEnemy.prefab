@@ -5079,7 +5079,7 @@ MonoBehaviour:
   health: 50
   moveSpeed: 75
   attackRange: 4
-  attackDamage: 0.1
+  attackDamage: 10
   attackCooldown: 3
   knockbackForce: 0.25
   lavaPoolPrefab: {fileID: 5205888642912483777, guid: 00706da32cd802743b93f9dc3cb0a11a, type: 3}
