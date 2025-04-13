@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c226c4451b06db08da321dfdc8f0a1ee
+guid: c70cc26589238d40ab85dab56fbfebaa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4364034832326165938
-    second: bg_0
+      213: 8999863512469678568
+    second: main_menu_bg_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg_0
+      name: main_menu_bg_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e4a74cf0175df63c0800000000000000
-      internalID: -4364034832326165938
+      spriteID: 8e921c76e20f5ec70800000000000000
+      internalID: 8999863512469678568
       vertices: []
       indices: 
       edges: []
