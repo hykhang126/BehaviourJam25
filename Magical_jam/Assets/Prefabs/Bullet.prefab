@@ -29,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192747416667966142}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.0005128549, w: 0.99999994}
-  m_LocalPosition: {x: 5.19, y: -1.868, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.38887846, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.059}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4889948883257668582
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -152,8 +152,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 8.1496376e-10, y: 0.013816409}
-  m_Size: {x: 0.9999999, y: 0.889274}
+  m_Offset: {x: 0.1, y: 0}
+  m_Size: {x: 0.52, y: 0.35}
   m_Direction: 1
 --- !u!114 &3741426449325267696
 MonoBehaviour:
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  speed: 1200
+  speed: 750
   maxRicochet: 3
   shotByPlayer: 1
 --- !u!95 &6684462332985715975

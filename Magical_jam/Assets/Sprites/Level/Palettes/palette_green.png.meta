@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: add3c1713f7d2884490aebfa4ec92ce1
+guid: b6d3f0bf3293dbf44bc66a1f9f00fad3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7913398537771753960
-    second: water_gun_idle_0
+      213: 5454277640042239287
+    second: palette_green_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: water_gun_idle_0
+      name: palette_green_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 19
-        height: 18
+        width: 8
+        height: 2
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81ed406f4f5fd2290800000000000000
-      internalID: -7913398537771753960
+      spriteID: 735d2199d9c71bb40800000000000000
+      internalID: 5454277640042239287
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      water_gun_idle_0: -7913398537771753960
+      palette_green_0: 5454277640042239287
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
