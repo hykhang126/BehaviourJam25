@@ -54,9 +54,12 @@ MonoBehaviour:
   playerBody: {fileID: 7894472832680753255}
   playerArm: {fileID: 6594501740717402074}
   attachedGun: {fileID: 1989616614844165598}
-  health: 500
+  health: 0
+  MAX_HEALTH: 100
   moveSpeed: 0
   isHit: 0
+  blinkTimer: 0.1
+  blinkCooldown: 0.5
   shield: {fileID: 3956620223896769112}
   _currentColor: 1
 --- !u!50 &3773818598775845539

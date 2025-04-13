@@ -31,8 +31,8 @@ public class Player : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
-    [SerializeField] private float blinkTimer = 0.1f;
-    [SerializeField] private float blinkDuration = 0.5f;
+    [SerializeField] private float blinkTimer;
+    [SerializeField] private float blinkCooldown = 0.1f;
 
     [SerializeField] Shield shield;
 
@@ -173,8 +173,12 @@ public class Player : MonoBehaviour
             else
             {
                 spriteRenderer.enabled = !spriteRenderer.enabled; // Toggle the sprite renderer
-                blinkTimer = blinkDuration; // Reset the timer
+                blinkTimer = blinkCooldown; // Reset the timer
             }
+        }
+        else
+        {
+            spriteRenderer.enabled = true; // Ensure the sprite renderer is enabled
         }
         
         // Update player rotation
