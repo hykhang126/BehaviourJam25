@@ -65,7 +65,6 @@ namespace Enemies
                 if (Vector2.Distance(playerTransformPosition, enemyTransformPosition) > attackRange)
                 {
                     enemyRigidbody.linearVelocity = (playerTransformPosition - enemyTransformPosition).normalized * (Time.fixedDeltaTime * runSpeed);
-                    spriteRenderer.flipX = playerPosition.x < transform.position.x;
                     return;
                 }
                 
@@ -94,7 +93,6 @@ namespace Enemies
             }
             
             enemyRigidbody.linearVelocity = currentMovementTrajectory * (Time.fixedDeltaTime * moveSpeed);
-            spriteRenderer.flipX = enemyRigidbody.linearVelocity.x < 0;
             
             if (IsPlayerWithinVision())
             {
