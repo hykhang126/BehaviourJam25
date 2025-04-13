@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using Combat;
 using Levels;
 using UnityEngine;
@@ -15,6 +16,23 @@ namespace Enemies
         [SerializeField] private Transform shootingPoint;
 
         private Core.Timer timer;
+        private bool projectileToggle;
+
+        private readonly List<Bullet> raindropBullets = new();
+        
+        protected override void ToggleProjectiles(bool toggle)
+        {
+            if (projectileToggle == toggle)
+            {
+                return;
+            }
+
+            projectileToggle = toggle;
+            foreach (var raindropBullet in raindropBullets)
+            {
+                raindropBullet.SetActive(toggle);
+            }
+        }
 
         protected override void MoveTowardsPlayer()
         {
@@ -51,7 +69,9 @@ namespace Enemies
                                         Mathf.Atan2 ( trajectoryVector.y, trajectoryVector.x ) * Mathf.Rad2Deg );
                 
                 var bullet = Instantiate(projectilePrefab, shootingPoint.transform.position, prefabRotation);
-                bullet.GetComponent<Bullet>().Initialize(trajectoryVector, "BlueEnemy", 800f, 10f);
+                var bulletComponent = bullet.GetComponent<Bullet>();
+                bulletComponent.Initialize(trajectoryVector, "BlueEnemy", 800f, 10f);
+                raindropBullets.Add(bulletComponent);
             }
             timer.Tick(Time.fixedDeltaTime);
         }

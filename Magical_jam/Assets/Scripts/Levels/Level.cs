@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Combat;
@@ -8,6 +9,17 @@ using UnityEngine.Events;
 
 public class Level : MonoBehaviour
 {
+    [Serializable]
+    public struct LevelData
+    {
+        public LevelColor LevelColor;
+        public Color HUDColor;
+        public GameObject SpawnObject;
+        public AudioClip BackgroundMusic;
+        public float SpawnCooldown;
+        public int MaxEnemies;
+    }
+    
     /// <summary>
     /// SINGLETON
     /// </summary>
@@ -27,6 +39,15 @@ public class Level : MonoBehaviour
     /// SINGLETON
 
     [SerializeField] private LevelColorManager _levelColorManager;
+    [SerializeField] public SpawnManager spawnManager;
+    [SerializeField] private List<LevelData> enemyData;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Transform playerSpawnPoint;
+    [SerializeField] private Player player;
+    
+    private LevelColor currentColor;
+    
+    public Player Player => player;
     
     public Transform[] spawnPoints;
 
@@ -54,20 +75,20 @@ public class Level : MonoBehaviour
     {
         _currentLevelColor = newColor;
         PlayAudio(_currentColorIndex);
+        currentColor = newColor;
     }
 
     public void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        _currentColorIndex = 0;
-        // Spawn the player at the first spawn point
-        SpawnPlayer(_currentColorIndex);
-
-        // Play the sound automatically at start (optional)
-        PlayAudio(_currentColorIndex);
+        _levelColorManager.OnLevelColorChanged.AddListener(HandleLevelColorChanged);
+        
+        _levelColorManager.Initialize();
+        spawnManager.Initialize();
+        
+        SpawnPlayer();
     }
 
-    public void Update()
+    private void OnDestroy()
     {
         // Check if the player has reached the end of the level
         if (spawnManagers.Length > 0 && spawnManagers[_currentColorIndex].currentEnemyCount == spawnManagers[_currentColorIndex].maxEnemies)
@@ -84,18 +105,23 @@ public class Level : MonoBehaviour
 
 
         }
+        _levelColorManager.OnLevelColorChanged.RemoveAllListeners();
     }
 
-    // Go to a spawn point and spawn the player
-    public void SpawnPlayer(int index)
+    public LevelData GetLevelData(LevelColor levelColor)
     {
-        Transform spawnPoint = spawnPoints[index];
+        return enemyData.Find(x => x.LevelColor == levelColor);
+    }
+    
+    private void SpawnPlayer()
+    {
+        Transform spawnPoint = playerSpawnPoint;
         player.transform.position = spawnPoint.position;
     }
 
-    public void PlayAudio(int index)
+    private void PlayAudio()
     {
-        audioSource.clip = bgmClips[index];
+        audioSource.clip = GetLevelData(currentColor).BackgroundMusic;
 
         // Plays the AudioClip assigned to the AudioSource
         if (audioSource.clip != null)
@@ -106,5 +132,13 @@ public class Level : MonoBehaviour
         {
             Debug.LogWarning("No audio clip is assigned to the AudioSource!");
         }
+    }
+
+    private void HandleLevelColorChanged(LevelColor levelColor)
+    {
+        currentColor = levelColor;
+        spawnManager.SetLevelColor(levelColor);
+        
+        PlayAudio();
     }
 }

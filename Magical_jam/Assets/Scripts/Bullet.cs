@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
     // Data
     private Vector3 trajectory;
     private int ricochet;
+    private bool isActive;
 
     public void Initialize(Vector3 trajectory, string bulletOwner, float speed = 2000f, float damage = 10f)
     {
@@ -43,6 +44,7 @@ public class Bullet : MonoBehaviour
         collider = GetComponent<CapsuleCollider2D>();
         ricochet = 0;
         rb.linearVelocity = Vector2.zero;
+        isActive = true;
 
         // Set the bullet to be destroyed after 5 seconds
         Destroy(gameObject, 5f);
@@ -51,6 +53,24 @@ public class Bullet : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = trajectory * (Time.fixedDeltaTime * speed);
+
+        if (shotByPlayer)
+        {
+            isActive = true;
+        }
+        
+        if (!isActive)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+            
+        gameObject.SetActive(true);
+    }
+    
+    public void SetActive(bool active)
+    {
+        isActive = active;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

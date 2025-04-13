@@ -27,18 +27,16 @@ namespace Combat
         [SerializeField] private bool _areLevelColorsRandomized;
         [SerializeField] private List<LevelColor> _levelColorOrder;
         [SerializeField] private int _minNumberOfLevelsLoaded = 3;
-        [SerializeField] private TMP_Text _textTest;
         
         private int _currentLevelDataIndex;
         
         private readonly List<LevelData> _levelData = new();
         private readonly Queue<LevelColor> _upcomingLevelColors = new();
 
-        private void Start()
+        public void Initialize()
         {
             _levelData.Clear();
             _upcomingLevelColors.Clear();
-            _textTest.text = "";
             
             AddUpcomingLevels(_minNumberOfLevelsLoaded);
             GoToNextLevel();
@@ -46,12 +44,16 @@ namespace Combat
         
         private void Update()
         {
+            if (_levelData.Count == 0)
+            {
+                return;
+            }
+            
             if (Time.time - _levelData[_currentLevelDataIndex].LastLevelStartTime >=
                 _levelColorSwapCooldown)
             {
                 GoToNextLevel();
                 AddUpcomingLevel();
-                _textTest.text = _textTest.text + " " + _levelData[_currentLevelDataIndex].LevelColor;
             }
         }
         
