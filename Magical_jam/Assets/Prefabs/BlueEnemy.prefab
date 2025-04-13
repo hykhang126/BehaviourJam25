@@ -207,7 +207,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.00662899, y: -0.13301802}
+  m_Offset: {x: 0, y: 0.35}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -217,7 +217,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.794178, y: 0.8934965}
+  m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
 --- !u!1 &2800850533861119925
 GameObject:
@@ -246,7 +246,7 @@ Transform:
   m_GameObject: {fileID: 2800850533861119925}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.57, y: -9.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -272,11 +272,11 @@ MonoBehaviour:
   enemyCollider: {fileID: 4800772989411193993}
   levelColor: 2
   health: 50
-  moveSpeed: 115
+  moveSpeed: 100
   attackRange: 1
   attackDamage: 1
   attackCooldown: 3
-  knockbackForce: 0.75
+  knockbackForce: 0.5
   projectilePrefab: {fileID: 1192747416667966142, guid: 35a77c6499e75ed4a9db68ddb5299683, type: 3}
   projectileCooldown: 3
   shootingPoint: {fileID: 2090973181079896069}
