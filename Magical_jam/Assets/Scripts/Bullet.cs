@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
+using Enemies;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] int maxRicochet;
+    [SerializeField] private float damage;
+    [SerializeField] private float speed;
+    [SerializeField] private int maxRicochet;
     
     // Components
     Rigidbody2D rb;
@@ -39,7 +41,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().Death();
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             Destroy(gameObject);
         }
         

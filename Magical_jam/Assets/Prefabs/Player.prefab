@@ -113,7 +113,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7277709363797054526}
   - component: {fileID: 7549041778833700098}
-  - component: {fileID: 8401433004866362306}
   - component: {fileID: 3773818598775845539}
   - component: {fileID: 1643819292734749714}
   m_Layer: 6
@@ -151,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2663b63e08c55304dbe642d62ba2643a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCollider: {fileID: 1643819292734749714}
   playerCamera: {fileID: 0}
   HUD: {fileID: 0}
   playerBody: {fileID: 7894472832680753255}

@@ -3,18 +3,18 @@ using UnityEngine.Serialization;
 
 using Combat;
 using System;
+using Levels;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Collider2D playerCollider;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private HUD HUD;
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform playerArm;
     [SerializeField] private Gun attachedGun;
-    [SerializeField] private int health;
+    [SerializeField] private float health;
     [SerializeField] float moveSpeed;
-
-    [FormerlySerializedAs("_characterBody")] [SerializeField] private Transform _playerBody;
 
     [SerializeField] bool isHit;
 
@@ -29,11 +29,26 @@ public class Player : MonoBehaviour
     [SerializeField] private LevelColor _currentColor;
 
     // Get health
-    public int getHealth()
+    public float getHealth()
     {
         return health;
     }
 
+    // TakeDamage
+    // This function is called when the player takes damage
+    // It decreases the player's health by 1 and updates the HUD
+    public void TakeDamage(float damageTaken = 1)
+    {
+        health -= damageTaken;
+        /*HUD.lowerHealth();*/
+        isHit = true;
+        if (health <= 0)
+        {
+            HUD.GameOver();
+            Destroy(this.gameObject);
+        }
+    }
+    
     // Update the player's color based on the current level color
     // Subscribe to OnLevelColorChanged event
     public void UpdatePlayerColor(LevelColor newColor)

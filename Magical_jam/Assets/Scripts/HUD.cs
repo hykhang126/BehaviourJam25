@@ -24,7 +24,7 @@ public class HUD : MonoBehaviour
     }
 
     public void lowerHealth(){
-        healthDisplay[player.getHealth()].gameObject.SetActive(false);
+        /*healthDisplay[player.getHealth()].gameObject.SetActive(false);*/
     }
 
     public void GameOver(){

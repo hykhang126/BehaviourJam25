@@ -34,7 +34,7 @@ public class Level : MonoBehaviour
     public AudioClip[] bgmClips;
     private AudioSource audioSource;
 
-    public GameObject player;
+    public Player player;
 
     public GameObject agentBK;
 
