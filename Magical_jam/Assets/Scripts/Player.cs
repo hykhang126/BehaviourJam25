@@ -9,11 +9,12 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private HUD HUD;
+    [SerializeField] private HUD HUD = HUD.instance;
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform playerArm;
     [SerializeField] private Gun attachedGun;
     [SerializeField] private float health;
+    [SerializeField] private float MAX_HEALTH = 100f;
     [SerializeField] float moveSpeed;
 
     public bool isHit;
@@ -27,6 +28,11 @@ public class Player : MonoBehaviour
     Animator animator;
 
     PlayerWeaponAnimCon playerWeaponAnimController;
+
+    SpriteRenderer spriteRenderer;
+
+    [SerializeField] private float blinkTimer = 0.1f;
+    [SerializeField] private float blinkDuration = 0.5f;
 
     [SerializeField] Shield shield;
 
@@ -134,12 +140,42 @@ public class Player : MonoBehaviour
             playerWeaponAnimController = GetComponentInChildren<PlayerWeaponAnimCon>();
         }
 
+        if (HUD == null)
+        {
+            HUD = FindFirstObjectByType<HUD>();
+        }
+        if (HUD == null)
+        {
+            Debug.LogError("HUD component not found in the scene.");
+        }
+
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("SpriteRenderer component not found in the children of the player object.");
+        }
+
+        health = MAX_HEALTH;
         isHit = false;
     }
     
     void Update()
     {
         var playerScreenPointPosition = playerCamera.WorldToScreenPoint(transform.position);
+
+        // If player is hit, blinking
+        if (isHit)
+        {
+            if (blinkTimer > 0f)
+            {
+                blinkTimer -= Time.deltaTime;
+            }
+            else
+            {
+                spriteRenderer.enabled = !spriteRenderer.enabled; // Toggle the sprite renderer
+                blinkTimer = blinkDuration; // Reset the timer
+            }
+        }
         
         // Update player rotation
         var flipPlayer = Input.mousePosition.x < playerScreenPointPosition.x;
@@ -174,6 +210,11 @@ public class Player : MonoBehaviour
         // Check if moving to trigger gun and shield bash animation
         playerWeaponAnimController.SetFloatAnimation("Speed", moveSpeed);
         shield.SetShieldFloat("Speed", moveSpeed);
+
+        // Update HUD logic
+        // Grab silder and fill it with current health percentage
+        var healthPercentage = health / MAX_HEALTH;
+        HUD.UpdateHealthBar(healthPercentage);
         
     }
 
