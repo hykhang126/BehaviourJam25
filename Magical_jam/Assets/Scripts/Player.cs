@@ -134,7 +134,9 @@ public class Player : MonoBehaviour
         if (_currentColor != LevelColor.Blue)
         {
             shield.DisableShield();
+            shield.TurnOffShieldSprite();
         }
+        
     }
 
     
