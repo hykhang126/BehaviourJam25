@@ -1,6 +1,8 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+using Enemies;
+
 public class Shield : MonoBehaviour
 {
     Collider2D sc;
@@ -30,7 +32,24 @@ public class Shield : MonoBehaviour
     public void EnableShield()
     {
         sc.enabled = true; // Enable the shield collider
-    }   
+    }
+
+    // On collision with enemy, trigger their dameage
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Enemy>().TakeDamage(1); // Example damage amount
+            Debug.Log("Shield hit by enemy: " + collision.name);
+            // Example: collision.GetComponent<Enemy>().TakeDamage(damageAmount);
+        }
+        else if (collision.CompareTag("Bullet"))
+        {
+            // Trigger bullet damage logic here
+            Debug.Log("Shield hit by bullet: " + collision.name);
+            // Example: collision.GetComponent<Bullet>().Destroy();
+        }
+    }
 
     // Update is called once per frame
     void Update()
