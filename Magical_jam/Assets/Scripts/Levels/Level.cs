@@ -110,7 +110,6 @@ public class Level : MonoBehaviour
         if (audioSource.clip != null)
         {
             audioSource.Play();
-            Debug.Log(audioSource.clip.name);
         }
         else
         {

@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.Stop();
-        SceneManager.LoadSceneAsync("AmandaScene");
+        SceneManager.LoadSceneAsync("HyHySceneSetMusic");
         
     }
 
