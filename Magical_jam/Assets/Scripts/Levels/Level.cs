@@ -51,11 +51,7 @@ public class Level : MonoBehaviour
     
     public Transform[] spawnPoints;
 
-    public SpawnManager[] spawnManagers;
-
     public AudioClip[] bgmClips;
-
-    [SerializeField] private int _currentColorIndex = 0;
 
     [SerializeField] private LevelColor _currentLevelColor;
     public LevelColor CurrentLevelColor
@@ -69,16 +65,16 @@ public class Level : MonoBehaviour
     // Update the level's color based on the current level color
     // Subscribe to OnLevelColorChanged event
     public void UpdateCurrentColor(LevelColor newColor)
-    {
+    { 
         _currentLevelColor = newColor;
-        PlayAudio();
         currentColor = newColor;
+        spawnManager.SetLevelColor(newColor);
+        
+        PlayAudio();
     }
 
     public void Start()
-    {
-        _levelColorManager.OnLevelColorChanged.AddListener(HandleLevelColorChanged);
-        
+    {        
         _levelColorManager.Initialize();
         spawnManager.Initialize();
         
@@ -87,7 +83,7 @@ public class Level : MonoBehaviour
 
     private void OnDestroy()
     {
-        spawnManagers[_currentColorIndex].gameObject.SetActive(false);
+        spawnManager.gameObject.SetActive(false);
         _levelColorManager.OnLevelColorChanged.RemoveAllListeners();
     }
 
@@ -115,13 +111,5 @@ public class Level : MonoBehaviour
         {
             Debug.LogWarning("No audio clip is assigned to the AudioSource!");
         }
-    }
-
-    private void HandleLevelColorChanged(LevelColor levelColor)
-    {
-        currentColor = levelColor;
-        spawnManager.SetLevelColor(levelColor);
-        
-        PlayAudio();
     }
 }

@@ -11,6 +11,8 @@ public class Melee : MonoBehaviour
 
     [SerializeField] GameObject meleeCapsuleCenter;
 
+    [SerializeField] float damage = 30f;
+
     bool isAttacking;
     
     void Awake(){
@@ -40,7 +42,7 @@ public class Melee : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCapsuleAll(meleeCapsuleCenter.transform.position,new Vector2(3,2),CapsuleDirection2D.Vertical,0);
         foreach(Collider2D c in colliders){
             if(c.gameObject.CompareTag("Enemy")){
-                c.GetComponentInParent<Enemy>().Death();
+                c.GetComponentInParent<Enemy>().TakeDamage(damage);
             }
             else if(c.gameObject.CompareTag("Destructible")){
                 Debug.Log("BOOM,CRASH,POW!! DESTRUCTIBLE DESTROYED");

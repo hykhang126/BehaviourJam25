@@ -5,6 +5,8 @@ using Combat;
 using System;
 using Levels;
 using Utility;
+using System.Threading;
+using Core;
 
 public class Player : MonoBehaviour
 {
@@ -13,14 +15,36 @@ public class Player : MonoBehaviour
     [SerializeField] private HUD HUD = HUD.instance;
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform playerArm;
-    [SerializeField] private Gun attachedGun;
     [SerializeField] private Kite attachedKite;
     [SerializeField] private float health;
     [SerializeField] private float MAX_HEALTH = 100f;
-    [SerializeField] float moveSpeed;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float blinkCooldown = 0.1f;
+    [SerializeField] private Core.Timer hitTimer;
 
+    [Header("Player Sprite Logic")]
+    [SerializeField] private Shield shield;
+    [SerializeField] private Gun attachedGun;
+    [SerializeField] private SpriteRenderer playerBunSpriteRenderer;
+
+    [Header("Player Color")]
+    [SerializeField] private LevelColor _currentColor;
+    // Update the player's color based on the current level color
+    // Subscribe to OnLevelColorChanged event
+    public void UpdatePlayerColor(LevelColor newColor)
+    {
+        _currentColor = newColor;
+    }
+    
     public bool isHit;
 
+
+    public float hitDuration = 1f;
+
+    public bool isInvincible;
+
+    public Collider2D PlayerCollider => playerCollider;
+    
     PlayerController playerController;
 
     Melee melee;
@@ -33,68 +57,7 @@ public class Player : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
-    [SerializeField] private float blinkTimer;
-    [SerializeField] private float blinkCooldown = 0.1f;
-
-    [SerializeField] Shield shield;
-
-    [SerializeField] private LevelColor _currentColor;
-
-    
-    public bool IsHit => isHit;
-    public Collider2D PlayerCollider => playerCollider;
-
-    //Awake is called before the game even starts.
-    void Awake()
-    {
-        isHit = false;
-    }
-
-    // Get health
-    public float getHealth()
-    {
-        return health;
-    }
-
-    // TakeDamage
-    // This function is called when the player takes damage
-    // It decreases the player's health by 1 and updates the HUD
-    public void TakeDamage(float damageTaken = 1)
-    {
-        if (isHit)
-        {
-            return;
-        }
-
-        health -= damageTaken;
-        // Animator
-        animator.SetTrigger("isHit");
-        /*HUD.lowerHealth();*/
-        isHit = true;
-        if (health <= 0)
-        {
-            HUD.GameOver();
-            Destroy(this.gameObject);
-        }
-    }
-    
-    // Update the player's color based on the current level color
-    // Subscribe to OnLevelColorChanged event
-    public void UpdatePlayerColor(LevelColor newColor)
-    {
-        _currentColor = newColor;
-    }
-
-    // Get the current color of the player
-    public LevelColor GetPlayerColor()
-    {
-        return _currentColor;
-    }
-
-    // Set if the player is hit
-    public void SetIsHit(bool hit){
-        isHit = hit;
-    }
+    float blinkDuration;
 
     // Start is called before the first frame update
     void Start()
@@ -157,25 +120,38 @@ public class Player : MonoBehaviour
             Debug.LogError("SpriteRenderer component not found in the children of the player object.");
         }
 
+        if (playerBunSpriteRenderer == null)
+        {
+            Debug.LogError("Player bun sprite renderer not found in the children of the player object.");
+        }
+
         health = MAX_HEALTH;
-        isHit = false;
+        isHit = isInvincible = false;
+
+        blinkDuration = (hitDuration > 0f) ? hitDuration : 1f; // Initialize blink timer
     }
     
     void Update()
     {
         var playerScreenPointPosition = playerCamera.WorldToScreenPoint(transform.position);
 
+        // Timer tick
+        if (hitTimer != null && hitTimer.IsRunning())
+        {
+            hitTimer.Tick(Time.deltaTime);
+        }
+
         // If player is hit, blinking
         if (isHit)
         {
-            if (blinkTimer > 0f)
+            if (blinkDuration > 0f)
             {
-                blinkTimer -= Time.deltaTime;
+                blinkDuration -= Time.deltaTime;
             }
             else
             {
                 spriteRenderer.enabled = !spriteRenderer.enabled; // Toggle the sprite renderer
-                blinkTimer = blinkCooldown; // Reset the timer
+                blinkDuration = blinkCooldown; // Reset the timer
             }
         }
         else
@@ -206,10 +182,83 @@ public class Player : MonoBehaviour
         shield.SetShieldFloat("Speed", moveSpeed);
 
         // Update HUD logic
-        // Grab silder and fill it with current health percentage
-        var healthPercentage = health / MAX_HEALTH;
-        HUD.UpdateHealthBar(healthPercentage);
+        // Whenever player is hit, trigger the heart animation
+        // HUD.UpdateHealthBar(health / MAX_HEALTH);
         
+    }
+
+    // Get health
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    // Get max health
+    public float GetMaxHealth()
+    {
+        return MAX_HEALTH;
+    }
+    
+    // function to check if player can be damaged
+    public bool CanBeDamaged()
+    {
+        return !isHit && !isInvincible;
+    }
+
+    // TakeDamage
+    // This function is called when the player takes damage
+    // It decreases the player's health by 1 and updates the HUD
+    public void TakeDamage(float damageTaken = 1)
+    {
+        if (isHit || isInvincible)
+        {
+            // If the player is already hit or invincible, do not take damage
+            return;
+        }
+
+        health -= damageTaken;
+        // Animator
+        animator.SetTrigger("isHit");
+        HUD.SetHeartAnimationTrigger("isHit");
+        /*HUD.lowerHealth();*/
+        isHit = true;
+        hitTimer = new Core.Timer(hitDuration);
+        hitTimer.onTimerEnd += () => isHit = false; // Reset isHit after the hit duration
+        if (health <= 0)
+        {
+            HUD.SetHeartAnimationBool("isDead", true);
+            HUD.GameOver();
+            Destroy(this.gameObject);
+        }
+    }
+
+    // Get the current color of the player
+    public LevelColor GetPlayerColor()
+    {
+        return _currentColor;
+    }
+
+    // Set if the player is hit
+    public void SetIsHit(bool hit){
+        isHit = hit;
+    }
+
+    // Set if the player is invincible
+    public void SetIsInvincible(bool invincible){
+        isInvincible = invincible;
+    }
+
+    // Set player's bun visibility
+    public void SetBunVisibility(bool visible)
+    {
+        if (playerBunSpriteRenderer != null)
+        {
+            playerBunSpriteRenderer.enabled = visible;
+        }
+        else
+        {
+            Debug.LogError("Player bun sprite renderer not found in the children of the player object.");
+        }
     }
 
     /// FIRE ACTION LOGIC
@@ -227,13 +276,13 @@ public class Player : MonoBehaviour
             case LevelColor.Blue:
                 TryBlock();
                 break;
-            // Green is 
+            // Green is melee
             case LevelColor.Green:
-                // Perform action for yellow color
+                // Perform action for green color
                 melee.gameObject.SetActive(true);
                 melee.Attack();
                 break;
-            // Yellow is melee
+            // Yellow is kite
             case LevelColor.Yellow:
                 // Perform action for yellow color
                 TryMoveKite(Input.mousePosition);

@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     
     // Components
     Rigidbody2D rb;
-    CapsuleCollider2D collider;
+    CapsuleCollider2D bulletCollider;
     
     // Data
     private Vector3 trajectory;
@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
         {
             rb = GetComponent<Rigidbody2D>();
         }
-        collider = GetComponent<CapsuleCollider2D>();
+        bulletCollider = GetComponent<CapsuleCollider2D>();
         ricochet = 0;
         rb.linearVelocity = Vector2.zero;
         isActive = true;
@@ -90,7 +90,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !shotByPlayer)
         {
             Player player = collision.gameObject.GetComponent<Player>();
-            if (!player.isHit) 
+            if (player.CanBeDamaged()) 
                 player.TakeDamage(damage);
             Destroy(gameObject);
         }
@@ -99,7 +99,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Shield") && !shotByPlayer)
         {
             // Disable the bullet collider layer exclusion
-            collider.excludeLayers = 0;
+            bulletCollider.excludeLayers = 0;
 
             shotByPlayer = true;
             // Player shield hit sfx
