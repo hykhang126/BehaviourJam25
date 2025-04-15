@@ -42,6 +42,23 @@ public class Shield : MonoBehaviour
         Physics2D.IgnoreLayerCollision(playerLayer, sc.gameObject.layer, true); // Ignore shield-player collision
     }
 
+    public void ToggleShield(bool toggle)
+    {
+        if (toggle)
+        {
+            EnableShield();
+            if (spriteRenderer)
+            {
+                spriteRenderer.enabled = true;
+            }
+        }
+        else
+        {
+            DisableShield();
+            TurnOffShieldSprite();
+        }
+    }
+
     public void DisableShield()
     {
         sc.enabled = false; // Disable the shield collider

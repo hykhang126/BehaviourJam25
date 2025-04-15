@@ -62,7 +62,8 @@ public class SpawnManager : MonoBehaviour
         enemySpawnPoints[spawnPointIndex].position = spawnPoint;
         
         // Set up enemy
-        var enemy = Instantiate(enemyPrefab.SpawnObject, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
+        var enemyGameObject = Instantiate(enemyPrefab.SpawnObject, spawnPoint, Quaternion.identity);
+        var enemy = enemyGameObject.GetComponent<Enemy>();
         enemy.Initialize(levelManager.Player, weaponProjectileContainer);
         enemy.transform.SetParent(enemyContainer);
         enemy.OnDeath += HandleEnemyDeath;

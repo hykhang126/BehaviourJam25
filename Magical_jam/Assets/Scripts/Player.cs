@@ -6,6 +6,7 @@ using System;
 using Levels;
 using System.Threading;
 using Core;
+using Utility;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private HUD HUD = HUD.instance;
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform playerArm;
+    [SerializeField] private Gun attachedGun;
+    [SerializeField] private Kite attachedKite;
     [SerializeField] private float health;
     [SerializeField] private float MAX_HEALTH = 100f;
     [SerializeField] private float moveSpeed;
@@ -169,23 +172,11 @@ public class Player : MonoBehaviour
         var armAngle = Vector3.Angle(armVectorAbs, Vector3.right);
         var armRotationZ = (armVector.y >= 0 ? 1 : -1) * armAngle;
         playerArm.rotation = Quaternion.Euler(0f, playerBodyRotation.y, armRotationZ);
-
-        // Update shield collider
-        if (_currentColor != LevelColor.Blue)
-        {
-            shield.DisableShield();
-            shield.TurnOffShieldSprite();
-        }
-
-        // Update gun sprite
-        if (_currentColor != LevelColor.Red)
-        {
-            playerWeaponAnimController.DisableGun();
-        }
-        else
-        {
-            playerWeaponAnimController.EnableGun();
-        }
+        
+        // Update weapons
+        playerWeaponAnimController.ToggleGun(_currentColor is LevelColor.Red);
+        shield.ToggleShield(_currentColor is LevelColor.Blue);
+        attachedKite.ToggleKite(_currentColor is LevelColor.Yellow);
 
         // Check if moving to trigger gun and shield bash animation
         playerWeaponAnimController.SetFloatAnimation("Speed", moveSpeed);
@@ -293,7 +284,8 @@ public class Player : MonoBehaviour
                 break;
             // Yellow is kite
             case LevelColor.Yellow:
-
+                // Perform action for yellow color
+                TryMoveKite(Input.mousePosition);
                 break;
             // Black is flashlight
             case LevelColor.Black:
@@ -304,8 +296,8 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-    
-    public void TryShoot(Vector3 mouseScreenPointPosition)
+
+    private void TryShoot(Vector3 mouseScreenPointPosition)
     {
         if (!attachedGun)
         {
@@ -327,6 +319,18 @@ public class Player : MonoBehaviour
         }
 
         shield.EnableShield();
+    }
+
+    private void TryMoveKite(Vector3 mouseScreenPointPosition)
+    {
+        if (!attachedKite)
+        {
+            Debug.LogError($"No gun attached to player {gameObject.name}.");
+            return;
+        }
+        
+        playerWeaponAnimController.SetTriggerAnimation("Shoot");
+        attachedKite.Move(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition));
     }
 
     void OnCollisionEnter2D(Collision2D collision)

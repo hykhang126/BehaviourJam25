@@ -22,6 +22,18 @@ public class PlayerWeaponAnimCon : MonoBehaviour
         }
     }
 
+    public void ToggleGun(bool toggle)
+    {
+        if (toggle)
+        {
+            EnableGun();
+        }
+        else
+        {
+            DisableGun();
+        }
+    }
+
     public void DisableGun()
     {
         if (spriteRenderer == null)

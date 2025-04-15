@@ -35,7 +35,7 @@ namespace Enemies
         public SpriteRenderer SpriteRenderer => GetComponentInChildren<SpriteRenderer>();
         public float AttackDamage => attackDamage;
         
-        public void Initialize(Player player, Transform weaponProjectileContainer)
+        public virtual void Initialize(Player player, Transform weaponProjectileContainer)
         {
             this.player = player;
             this.weaponProjectileContainer = weaponProjectileContainer;
@@ -83,11 +83,18 @@ namespace Enemies
                 return;
             }
             
-            MoveTowardsPlayer();
-            TryAttackPlayer();
-            
-            ToggleProjectiles(true);
             gameObject.SetActive(true);
+            ToggleProjectiles(true);
+            playerPosition = player.transform.position;
+            
+            if (!IsNearPlayer())
+            {
+                MoveTowardsPlayer();
+                return;
+            }
+            
+            enemyRigidbody.linearVelocity = Vector2.zero;
+            TryAttackPlayer();
         }
 
         protected virtual void ToggleProjectiles(bool toggle)
@@ -97,25 +104,16 @@ namespace Enemies
 
         protected virtual void MoveTowardsPlayer()
         {
-            playerPosition = player.transform.position;
             normalizedTrajectoryToPlayer = (playerPosition - (Vector2)transform.position).normalized;
             enemyRigidbody.linearVelocity = normalizedTrajectoryToPlayer * (Time.fixedDeltaTime * moveSpeed);
 
-            // Flip sprite dependiong on player position
-            if (playerPosition.x < transform.position.x)
-            {
-                spriteRenderer.flipX = true;
-            }
-            else
-            {
-                spriteRenderer.flipX = false;
-            }
+            // Flip sprite depending on player position
             spriteRenderer.flipX = playerPosition.x < transform.position.x;
         }
 
         protected bool IsNearPlayer()
         {
-            var distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
+            var distanceToPlayer = Vector2.Distance(playerPosition, transform.position);
             return distanceToPlayer <= attackRange;
         }
 
