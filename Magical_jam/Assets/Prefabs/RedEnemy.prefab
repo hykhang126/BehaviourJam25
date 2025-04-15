@@ -5078,7 +5078,7 @@ MonoBehaviour:
   levelColor: 1
   health: 50
   moveSpeed: 75
-  attackRange: 4
+  attackRange: 2
   attackDamage: 10
   attackCooldown: 3
   knockbackForce: 0.25

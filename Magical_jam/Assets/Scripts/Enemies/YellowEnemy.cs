@@ -1,40 +1,62 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 namespace Enemies
 {
     public class YellowEnemy : Enemy
     {
-        private Coroutine dashCoroutine;
+        [Header(nameof(YellowEnemy))]
+        [SerializeField] private Collider2D enemyTriggerCollider;
+
+        private Vector2 startPosition;
         private Vector2 endPosition;
         private bool isDashing;
-        private float distanceCovered;
-        
+        private float speedPerFrame;
+        private float speedTimer;
+
+        public override void Initialize(Player player, Transform weaponProjectileContainer)
+        {
+            base.Initialize(player, weaponProjectileContainer);
+            
+            Physics2D.IgnoreCollision(EnemyCollider, player.PlayerCollider);
+            speedPerFrame = Time.deltaTime * moveSpeed;
+        }
+
         private void FixedUpdate()
         {
             if (!player)
             {
                 Debug.LogError("Player is not active.");
                 Destroy(this);
+                return;
             }
 
             if (health <= 0)
             {
                 Death();
+                return;
             }
 
             if (currentState is EnemyState.Dormant or EnemyState.Dead)
             {
-                StopDashing();
+                isDashing = false;
                 enemyRigidbody.linearVelocity = Vector2.zero;
                 gameObject.SetActive(false);
                 return;
             }
-            
-            TryAttackPlayer();
-            
+
             gameObject.SetActive(true);
+
+            if (isDashing && (Vector2)transform.position != endPosition)
+            {
+                speedTimer += speedPerFrame;
+                transform.position = Vector2.Lerp(startPosition, endPosition, speedTimer);
+                lastAttackTime = Time.time;
+                return;
+            }
+
+            isDashing = false;
+            TryAttackPlayer();
         }
 
         protected override void TryAttackPlayer()
@@ -43,45 +65,20 @@ namespace Enemies
             {
                 return;
             }
-            
-            StartDashing();
-        }
 
-        private void StartDashing()
-        {
+            startPosition = transform.position;
             playerPosition = player.transform.position;
             endPosition = playerPosition - (Vector2)transform.position;
-            // End position detected here. Visual indicator required.
-            
-            StopDashing();
-            dashCoroutine = StartCoroutine(Dash());
-            
-            lastAttackTime = Time.time;
             isDashing = true;
+            speedTimer = 0;
         }
 
-        private void StopDashing()
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (dashCoroutine != null)
+            if (other.GetComponent<Collider2D>() == player.PlayerCollider)
             {
-                StopCoroutine(dashCoroutine);
+                player.TakeDamage(attackDamage);
             }
-            
-            isDashing = false;
-            distanceCovered = 0f;
-        }
-
-        private IEnumerator Dash()
-        {
-            while (distanceCovered < attackRange)
-            {
-                enemyRigidbody.linearVelocity = endPosition * moveSpeed;
-                distanceCovered += enemyRigidbody.linearVelocity.magnitude;
-                Debug.LogError(distanceCovered);
-                yield return null;
-            }
-
-            enemyRigidbody.linearVelocity = Vector2.zero;
         }
     }
 }

@@ -29,7 +29,6 @@ public class Level : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -106,7 +105,6 @@ public class Level : MonoBehaviour
         if (audioSource.clip != null)
         {
             audioSource.Play();
-            Debug.Log(audioSource.clip.name);
         }
         else
         {
