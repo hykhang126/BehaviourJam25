@@ -911,7 +911,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -933,11 +939,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: d715a669-7e2b-471f-8e11-b61ad8610df8
+  cloudProjectId: 3bef814a-9c37-4397-827f-35c66fa9dfc2
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: BarkingKitten
-  organizationId: braveguys42
+  projectName: PsychoCycle
+  organizationId: khangsun126
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
