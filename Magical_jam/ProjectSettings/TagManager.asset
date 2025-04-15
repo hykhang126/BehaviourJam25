@@ -50,9 +50,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Collision
-    uniqueID: 1582954905
-    locked: 0
   - name: WalkBehind
     uniqueID: 2420280899
     locked: 0
