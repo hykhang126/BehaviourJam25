@@ -11,12 +11,22 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] Player player;
 
+    /*
+        Top left is green
+        Top right is blue
+        Bottom right is red
+        Bottom left is yellow
+    */
     [SerializeField] Image colorWheel;
 
     [SerializeField] GameObject gameOver;
 
     [SerializeField] Animator healthBarAnimator;
     [SerializeField] Animator healthHeartAnimator;
+
+    [SerializeField] float _levelColorSwapCooldown = 0f;
+
+    [SerializeField] LevelColorManager levelColorManager;
 
     // Make singleton
     public static HUD instance;
@@ -38,6 +48,16 @@ public class HUD : MonoBehaviour
     void Start()
     {
         gameOver.gameObject.SetActive(false);
+        
+        if (levelColorManager == null)
+        {
+            Debug.LogError("LevelColorManager is not assigned in the inspector.");
+            _levelColorSwapCooldown = 5f; // Default value if not assigned
+        }
+        else
+        {
+            _levelColorSwapCooldown = levelColorManager.levelColorSwapCooldown;
+        }
 
         if (healthBarAnimator == null)
         {
@@ -59,7 +79,12 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // Rotate the color wheel per frambased on _levelColorSwapCooldown, each color should finish 90 degrees in that amount of time
+        if (_levelColorSwapCooldown > 0f)
+        {
+            float angle = 90f / _levelColorSwapCooldown * Time.deltaTime;
+            RotateColorWheel(angle);
+        }
     }
 
     public void GameOver(){
@@ -92,28 +117,36 @@ public class HUD : MonoBehaviour
         }
     }
 
+    public void RotateColorWheel(float angle)
+    {
+        // Rotate the color wheel by the specified angle
+        colorWheel.transform.Rotate(0, 0, angle);
+    }
+
     private void UpdateColorWheel()
     {
         // Rotate the wheel 90 degrees based on the current color with a smooth transition
+        // Top left is green, top right is blue, bottom right is red, bottom left is yellow
         Quaternion targetRotation = Quaternion.identity;
 
         switch (_currentColor)
         {
             case LevelColor.Green:
-                targetRotation = Quaternion.Euler(0, 0, 0);
-                break;
+            targetRotation = Quaternion.Euler(0, 0, -45);
+            break;
             case LevelColor.Blue:
-                targetRotation = Quaternion.Euler(0, 0, 90);
-                break;
+            targetRotation = Quaternion.Euler(0, 0, 45);
+            break;
             case LevelColor.Red:
-                targetRotation = Quaternion.Euler(0, 0, 180);
-                break;
+            targetRotation = Quaternion.Euler(0, 0, 135);
+            break;
             case LevelColor.Yellow:
-                targetRotation = Quaternion.Euler(0, 0, 270);
-                break;
+            targetRotation = Quaternion.Euler(0, 0, 225);
+            break;
         }
 
-        StartCoroutine(SmoothRotate(colorWheel.transform, targetRotation, 2.0f)); // 0.5 seconds for transition
+        // StartCoroutine(SmoothRotate(colorWheel.transform, targetRotation, 2.0f)); // 0.5 seconds for transition
+        colorWheel.transform.rotation = targetRotation; // Set the final rotation immediately for now
     }
 
     private IEnumerator SmoothRotate(Transform target, Quaternion targetRotation, float duration)

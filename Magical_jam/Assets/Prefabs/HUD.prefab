@@ -197,6 +197,8 @@ MonoBehaviour:
   gameOver: {fileID: 2349426691492598655}
   healthBarAnimator: {fileID: 4964259789061291072}
   healthHeartAnimator: {fileID: 2111992327839830864}
+  _levelColorSwapCooldown: 0
+  levelColorManager: {fileID: 0}
   _currentColor: 0
 --- !u!1 &2349426691492598655
 GameObject:
@@ -443,13 +445,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4330982519987062801}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3927842397657019480}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 40, y: -3}

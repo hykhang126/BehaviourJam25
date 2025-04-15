@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpritePalette
+  m_Name: SpritePaletteRed
   m_Shader: {fileID: -6465566751694194690, guid: 34bf7ca961a122a459115e32009f27d5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GradientTex:
-        m_Texture: {fileID: 2800000, guid: b6d3f0bf3293dbf44bc66a1f9f00fad3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 97fcf63d6f24b6a46826dee2318b65af, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:

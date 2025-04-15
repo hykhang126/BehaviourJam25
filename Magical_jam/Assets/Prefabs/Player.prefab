@@ -54,14 +54,15 @@ MonoBehaviour:
   playerBody: {fileID: 7894472832680753255}
   playerArm: {fileID: 6594501740717402074}
   attachedGun: {fileID: 1989616614844165598}
-  health: 0
+  health: 50
   MAX_HEALTH: 100
   moveSpeed: 0
-  isHit: 0
-  blinkTimer: 0.1
-  blinkCooldown: 0.5
+  blinkCooldown: 0.1
   shield: {fileID: 3956620223896769112}
-  _currentColor: 1
+  _currentColor: 4
+  isHit: 0
+  hitDuration: 1
+  isInvincible: 0
 --- !u!50 &3773818598775845539
 Rigidbody2D:
   serializedVersion: 5
@@ -105,7 +106,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 320
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -237,7 +238,8 @@ MonoBehaviour:
   player: {fileID: 7549041778833700098}
   bulletPrefab: {fileID: 1192747416667966142, guid: ff45c701d3386584794dde714b1b6a5d, type: 3}
   bulletSpawnPoint: {fileID: 7255201759582819541}
-  reloadCooldown: 5
+  reloadCooldown: 0.2
+  reloadTime: 0
 --- !u!95 &2093976319093873078
 Animator:
   serializedVersion: 7
@@ -383,7 +385,7 @@ Transform:
   m_GameObject: {fileID: 4411056505402875977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1700001, y: 0.03999996, z: 0}
+  m_LocalPosition: {x: 0.74, y: 0.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

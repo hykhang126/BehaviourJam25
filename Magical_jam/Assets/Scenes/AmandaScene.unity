@@ -450,7 +450,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _levelColorSwapCooldown: 10
+  levelColorSwapCooldown: 5
   _areLevelColorsRandomized: 0
   _levelColorOrder: 010000000200000003000000
   _minNumberOfLevelsLoaded: 3
@@ -585,6 +585,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1502041038}
+    - target: {fileID: 4561116347701430897, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: levelColorManager
+      value: 
+      objectReference: {fileID: 295313465}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -793,9 +797,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4a50ebad498ae4888eeb12f3f6f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 1138862086}
+  mapMats:
+  - {fileID: 2100000, guid: 817b41341fd638b478f3a5f028c04aae, type: 2}
+  - {fileID: 2100000, guid: beeb5adfc261f844ab12b35068694b80, type: 2}
+  - {fileID: 2100000, guid: 612bfe29b997c044182e4b93bc5cda9a, type: 2}
+  - {fileID: 2100000, guid: a17ef6ca252c25f47b21904bf7a9def9, type: 2}
   level: {fileID: 1624063118}
   _currentColor: 0
+  mapRenderer: {fileID: 1138862085}
 --- !u!4 &851409279
 Transform:
   m_ObjectHideFlags: 0
@@ -11626,11 +11635,6 @@ MonoBehaviour:
   sewerGrates:
   - {fileID: 926904965}
   - {fileID: 1506450891}
---- !u!4 &1865622040 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7894472832680753255, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-  m_PrefabInstance: {fileID: 2094713037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1879837259 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4561116347701430897, guid: 65381d9088b70264694e3bc55310952a, type: 3}
@@ -11685,38 +11689,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1643819292734749714, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 320
-      objectReference: {fileID: 0}
-    - target: {fileID: 1989616614844165598, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: reloadCooldown
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2166350286605484541, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: dashSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2166350286605484541, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: dashCooldown
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398904547398988823, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398904547398988823, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.003
-      objectReference: {fileID: 0}
-    - target: {fileID: 3773818598775845539, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939359736921468959, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7277709363797054526, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.74
@@ -11762,29 +11734,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1879837259}
     - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: health
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: blinkTimer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: _playerBody
-      value: 
-      objectReference: {fileID: 1865622040}
-    - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 93682129}
-    - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: _currentColor
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: blinkCooldown
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

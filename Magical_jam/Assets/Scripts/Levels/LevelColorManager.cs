@@ -23,7 +23,7 @@ namespace Combat
             public float LastLevelStartTime;
         }
         
-        [SerializeField] private float _levelColorSwapCooldown = 5;
+        public float levelColorSwapCooldown = 5;
         [SerializeField] private bool _areLevelColorsRandomized;
         [SerializeField] private List<LevelColor> _levelColorOrder;
         [SerializeField] private int _minNumberOfLevelsLoaded = 3;
@@ -50,7 +50,7 @@ namespace Combat
             }
             
             if (Time.time - _levelData[_currentLevelDataIndex].LastLevelStartTime >=
-                _levelColorSwapCooldown)
+                levelColorSwapCooldown)
             {
                 GoToNextLevel();
                 AddUpcomingLevel();

@@ -5,11 +5,13 @@ using Combat;
 
 public class MapChanger : MonoBehaviour
 {
-    public Tilemap tilemap; // Reference to the Tilemap component
+    public Material[] mapMats; // Reference to the Tilemap component
 
     public Level level = Level.Instance;
 
     [SerializeField] private LevelColor _currentColor;
+
+    [SerializeField] Renderer mapRenderer;
 
     // Update the level's color based on the current level color
     // Subscribe to OnLevelColorChanged event
@@ -20,22 +22,19 @@ public class MapChanger : MonoBehaviour
         switch (newColor)
         {
             case LevelColor.Red:
-                tilemap.color = Color.red;
-                break;
-            case LevelColor.Green:
-                tilemap.color = Color.green;
+                mapRenderer.material = mapMats[0];
                 break;
             case LevelColor.Blue:
-                tilemap.color = Color.blue;
+                mapRenderer.material = mapMats[1];
+                break;
+            case LevelColor.Green:
+                mapRenderer.material = mapMats[2];
                 break;
             case LevelColor.Yellow:
-                tilemap.color = Color.yellow;
-                break;
-            case LevelColor.Black:
-                tilemap.color = Color.black;
+                mapRenderer.material = mapMats[3];
                 break;
             default:
-                tilemap.color = Color.white; // Default color
+                Debug.LogError("Invalid color selected.");
                 break;
         }
     }
@@ -43,9 +42,14 @@ public class MapChanger : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (tilemap == null)
+        if (mapRenderer == null)
         {
-            tilemap = GetComponent<Tilemap>(); // Get the Tilemap component if not assigned in the inspector
+            Debug.LogError("Map renderer not assigned in the inspector.");
+        }
+        
+        if (mapMats == null || mapMats.Length == 0)
+        {
+            Debug.LogError("Map material not assigned in the inspector.");
         }
     }
 
