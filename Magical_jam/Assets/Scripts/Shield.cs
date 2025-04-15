@@ -14,7 +14,7 @@ public class Shield : MonoBehaviour
 
     public int playerLayer = 6; // Layer for the player
 
-    public Transform hand;
+    public Transform pivot;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -117,9 +117,9 @@ public class Shield : MonoBehaviour
     void FixedUpdate()
     {
         // Move to parent location
-        if (hand != null)
+        if (pivot != null)
         {
-            transform.position = hand.position;
+            transform.position = pivot.position;
         }
     }
 }

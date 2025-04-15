@@ -53,14 +53,15 @@ MonoBehaviour:
   HUD: {fileID: 0}
   playerBody: {fileID: 7894472832680753255}
   playerArm: {fileID: 6594501740717402074}
-  attachedGun: {fileID: 1989616614844165598}
-  attachedKite: {fileID: 7856848509469153732}
   health: 0
   MAX_HEALTH: 100
   moveSpeed: 0
   blinkCooldown: 0.1
+  playerBunSpriteRenderer: {fileID: 734019383149238975}
   shield: {fileID: 3956620223896769112}
-  _currentColor: 4
+  attachedGun: {fileID: 1989616614844165598}
+  attachedKite: {fileID: 7856848509469153732}
+  _currentColor: 0
   isHit: 0
   hitDuration: 1
   isInvincible: 0
@@ -778,7 +779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLayer: 6
-  hand: {fileID: 3398904547398988823}
+  pivot: {fileID: 3398904547398988823}
 --- !u!95 &3667177340086995042
 Animator:
   serializedVersion: 7
@@ -1048,6 +1049,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6100328027782155389}
     m_Modifications:
+    - target: {fileID: 960783571122522336, guid: d3ead0ae48c209b4d9e218298bd9995e, type: 3}
+      propertyPath: handContainer
+      value: 
+      objectReference: {fileID: 6100328027782155389}
     - target: {fileID: 5205888642912483777, guid: d3ead0ae48c209b4d9e218298bd9995e, type: 3}
       propertyPath: m_Name
       value: Kite

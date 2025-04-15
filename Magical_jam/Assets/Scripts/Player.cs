@@ -15,18 +15,17 @@ public class Player : MonoBehaviour
     [SerializeField] private HUD HUD = HUD.instance;
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform playerArm;
-    [SerializeField] private Gun attachedGun;
-    [SerializeField] private Kite attachedKite;
     [SerializeField] private float health;
     [SerializeField] private float MAX_HEALTH = 100f;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float blinkCooldown = 0.1f;
     [SerializeField] private Core.Timer hitTimer;
+    [SerializeField] private SpriteRenderer playerBunSpriteRenderer;
 
-    [Header("Player Sprite Logic")]
+    [Header("Player Weapon Logic")]
     [SerializeField] private Shield shield;
     [SerializeField] private Gun attachedGun;
-    [SerializeField] private SpriteRenderer playerBunSpriteRenderer;
+    [SerializeField] private Kite attachedKite;
 
     [Header("Player Color")]
     [SerializeField] private LevelColor _currentColor;
