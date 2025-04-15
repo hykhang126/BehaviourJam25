@@ -158,8 +158,8 @@ Camera:
   m_GameObject: {fileID: 93682127}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.854902, g: 0.95294124, b: 1, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.22352943, g: 0.20392159, b: 0.3372549, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -178,7 +178,7 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0.99999994
+    width: 0.999669
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -11167,12 +11167,10 @@ MonoBehaviour:
   player: {fileID: 1502041038}
   spawnPoints:
   - {fileID: 1823765704}
-  spawnManagers: []
   bgmClips:
   - {fileID: 8300000, guid: a6e62798f3f4a6a44bdd97e3237dc693, type: 3}
   - {fileID: 8300000, guid: 2bcc8070ba37fbc498c0e33661cd0fde, type: 3}
   - {fileID: 8300000, guid: af0ba49e81dbc39498b33aa7fdda5415, type: 3}
-  _currentColorIndex: 0
   _currentLevelColor: 2
 --- !u!82 &1624063119
 AudioSource:
