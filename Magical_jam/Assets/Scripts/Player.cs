@@ -4,6 +4,8 @@ using UnityEngine.Serialization;
 using Combat;
 using System;
 using Levels;
+using System.Threading;
+using Core;
 
 public class Player : MonoBehaviour
 {
@@ -16,9 +18,24 @@ public class Player : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float MAX_HEALTH = 100f;
     [SerializeField] float moveSpeed;
+    [SerializeField] private float blinkCooldown = 0.1f;
 
+    [SerializeField] Shield shield;
+
+    [SerializeField] private LevelColor _currentColor;
+
+     [SerializeField] private Core.Timer hitTimer;
+
+    
     public bool isHit;
 
+
+    public float hitDuration = 1f;
+
+    public bool isInvincible;
+
+    public Collider2D PlayerCollider => playerCollider;
+    
     PlayerController playerController;
 
     Melee melee;
@@ -31,16 +48,7 @@ public class Player : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
-    [SerializeField] private float blinkTimer;
-    [SerializeField] private float blinkCooldown = 0.1f;
-
-    [SerializeField] Shield shield;
-
-    [SerializeField] private LevelColor _currentColor;
-
-    
-    public bool IsHit => isHit;
-    public Collider2D PlayerCollider => playerCollider;
+    float blinkDuration;
 
     //Awake is called before the game even starts.
     void Awake()
@@ -49,9 +57,21 @@ public class Player : MonoBehaviour
     }
 
     // Get health
-    public float getHealth()
+    public float GetHealth()
     {
         return health;
+    }
+
+    // Get max health
+    public float GetMaxHealth()
+    {
+        return MAX_HEALTH;
+    }
+    
+    // function to check if player can be damaged
+    public bool CanBeDamaged()
+    {
+        return !isHit && !isInvincible;
     }
 
     // TakeDamage
@@ -59,18 +79,23 @@ public class Player : MonoBehaviour
     // It decreases the player's health by 1 and updates the HUD
     public void TakeDamage(float damageTaken = 1)
     {
-        if (isHit)
+        if (isHit || isInvincible)
         {
+            // If the player is already hit or invincible, do not take damage
             return;
         }
 
         health -= damageTaken;
         // Animator
         animator.SetTrigger("isHit");
+        HUD.SetHeartAnimationTrigger("isHit");
         /*HUD.lowerHealth();*/
         isHit = true;
+        hitTimer = new Core.Timer(hitDuration);
+        hitTimer.onTimerEnd += () => isHit = false; // Reset isHit after the hit duration
         if (health <= 0)
         {
+            HUD.SetHeartAnimationBool("isDead", true);
             HUD.GameOver();
             Destroy(this.gameObject);
         }
@@ -92,6 +117,11 @@ public class Player : MonoBehaviour
     // Set if the player is hit
     public void SetIsHit(bool hit){
         isHit = hit;
+    }
+
+    // Set if the player is invincible
+    public void SetIsInvincible(bool invincible){
+        isInvincible = invincible;
     }
 
     // Start is called before the first frame update
@@ -157,23 +187,31 @@ public class Player : MonoBehaviour
 
         health = MAX_HEALTH;
         isHit = false;
+
+        blinkDuration = (hitDuration > 0f) ? hitDuration : 1f; // Initialize blink timer
     }
     
     void Update()
     {
         var playerScreenPointPosition = playerCamera.WorldToScreenPoint(transform.position);
 
+        // Timer tick
+        if (hitTimer != null && hitTimer.IsRunning())
+        {
+            hitTimer.Tick(Time.deltaTime);
+        }
+
         // If player is hit, blinking
         if (isHit)
         {
-            if (blinkTimer > 0f)
+            if (blinkDuration > 0f)
             {
-                blinkTimer -= Time.deltaTime;
+                blinkDuration -= Time.deltaTime;
             }
             else
             {
                 spriteRenderer.enabled = !spriteRenderer.enabled; // Toggle the sprite renderer
-                blinkTimer = blinkCooldown; // Reset the timer
+                blinkDuration = blinkCooldown; // Reset the timer
             }
         }
         else
@@ -216,9 +254,8 @@ public class Player : MonoBehaviour
         shield.SetShieldFloat("Speed", moveSpeed);
 
         // Update HUD logic
-        // Grab silder and fill it with current health percentage
-        var healthPercentage = health / MAX_HEALTH;
-        HUD.UpdateHealthBar(healthPercentage);
+        // Whenever player is hit, trigger the heart animation
+        // HUD.UpdateHealthBar(health / MAX_HEALTH);
         
     }
 

@@ -51,11 +51,7 @@ public class Level : MonoBehaviour
     
     public Transform[] spawnPoints;
 
-    public SpawnManager[] spawnManagers;
-
     public AudioClip[] bgmClips;
-
-    [SerializeField] private int _currentColorIndex = 0;
 
     [SerializeField] private LevelColor _currentLevelColor;
     public LevelColor CurrentLevelColor
@@ -87,7 +83,7 @@ public class Level : MonoBehaviour
 
     private void OnDestroy()
     {
-        spawnManagers[_currentColorIndex].gameObject.SetActive(false);
+        spawnManager.gameObject.SetActive(false);
         _levelColorManager.OnLevelColorChanged.RemoveAllListeners();
     }
 
