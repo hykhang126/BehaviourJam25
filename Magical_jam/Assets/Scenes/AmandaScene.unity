@@ -7767,7 +7767,7 @@ MonoBehaviour:
         m_CallState: 2
   levelColorSwapCooldown: 15
   _areLevelColorsRandomized: 0
-  _levelColorOrder: 010000000300000002000000
+  _levelColorOrder: 01000000040000000300000002000000
 --- !u!1 &349266399
 GameObject:
   m_ObjectHideFlags: 0
@@ -8086,11 +8086,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &755043014 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6100328027782155389, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-  m_PrefabInstance: {fileID: 2094713037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &767903321
 GameObject:
   m_ObjectHideFlags: 0
@@ -23262,11 +23257,6 @@ Transform:
   - {fileID: 851409279}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &838303236 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3398904547398988823, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-  m_PrefabInstance: {fileID: 2094713037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &851409277
 GameObject:
   m_ObjectHideFlags: 0
@@ -23673,6 +23663,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8b4447e54b44ba930c88b09fec9971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &946208653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 946208654}
+  m_Layer: 0
+  m_Name: BottomRightMapBound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &946208654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946208653}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 14.7, y: -16.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1410834012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1185106869
 GameObject:
   m_ObjectHideFlags: 0
@@ -23890,6 +23911,39 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!1 &1410834011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1410834012}
+  m_Layer: 0
+  m_Name: SpawnBound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1410834012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410834011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1696102071}
+  - {fileID: 946208654}
+  m_Father: {fileID: 1811647388}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1502041032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7277709363797054526, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
@@ -24495,6 +24549,37 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!1 &1696102070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1696102071}
+  m_Layer: 0
+  m_Name: TopLeftMapBound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1696102071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696102070}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.5, y: 13.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1410834012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793624729
 GameObject:
   m_ObjectHideFlags: 0
@@ -24558,9 +24643,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1410834012}
+  - {fileID: 349266400}
   - {fileID: 14325752}
   - {fileID: 1793624730}
-  - {fileID: 349266400}
   - {fileID: 1676138144}
   m_Father: {fileID: 812248143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24588,6 +24674,9 @@ MonoBehaviour:
   sewerGrates:
   - {fileID: 926904965}
   - {fileID: 1506450891}
+  spawnPointsBound:
+    TopLeft: {fileID: 1696102071}
+    BottomRight: {fileID: 946208654}
 --- !u!114 &1879837259 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4561116347701430897, guid: 65381d9088b70264694e3bc55310952a, type: 3}
@@ -24642,10 +24731,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3956620223896769112, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: pivot
-      value: 
-      objectReference: {fileID: 838303236}
     - target: {fileID: 7277709363797054526, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.72
@@ -24694,14 +24779,6 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 93682129}
-    - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: _currentColor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7856848509469153732, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: handContainer
-      value: 
-      objectReference: {fileID: 755043014}
     - target: {fileID: 7856848509469153732, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
       propertyPath: projectileContainer
       value: 
