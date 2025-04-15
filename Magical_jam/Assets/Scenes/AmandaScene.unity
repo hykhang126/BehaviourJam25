@@ -11862,7 +11862,6 @@ MonoBehaviour:
   - {fileID: 526509307}
   - {fileID: 622633093}
   - {fileID: 1185106870}
-  enemySpawnPointUpdateVectorScalar: 5
   weaponProjectileContainer: {fileID: 14325752}
   sewerGrates:
   - {fileID: 926904965}
