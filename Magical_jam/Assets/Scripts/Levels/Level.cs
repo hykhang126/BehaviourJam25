@@ -65,16 +65,16 @@ public class Level : MonoBehaviour
     // Update the level's color based on the current level color
     // Subscribe to OnLevelColorChanged event
     public void UpdateCurrentColor(LevelColor newColor)
-    {
+    { 
         _currentLevelColor = newColor;
-        PlayAudio();
         currentColor = newColor;
+        spawnManager.SetLevelColor(newColor);
+        
+        PlayAudio();
     }
 
     public void Start()
-    {
-        _levelColorManager.OnLevelColorChanged.AddListener(HandleLevelColorChanged);
-        
+    {        
         _levelColorManager.Initialize();
         spawnManager.Initialize();
         
@@ -112,13 +112,5 @@ public class Level : MonoBehaviour
         {
             Debug.LogWarning("No audio clip is assigned to the AudioSource!");
         }
-    }
-
-    private void HandleLevelColorChanged(LevelColor levelColor)
-    {
-        currentColor = levelColor;
-        spawnManager.SetLevelColor(levelColor);
-        
-        PlayAudio();
     }
 }

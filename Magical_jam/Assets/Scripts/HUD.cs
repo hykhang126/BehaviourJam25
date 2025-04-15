@@ -33,6 +33,9 @@ public class HUD : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        // Set myself active
+        gameObject.SetActive(true);
     }
 
     public LevelColor _currentColor;

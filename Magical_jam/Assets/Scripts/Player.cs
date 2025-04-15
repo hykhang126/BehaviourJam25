@@ -14,18 +14,25 @@ public class Player : MonoBehaviour
     [SerializeField] private HUD HUD = HUD.instance;
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform playerArm;
-    [SerializeField] private Gun attachedGun;
     [SerializeField] private float health;
     [SerializeField] private float MAX_HEALTH = 100f;
-    [SerializeField] float moveSpeed;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private float blinkCooldown = 0.1f;
+    [SerializeField] private Core.Timer hitTimer;
 
-    [SerializeField] Shield shield;
+    [Header("Player Sprite Logic")]
+    [SerializeField] private Shield shield;
+    [SerializeField] private Gun attachedGun;
+    [SerializeField] private SpriteRenderer playerBunSpriteRenderer;
 
+    [Header("Player Color")]
     [SerializeField] private LevelColor _currentColor;
-
-     [SerializeField] private Core.Timer hitTimer;
-
+    // Update the player's color based on the current level color
+    // Subscribe to OnLevelColorChanged event
+    public void UpdatePlayerColor(LevelColor newColor)
+    {
+        _currentColor = newColor;
+    }
     
     public bool isHit;
 
@@ -49,80 +56,6 @@ public class Player : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     float blinkDuration;
-
-    //Awake is called before the game even starts.
-    void Awake()
-    {
-        isHit = false;
-    }
-
-    // Get health
-    public float GetHealth()
-    {
-        return health;
-    }
-
-    // Get max health
-    public float GetMaxHealth()
-    {
-        return MAX_HEALTH;
-    }
-    
-    // function to check if player can be damaged
-    public bool CanBeDamaged()
-    {
-        return !isHit && !isInvincible;
-    }
-
-    // TakeDamage
-    // This function is called when the player takes damage
-    // It decreases the player's health by 1 and updates the HUD
-    public void TakeDamage(float damageTaken = 1)
-    {
-        if (isHit || isInvincible)
-        {
-            // If the player is already hit or invincible, do not take damage
-            return;
-        }
-
-        health -= damageTaken;
-        // Animator
-        animator.SetTrigger("isHit");
-        HUD.SetHeartAnimationTrigger("isHit");
-        /*HUD.lowerHealth();*/
-        isHit = true;
-        hitTimer = new Core.Timer(hitDuration);
-        hitTimer.onTimerEnd += () => isHit = false; // Reset isHit after the hit duration
-        if (health <= 0)
-        {
-            HUD.SetHeartAnimationBool("isDead", true);
-            HUD.GameOver();
-            Destroy(this.gameObject);
-        }
-    }
-    
-    // Update the player's color based on the current level color
-    // Subscribe to OnLevelColorChanged event
-    public void UpdatePlayerColor(LevelColor newColor)
-    {
-        _currentColor = newColor;
-    }
-
-    // Get the current color of the player
-    public LevelColor GetPlayerColor()
-    {
-        return _currentColor;
-    }
-
-    // Set if the player is hit
-    public void SetIsHit(bool hit){
-        isHit = hit;
-    }
-
-    // Set if the player is invincible
-    public void SetIsInvincible(bool invincible){
-        isInvincible = invincible;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -185,8 +118,13 @@ public class Player : MonoBehaviour
             Debug.LogError("SpriteRenderer component not found in the children of the player object.");
         }
 
+        if (playerBunSpriteRenderer == null)
+        {
+            Debug.LogError("Player bun sprite renderer not found in the children of the player object.");
+        }
+
         health = MAX_HEALTH;
-        isHit = false;
+        isHit = isInvincible = false;
 
         blinkDuration = (hitDuration > 0f) ? hitDuration : 1f; // Initialize blink timer
     }
@@ -259,6 +197,80 @@ public class Player : MonoBehaviour
         
     }
 
+    // Get health
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    // Get max health
+    public float GetMaxHealth()
+    {
+        return MAX_HEALTH;
+    }
+    
+    // function to check if player can be damaged
+    public bool CanBeDamaged()
+    {
+        return !isHit && !isInvincible;
+    }
+
+    // TakeDamage
+    // This function is called when the player takes damage
+    // It decreases the player's health by 1 and updates the HUD
+    public void TakeDamage(float damageTaken = 1)
+    {
+        if (isHit || isInvincible)
+        {
+            // If the player is already hit or invincible, do not take damage
+            return;
+        }
+
+        health -= damageTaken;
+        // Animator
+        animator.SetTrigger("isHit");
+        HUD.SetHeartAnimationTrigger("isHit");
+        /*HUD.lowerHealth();*/
+        isHit = true;
+        hitTimer = new Core.Timer(hitDuration);
+        hitTimer.onTimerEnd += () => isHit = false; // Reset isHit after the hit duration
+        if (health <= 0)
+        {
+            HUD.SetHeartAnimationBool("isDead", true);
+            HUD.GameOver();
+            Destroy(this.gameObject);
+        }
+    }
+
+    // Get the current color of the player
+    public LevelColor GetPlayerColor()
+    {
+        return _currentColor;
+    }
+
+    // Set if the player is hit
+    public void SetIsHit(bool hit){
+        isHit = hit;
+    }
+
+    // Set if the player is invincible
+    public void SetIsInvincible(bool invincible){
+        isInvincible = invincible;
+    }
+
+    // Set player's bun visibility
+    public void SetBunVisibility(bool visible)
+    {
+        if (playerBunSpriteRenderer != null)
+        {
+            playerBunSpriteRenderer.enabled = visible;
+        }
+        else
+        {
+            Debug.LogError("Player bun sprite renderer not found in the children of the player object.");
+        }
+    }
+
     /// FIRE ACTION LOGIC
     /// This function is called when the player presses the fire button
     public void FireAction()
@@ -274,17 +286,13 @@ public class Player : MonoBehaviour
             case LevelColor.Blue:
                 TryBlock();
                 break;
-            // Green is 
+            // Green is melee
             case LevelColor.Green:
-                            // Perform action for yellow color
                 melee.gameObject.SetActive(true);
                 melee.Attack();
-                
-
                 break;
-            // Yellow is melee
+            // Yellow is kite
             case LevelColor.Yellow:
-
 
                 break;
             // Black is flashlight
