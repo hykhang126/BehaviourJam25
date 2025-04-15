@@ -41,11 +41,23 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Tilemap
+  - name: Ground
     uniqueID: 4289048019
+    locked: 0
+  - name: WalkInFront
+    uniqueID: 2528853505
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Collision
+    uniqueID: 1582954905
+    locked: 0
+  - name: WalkBehind
+    uniqueID: 2420280899
+    locked: 0
+  - name: Decor
+    uniqueID: 3241477963
     locked: 0
   - name: UI
     uniqueID: 3162947221
