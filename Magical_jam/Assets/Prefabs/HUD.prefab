@@ -134,8 +134,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: -1
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 31
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -195,11 +195,49 @@ MonoBehaviour:
   player: {fileID: 0}
   colorWheel: {fileID: 1145905086866540607}
   gameOver: {fileID: 2349426691492598655}
+  levelColorManager: {fileID: 0}
+  _levelColorSwapCooldown: 0
   healthBarAnimator: {fileID: 4964259789061291072}
   healthHeartAnimator: {fileID: 2111992327839830864}
-  _levelColorSwapCooldown: 0
-  levelColorManager: {fileID: 0}
+  healthBlipPrefab: {fileID: 662387636821028033, guid: b76ee05164e478c438f408e13f6843f1, type: 3}
+  healthBlipPrefabContainer: {fileID: 2327933987106399586}
+  healthBlipEndPos: {fileID: 1154628406929671167}
   _currentColor: 0
+--- !u!1 &2327933987106399586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4537502172367722861}
+  m_Layer: 5
+  m_Name: BlipContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4537502172367722861
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327933987106399586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7589679574685311586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2349426691492598655
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +736,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4537502172367722861}
   m_Father: {fileID: 405054797275323621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
