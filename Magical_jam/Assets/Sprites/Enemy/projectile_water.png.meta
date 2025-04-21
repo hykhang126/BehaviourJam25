@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: 175d2d2340eaaf84abd8efa3de80333a
+guid: 15cf390805a6dfc439746d1ff9861394
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2634147735006289158
-    second: water_gun_projectile_0
+      213: -5292988662052752657
+    second: enemy_blue_projectile_0
   - first:
-      213: -1436277473173155041
-    second: water_gun_projectile_1
+      213: -218206175669341021
+    second: enemy_blue_projectile_1
   - first:
-      213: 702026755072532596
-    second: water_gun_projectile_2
+      213: -414399117430330206
+    second: enemy_blue_projectile_2
+  - first:
+      213: 9185857709457454488
+    second: enemy_blue_projectile_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -132,67 +135,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: water_gun_projectile_0
+      name: projectile_water_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 15
-        height: 9
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 60d13fe986f5e8420800000000000000
-      internalID: 2634147735006289158
+      spriteID: 0a57c990c5d4d95418c274f90a23c7f0
+      internalID: 816228169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_gun_projectile_1
+      name: projectile_water_1
       rect:
         serializedVersion: 2
-        x: 15
+        x: 12
         y: 0
-        width: 15
-        height: 9
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f135e947f31511ce0800000000000000
-      internalID: -1436277473173155041
+      spriteID: 8bbdf0ab896500044a4df7e488dc11db
+      internalID: 1295229852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: water_gun_projectile_2
+      name: projectile_water_2
       rect:
         serializedVersion: 2
-        x: 30
+        x: 24
         y: 0
-        width: 15
-        height: 9
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4702bee3d991eb900800000000000000
-      internalID: 702026755072532596
+      spriteID: ae85b9439cefe284eb6500c508535864
+      internalID: 1180731357
       vertices: []
       indices: 
       edges: []
@@ -201,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cd789d1ca24e02d47a2726fad89c3729
+    spriteID: a96afb7cd6197fb4e95482931ad33c48
     internalID: 0
     vertices: []
     indices: 
@@ -211,9 +214,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      water_gun_projectile_0: 2634147735006289158
-      water_gun_projectile_1: -1436277473173155041
-      water_gun_projectile_2: 702026755072532596
+      projectile_water_0: 816228169
+      projectile_water_1: 1295229852
+      projectile_water_2: 1180731357
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
