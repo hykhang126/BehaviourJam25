@@ -44,6 +44,9 @@ TagManager:
   - name: Ground
     uniqueID: 4289048019
     locked: 0
+  - name: Shadows
+    uniqueID: 7412451
+    locked: 0
   - name: WalkInFront
     uniqueID: 2528853505
     locked: 0

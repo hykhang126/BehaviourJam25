@@ -20,7 +20,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float blinkCooldown = 0.1f;
     [SerializeField] private Core.Timer hitTimer;
-    [SerializeField] private SpriteRenderer playerBunSpriteRenderer;
+    [SerializeField] private SpriteRenderer playerArmSpriteRenderer;
+    [SerializeField] private ParticleSystem dashTrail;
 
     [Header("Player Weapon Logic")]
     [SerializeField] private Shield shield;
@@ -120,9 +121,9 @@ public class Player : MonoBehaviour
             Debug.LogError("SpriteRenderer component not found in the children of the player object.");
         }
 
-        if (playerBunSpriteRenderer == null)
+        if (playerArmSpriteRenderer == null)
         {
-            Debug.LogError("Player bun sprite renderer not found in the children of the player object.");
+            Debug.LogError("Player arm sprite renderer not found in the children of the player object.");
         }
 
         health = MAX_HEALTH;
@@ -248,16 +249,25 @@ public class Player : MonoBehaviour
         isInvincible = invincible;
     }
 
-    // Set player's bun visibility
-    public void SetBunVisibility(bool visible)
+    // Set player's arm visibility
+    public void SetArmVisibility(bool visible)
     {
-        if (playerBunSpriteRenderer != null)
+        if (playerArmSpriteRenderer != null)
         {
-            playerBunSpriteRenderer.enabled = visible;
+            playerArmSpriteRenderer.enabled = visible;
         }
         else
         {
-            Debug.LogError("Player bun sprite renderer not found in the children of the player object.");
+            Debug.LogError("Player arm sprite renderer not found in the children of the player object.");
+        }
+    }
+
+    // Make the trail appear when dashing
+    public void CheckIfDashing(bool dashing)
+    {
+        if (dashing == true)
+        {
+            dashTrail.Play();
         }
     }
 
