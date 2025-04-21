@@ -7884,6 +7884,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5465791489507647099, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5770671163872252543, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6061223798457758936, guid: 65381d9088b70264694e3bc55310952a, type: 3}
       propertyPath: m_Camera
       value: 
@@ -7891,10 +7899,6 @@ PrefabInstance:
     - target: {fileID: 6061223798457758936, guid: 65381d9088b70264694e3bc55310952a, type: 3}
       propertyPath: m_RenderMode
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061223798457758936, guid: 65381d9088b70264694e3bc55310952a, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1132020075
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
