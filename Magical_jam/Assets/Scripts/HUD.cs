@@ -19,6 +19,7 @@ public class HUD : MonoBehaviour
         Bottom left is yellow
     */
     [SerializeField] Image colorWheel;
+    [SerializeField] TMP_Text colorText;
 
     [SerializeField] GameObject gameOver;
 
@@ -147,15 +148,19 @@ public class HUD : MonoBehaviour
         {
             case LevelColor.Green:
             targetRotation = Quaternion.Euler(0, 0, -45);
+            colorText.SetText("ENVY");
             break;
             case LevelColor.Blue:
             targetRotation = Quaternion.Euler(0, 0, 45);
+            colorText.SetText("MELANCHOLY");
             break;
             case LevelColor.Red:
             targetRotation = Quaternion.Euler(0, 0, 135);
+            colorText.SetText("RAGE");
             break;
             case LevelColor.Yellow:
             targetRotation = Quaternion.Euler(0, 0, 225);
+            colorText.SetText("SHOCK");
             break;
         }
 

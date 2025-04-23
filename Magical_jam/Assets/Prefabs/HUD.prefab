@@ -298,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   colorWheel: {fileID: 1145905086866540607}
+  colorText: {fileID: 5439304143262858139}
   gameOver: {fileID: 2349426691492598655}
   levelColorManager: {fileID: 0}
   _levelColorSwapCooldown: 0
@@ -658,7 +659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MELANCHOLY
+  m_text: NULL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5baafc2f7d207054ba5bb9fd081ed673, type: 2}
   m_sharedMaterial: {fileID: -8000458310040085398, guid: 5baafc2f7d207054ba5bb9fd081ed673, type: 2}

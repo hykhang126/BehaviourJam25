@@ -4895,6 +4895,7 @@ MonoBehaviour:
   moveSpeed: 0
   blinkCooldown: 0.1
   playerArmSpriteRenderer: {fileID: 2440474457291877044}
+  playerWeaponShadow: {fileID: 1302764554199377722}
   dashTrail: {fileID: 4602412881576287957}
   shield: {fileID: 3956620223896769112}
   attachedGun: {fileID: 1989616614844165598}
