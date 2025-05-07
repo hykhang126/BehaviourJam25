@@ -141,8 +141,8 @@ namespace Enemies
         public void SetEnemyState(EnemyState enemyState)
         {
             currentState = enemyState;
-            ToggleProjectiles(false);
-            gameObject.SetActive(enemyState is EnemyState.Attacking);
+            ToggleProjectiles(currentState is EnemyState.Attacking);
+            gameObject.SetActive(currentState is EnemyState.Attacking);
         }
         
         public void Death()

@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
     
     public bool isHit;
 
-
     public float hitDuration = 1f;
 
     public bool isInvincible;
@@ -175,6 +174,7 @@ public class Player : MonoBehaviour
         // Update weapons
         playerWeaponAnimController.ToggleGun(_currentColor is LevelColor.Red);
         shield.ToggleShield(_currentColor is LevelColor.Blue);
+        melee.ToggleMelee(_currentColor is LevelColor.Green);
         attachedKite.ToggleKite(_currentColor is LevelColor.Yellow);
 
         // Check if moving to trigger gun and shield bash animation
@@ -308,7 +308,6 @@ public class Player : MonoBehaviour
         playerWeaponAnimController.SetTriggerAnimation("Shoot");
         attachedGun.Shoot(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition), GetType().ToString());
     }
-
     
     private void TryBlock()
     {

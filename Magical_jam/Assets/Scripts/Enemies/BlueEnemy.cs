@@ -12,7 +12,8 @@ namespace Enemies
         [Header(nameof(BlueEnemy))]
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private float projectileCooldown = 3f;
-
+        [SerializeField] private float projectileDamage = 10f;
+        [SerializeField] private float projectileSpeed = 800f;
         [SerializeField] private Transform shootingPoint;
 
         private Core.Timer timer;
@@ -68,9 +69,9 @@ namespace Enemies
                 Quaternion prefabRotation = Quaternion.Euler( 0, 0, 
                                         Mathf.Atan2 ( trajectoryVector.y, trajectoryVector.x ) * Mathf.Rad2Deg );
                 
-                var bullet = Instantiate(projectilePrefab, shootingPoint.transform.position, prefabRotation);
+                var bullet = Instantiate(projectilePrefab, shootingPoint.transform.position, prefabRotation, weaponProjectileContainer);
                 var bulletComponent = bullet.GetComponent<Bullet>();
-                bulletComponent.Initialize(trajectoryVector, "BlueEnemy", 800f, 10f);
+                bulletComponent.Initialize(trajectoryVector, "BlueEnemy", projectileSpeed, projectileDamage);
                 raindropBullets.Add(bulletComponent);
             }
             timer.Tick(Time.fixedDeltaTime);
