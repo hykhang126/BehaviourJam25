@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469749007407996319}
-  - component: {fileID: 9055238409626069956}
-  m_Layer: 9
-  m_Name: Collider
+  - component: {fileID: 7380762065969386949}
+  m_Layer: 11
+  m_Name: TriggerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,8 +32,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6133056758867492842}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &9055238409626069956
-CapsuleCollider2D:
+--- !u!58 &7380762065969386949
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -67,8 +67,75 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 1
+  m_Radius: 0.5
+--- !u!1 &4222045219505442959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5519303608074841433}
+  - component: {fileID: 4226110538813802749}
+  m_Layer: 11
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5519303608074841433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222045219505442959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.06, y: -2.68, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6133056758867492842}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4226110538813802749
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222045219505442959}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!1 &4348768653624200479
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5782933937680676300}
   - component: {fileID: 1791112337397878303}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +234,7 @@ GameObject:
   - component: {fileID: 6133056758867492842}
   - component: {fileID: 2879225314098125341}
   - component: {fileID: 6953678207042582589}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: PunchFist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,6 +255,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5782933937680676300}
+  - {fileID: 5519303608074841433}
   - {fileID: 469749007407996319}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -205,7 +273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyOwner: {fileID: 0}
   punchFistRigidbody: {fileID: 6953678207042582589}
-  punchFistCollider: {fileID: 9055238409626069956}
+  punchFistCollider: {fileID: 4226110538813802749}
+  punchFistTriggerCollider: {fileID: 7380762065969386949}
   movementAnimationCurve:
     serializedVersion: 2
     m_Curve:

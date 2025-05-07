@@ -96,7 +96,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 943779258991555487}
-  - component: {fileID: 4596626024665937407}
+  - component: {fileID: 3755267944857636973}
   m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
@@ -113,14 +113,14 @@ Transform:
   m_GameObject: {fileID: 1724998715142940986}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.815, z: 0}
+  m_LocalScale: {x: 1.2652, y: 1.2652, z: 1.2652}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7496476180899592813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &4596626024665937407
-CapsuleCollider2D:
+--- !u!58 &3755267944857636973
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -153,9 +153,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.8}
-  m_Size: {x: 0.9, y: 0.9}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.45
 --- !u!1 &2800850533861119925
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +189,7 @@ Transform:
   m_Children:
   - {fileID: 7218387977919534807}
   - {fileID: 943779258991555487}
-  - {fileID: 195877603693214734}
+  - {fileID: 2705821247736983194}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1295115163563936685
@@ -207,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7431476227741332777}
   enemyRigidbody: {fileID: 1181669545835133422}
-  enemyCollider: {fileID: 4596626024665937407}
+  enemyCollider: {fileID: 3755267944857636973}
   levelColor: 4
   health: 50
   moveSpeed: 15
@@ -215,7 +214,7 @@ MonoBehaviour:
   attackDamage: 1
   attackCooldown: 3
   knockbackForce: 0
-  enemyTriggerCollider: {fileID: 6800903250854187945}
+  enemyTriggerCollider: {fileID: 2753583407693914878}
 --- !u!50 &1181669545835133422
 Rigidbody2D:
   serializedVersion: 5
@@ -265,7 +264,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &5535836689098742454
+--- !u!1 &8790138673599643072
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,8 +272,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 195877603693214734}
-  - component: {fileID: 6800903250854187945}
+  - component: {fileID: 2705821247736983194}
+  - component: {fileID: 2753583407693914878}
   m_Layer: 9
   m_Name: TriggerCollider
   m_TagString: Untagged
@@ -282,28 +281,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &195877603693214734
+--- !u!4 &2705821247736983194
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5535836689098742454}
+  m_GameObject: {fileID: 8790138673599643072}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.815, z: 0}
+  m_LocalScale: {x: 1.2652, y: 1.2652, z: 1.2652}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7496476180899592813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &6800903250854187945
-CapsuleCollider2D:
+--- !u!58 &2753583407693914878
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5535836689098742454}
+  m_GameObject: {fileID: 8790138673599643072}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -331,6 +330,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.8}
-  m_Size: {x: 0.9, y: 0.9}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.45
