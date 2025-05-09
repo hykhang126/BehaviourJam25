@@ -6,6 +6,7 @@ using Levels;
 using TMPro;
 using Combat;
 using System;
+using Characters;
 
 public class HUD : MonoBehaviour
 {

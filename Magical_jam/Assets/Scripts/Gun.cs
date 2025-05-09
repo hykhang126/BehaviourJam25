@@ -1,4 +1,5 @@
 using System;
+using Characters;
 using UnityEngine;
 
 public class Gun : MonoBehaviour

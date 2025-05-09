@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Enemies;
+using Characters;
 
 public class Melee : MonoBehaviour
 {

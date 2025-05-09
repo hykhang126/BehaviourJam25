@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using Characters;
 using UnityEngine;
 
 namespace Utility
 {
-    public class LavaPool : MonoBehaviour
+    public class LavaPool : Weapon
     {
         [SerializeField] private Collider2D lavaPoolCollider;
         [SerializeField] private float maxDamage;

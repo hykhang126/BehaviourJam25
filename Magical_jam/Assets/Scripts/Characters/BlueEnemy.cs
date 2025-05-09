@@ -5,7 +5,7 @@ using Levels;
 using UnityEngine;
 using Core;
 
-namespace Enemies
+namespace Characters
 {
     public class BlueEnemy : Enemy
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Random = System.Random;
 
-namespace Enemies
+namespace Characters
 {
     public class BlackEnemy : Enemy
     {

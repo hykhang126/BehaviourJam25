@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Enemies;
+using Characters;
 using Levels;
 using UnityEngine;
 using Utility;

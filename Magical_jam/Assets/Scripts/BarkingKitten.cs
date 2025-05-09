@@ -1,5 +1,5 @@
 using UnityEngine;
-using Enemies;
+using Characters;
 
 public class BarkingKitten : MonoBehaviour
 {

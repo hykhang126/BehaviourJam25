@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Enemies
+namespace Characters
 {
     public class YellowEnemy : Enemy
     {

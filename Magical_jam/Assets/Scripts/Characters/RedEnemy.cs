@@ -4,7 +4,7 @@ using Levels;
 using UnityEngine;
 using Utility;
 
-namespace Enemies
+namespace Characters
 {
     public class RedEnemy : Enemy
     {

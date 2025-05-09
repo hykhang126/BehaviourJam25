@@ -1,4 +1,4 @@
-﻿namespace Enemies
+﻿namespace Characters
 {
     public enum EnemyState
     {

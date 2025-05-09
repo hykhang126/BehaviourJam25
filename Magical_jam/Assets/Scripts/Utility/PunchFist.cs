@@ -1,10 +1,10 @@
 ﻿using System;
-using Enemies;
+using Characters;
 using UnityEngine;
 
 namespace Utility
 {
-    public class PunchFist : MonoBehaviour
+    public class PunchFist : Weapon
     {
         public event Action OnFinished;
         

@@ -4,9 +4,9 @@ using Levels;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Enemies
+namespace Characters
 {
-    public abstract class Enemy : MonoBehaviour
+    public abstract class Enemy : Character
     {
         public event Action<Enemy> OnDeath;
         
