@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Characters;
 using Combat;
 using Levels;
 using Unity.VisualScripting;
@@ -45,40 +46,25 @@ public class Level : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private Player player;
     
+    [SerializeField] private LevelColor _currentLevelColor;
+    
     private LevelColor currentColor;
     
     public Player Player => player;
     
-    public Transform[] spawnPoints;
-
-    public SpawnManager[] spawnManagers;
-
-    public AudioClip[] bgmClips;
-
-    [SerializeField] private int _currentColorIndex = 0;
-
-    [SerializeField] private LevelColor _currentLevelColor;
-    public LevelColor CurrentLevelColor
-    {
-        get => _currentLevelColor;
-        set
-        {
-            _currentLevelColor = value;
-        }
-    }
     // Update the level's color based on the current level color
     // Subscribe to OnLevelColorChanged event
     public void UpdateCurrentColor(LevelColor newColor)
-    {
+    { 
         _currentLevelColor = newColor;
-        PlayAudio();
         currentColor = newColor;
+        spawnManager.SetLevelColor(newColor);
+        
+        PlayAudio();
     }
 
     public void Start()
-    {
-        _levelColorManager.OnLevelColorChanged.AddListener(HandleLevelColorChanged);
-        
+    {        
         _levelColorManager.Initialize();
         spawnManager.Initialize();
         
@@ -87,7 +73,7 @@ public class Level : MonoBehaviour
 
     private void OnDestroy()
     {
-        spawnManagers[_currentColorIndex].gameObject.SetActive(false);
+        spawnManager.gameObject.SetActive(false);
         _levelColorManager.OnLevelColorChanged.RemoveAllListeners();
     }
 
@@ -101,7 +87,7 @@ public class Level : MonoBehaviour
         Transform spawnPoint = playerSpawnPoint;
         player.transform.position = spawnPoint.position;
     }
-
+    
     private void PlayAudio()
     {
         audioSource.clip = GetLevelData(currentColor).BackgroundMusic;
@@ -110,19 +96,10 @@ public class Level : MonoBehaviour
         if (audioSource.clip != null)
         {
             audioSource.Play();
-            Debug.Log(audioSource.clip.name);
         }
         else
         {
             Debug.LogWarning("No audio clip is assigned to the AudioSource!");
         }
-    }
-
-    private void HandleLevelColorChanged(LevelColor levelColor)
-    {
-        currentColor = levelColor;
-        spawnManager.SetLevelColor(levelColor);
-        
-        PlayAudio();
     }
 }

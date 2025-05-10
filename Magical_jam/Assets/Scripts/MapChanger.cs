@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Levels;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -5,8 +6,9 @@ using Combat;
 
 public class MapChanger : MonoBehaviour
 {
-    public Tilemap tilemap; // Reference to the Tilemap component
-
+    public Material[] mapMats; // Reference to the Tilemap component
+    [SerializeField] private List<Renderer> mapRenderers;
+    
     public Level level = Level.Instance;
 
     [SerializeField] private LevelColor _currentColor;
@@ -16,42 +18,55 @@ public class MapChanger : MonoBehaviour
     public void UpdateCurrentColor(LevelColor newColor)
     {
         _currentColor = newColor;
-        // Switch the map color based on the new color
-        switch (newColor)
+        foreach (var mapRenderer in mapRenderers)
         {
-            case LevelColor.Red:
-                tilemap.color = Color.red;
-                break;
-            case LevelColor.Green:
-                tilemap.color = Color.green;
-                break;
-            case LevelColor.Blue:
-                tilemap.color = Color.blue;
-                break;
-            case LevelColor.Yellow:
-                tilemap.color = Color.yellow;
-                break;
-            case LevelColor.Black:
-                tilemap.color = Color.black;
-                break;
-            default:
-                tilemap.color = Color.white; // Default color
-                break;
+            if (mapRenderer == null)
+            {
+                continue;
+            }
+            
+            UpdateCurrentColorGivenMapRenderer(mapRenderer);
         }
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
-        if (tilemap == null)
+        foreach (var mapRenderer in mapRenderers)
         {
-            tilemap = GetComponent<Tilemap>(); // Get the Tilemap component if not assigned in the inspector
+            if (mapRenderer == null)
+            {
+                Debug.LogError("Map renderer not assigned in the inspector.");
+            }
+        }
+        
+        if (mapMats == null || mapMats.Length == 0)
+        {
+            Debug.LogError("Map material not assigned in the inspector.");
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void UpdateCurrentColorGivenMapRenderer(Renderer mapRenderer)
     {
-
+        // Switch the map color based on the new color
+        switch (_currentColor)
+        {
+            case LevelColor.Red:
+                mapRenderer.material = mapMats[0];
+                break;
+            case LevelColor.Blue:
+                mapRenderer.material = mapMats[1];
+                break;
+            case LevelColor.Green:
+                mapRenderer.material = mapMats[2];
+                break;
+            case LevelColor.Yellow:
+                mapRenderer.material = mapMats[3];
+                break;
+            case LevelColor.Black:
+            case LevelColor.None:
+            default:
+                Debug.LogError("Invalid color selected.");
+                break;
+        }
     }
 }

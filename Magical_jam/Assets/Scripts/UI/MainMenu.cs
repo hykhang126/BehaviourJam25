@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
     public static MainMenu instance;
     private AudioSource audioSource;
 
+    [SerializeField] private string firstSceneToPlay;
+
     // void Awake()
     // {
     //     if(instance == null)
@@ -24,7 +26,11 @@ public class MainMenu : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.Stop();
-        SceneManager.LoadSceneAsync("AmandaScene");
+        if (string.IsNullOrEmpty(firstSceneToPlay))
+        {
+            SceneManager.LoadScene("AmandaScene");
+        }
+        else SceneManager.LoadScene(firstSceneToPlay);
         
     }
 

@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HyHyScene.unity
     guid: 0009dff76437c1e4f843a46c440f5402
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HyHySceneSetMusic.unity
     guid: a6bc43fd1c4a2720ba9cb9e38c77bcde
   m_configObjects: {}

@@ -1,4 +1,5 @@
 using System;
+using Characters;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -6,7 +7,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private float reloadCooldown = 5f;
+    [SerializeField] private float reloadCooldown = 0.5f;
+    [SerializeField] private float reloadTime;
     
     void Start()
     {
@@ -18,6 +20,13 @@ public class Gun : MonoBehaviour
     
     public void Shoot(Vector3 mousePosition, string bulletOwner)
     {
+        // Gun cooldown
+        if (Time.time < reloadTime)
+        {
+            return;
+        }
+        reloadTime = Time.time + reloadCooldown;
+
         var trajectoryVector = mousePosition - bulletSpawnPoint.transform.position;
         trajectoryVector.z = 0f;
         // if the vector maginitude is too small, magnify it
