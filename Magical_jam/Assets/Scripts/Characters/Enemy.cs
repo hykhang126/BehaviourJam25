@@ -13,12 +13,7 @@ namespace Characters
         
         [Header(nameof(Enemy))]
         [SerializeField] protected NavMeshAgent navMeshAgent;
-        [SerializeField] protected SpriteRenderer spriteRenderer;
-        [SerializeField] protected Rigidbody2D enemyRigidbody;
-        [SerializeField] private Collider2D enemyCollider;
         [SerializeField] private LevelColor levelColor;
-        [SerializeField] protected float health;
-        [SerializeField] protected float moveSpeed;
         [SerializeField] protected float attackRange;
         [SerializeField] protected float attackDamage;
         [SerializeField] protected float attackCooldown;
@@ -32,7 +27,7 @@ namespace Characters
         protected Vector2 normalizedTrajectoryToPlayer;
         protected Transform weaponProjectileContainer;
 
-        public Collider2D EnemyCollider => enemyCollider;
+        public Collider2D EnemyCollider => characterCollider;
         public LevelColor LevelColor => levelColor;
         public SpriteRenderer SpriteRenderer => GetComponentInChildren<SpriteRenderer>();
         public float AttackDamage => attackDamage;
@@ -76,7 +71,7 @@ namespace Characters
             
             if (currentState is EnemyState.Dormant or EnemyState.Dead)
             {
-                enemyRigidbody.linearVelocity = Vector2.zero;
+                characterRigidbody.linearVelocity = Vector2.zero;
                 gameObject.SetActive(false);
                 return;
             }
@@ -91,7 +86,7 @@ namespace Characters
                 return;
             }
             
-            enemyRigidbody.linearVelocity = Vector2.zero;
+            characterRigidbody.linearVelocity = Vector2.zero;
             TryAttackPlayer();
         }
 
@@ -105,7 +100,7 @@ namespace Characters
             navMeshAgent.SetDestination(playerPosition);
             
             // Flip sprite depending on player position
-            spriteRenderer.flipX = playerPosition.x < transform.position.x;
+            characterSpriteRenderer.flipX = playerPosition.x < transform.position.x;
         }
 
         protected bool IsNearPlayer()
@@ -144,7 +139,7 @@ namespace Characters
         
         public void Death()
         {
-            enemyRigidbody.freezeRotation = false;
+            characterRigidbody.freezeRotation = false;
             currentState = EnemyState.Dead;
             // Destroy the enemy object after a delay
             Destroy(gameObject, 2f);

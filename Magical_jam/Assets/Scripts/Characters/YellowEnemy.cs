@@ -40,7 +40,7 @@ namespace Characters
             if (currentState is EnemyState.Dormant or EnemyState.Dead)
             {
                 isDashing = false;
-                enemyRigidbody.linearVelocity = Vector2.zero;
+                characterRigidbody.linearVelocity = Vector2.zero;
                 gameObject.SetActive(false);
                 return;
             }

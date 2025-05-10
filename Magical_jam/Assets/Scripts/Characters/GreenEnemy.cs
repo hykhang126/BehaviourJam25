@@ -15,13 +15,13 @@ namespace Characters
         {
             if (punchFist.IsPunching)
             {
-                enemyRigidbody.linearVelocity = Vector2.zero;
+                characterRigidbody.linearVelocity = Vector2.zero;
                 return;
             }
             
             playerPosition = player.transform.position;
             normalizedTrajectoryToPlayer = (playerPosition - (Vector2)transform.position).normalized;
-            enemyRigidbody.linearVelocity = normalizedTrajectoryToPlayer * (Time.fixedDeltaTime * moveSpeed);
+            characterRigidbody.linearVelocity = normalizedTrajectoryToPlayer * (Time.fixedDeltaTime * moveSpeed);
             
             var enemyBodyRotation = enemyBody.rotation;
             enemyBodyRotation.y = playerPosition.x < transform.position.x ? 180f : 0f;

@@ -64,7 +64,7 @@ namespace Characters
                 
                 if (Vector2.Distance(playerTransformPosition, enemyTransformPosition) > attackRange)
                 {
-                    enemyRigidbody.linearVelocity = (playerTransformPosition - enemyTransformPosition).normalized * (Time.fixedDeltaTime * runSpeed);
+                    characterRigidbody.linearVelocity = (playerTransformPosition - enemyTransformPosition).normalized * (Time.fixedDeltaTime * runSpeed);
                     return;
                 }
                 
@@ -92,7 +92,7 @@ namespace Characters
                 randomMovementLerpVariable = 0;
             }
             
-            enemyRigidbody.linearVelocity = currentMovementTrajectory * (Time.fixedDeltaTime * moveSpeed);
+            characterRigidbody.linearVelocity = currentMovementTrajectory * (Time.fixedDeltaTime * moveSpeed);
             
             if (IsPlayerWithinVision())
             {
@@ -133,7 +133,7 @@ namespace Characters
 
         public void GetStunned()
         {
-            enemyRigidbody.linearVelocity = Vector2.zero;
+            characterRigidbody.linearVelocity = Vector2.zero;
             isStunned = true;
             isAttacking = false;
             stunDurationTimer = Time.time;

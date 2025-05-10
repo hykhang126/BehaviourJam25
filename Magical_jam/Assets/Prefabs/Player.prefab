@@ -48,6 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2663b63e08c55304dbe642d62ba2643a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterCollider: {fileID: 1643819292734749714}
+  characterRigidbody: {fileID: 3773818598775845539}
+  characterSpriteRenderer: {fileID: 1255798220715151535}
+  health: 50
+  moveSpeed: 0
   playerCollider: {fileID: 1643819292734749714}
   playerCamera: {fileID: 0}
   HUD: {fileID: 0}
