@@ -3,6 +3,7 @@ using Combat;
 using Levels;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Characters
 {
@@ -11,6 +12,7 @@ namespace Characters
         public event Action<Enemy> OnDeath;
         
         [Header(nameof(Enemy))]
+        [SerializeField] protected NavMeshAgent navMeshAgent;
         [SerializeField] protected SpriteRenderer spriteRenderer;
         [SerializeField] protected Rigidbody2D enemyRigidbody;
         [SerializeField] private Collider2D enemyCollider;
@@ -52,25 +54,21 @@ namespace Characters
         
         private void Start()
         {
-            if (!player) 
-            {
-                player = FindFirstObjectByType<Player>();
-                if (!player)
-                {
-                    Debug.LogError("Player not found in the scene.");
-                    Destroy(this);
-                }
-            }
+            navMeshAgent.speed = moveSpeed;
+            navMeshAgent.updateRotation = false;
+            navMeshAgent.updateUpAxis = false;
         }
-
+        
         private void FixedUpdate()
         {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            
             if (!player)
             {
                 Debug.LogError("Player is not active.");
                 Destroy(this);
             }
-
+            
             if (health <= 0)
             {
                 Death();
@@ -101,12 +99,11 @@ namespace Characters
         {
             
         }
-
+        
         protected virtual void MoveTowardsPlayer()
         {
-            normalizedTrajectoryToPlayer = (playerPosition - (Vector2)transform.position).normalized;
-            enemyRigidbody.linearVelocity = normalizedTrajectoryToPlayer * (Time.fixedDeltaTime * moveSpeed);
-
+            navMeshAgent.SetDestination(playerPosition);
+            
             // Flip sprite depending on player position
             spriteRenderer.flipX = playerPosition.x < transform.position.x;
         }

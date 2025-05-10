@@ -41,12 +41,11 @@ namespace Characters
 
             var trajectory = playerPosition - (Vector2)transform.position;
             trajectory.Normalize();
-            enemyRigidbody.linearVelocity = trajectory * (Time.fixedDeltaTime * moveSpeed);
 
-            // Flip the spawn point of the projectile too
+            // Flip the spawn point of the projectile
             shootingPoint.transform.position = transform.position + (Vector3)trajectory * 0.5f;
             shootingPoint.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(trajectory.y, trajectory.x) * Mathf.Rad2Deg);
-
+            
             SpawnRainDropProjectile();
         }
 
