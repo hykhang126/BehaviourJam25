@@ -38,7 +38,7 @@ namespace Combat
             _upcomingLevelColors.Clear();
 
             // Intialize first level color
-            OnLevelColorChanged?.Invoke(LevelColor.Red);
+            OnLevelColorChanged?.Invoke(LevelColor.Red);    // TODO: why is this hardcoded?
             
             AddInitialLevelsBasedOnOrder(1);
             GoToNextLevel();

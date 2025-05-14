@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Enemies;
+using Characters;
 using Levels;
 using UnityEngine;
 using Utility;
@@ -16,10 +16,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Level levelManager;
     [SerializeField] private Transform enemyContainer;
     [SerializeField] private List<Transform> enemySpawnPoints;
-    [SerializeField] private float enemySpawnPointUpdateVectorScalar;
     [SerializeField] private Transform weaponProjectileContainer;
     [SerializeField] private List<SewerGrate> sewerGrates;
-    [SerializeField] private SpawnPointsBound spawnPointsBound;
     
     private LevelColor currentLevelColor;
     private float lastEnemySpawnTime;
@@ -30,13 +28,6 @@ public class SpawnManager : MonoBehaviour
     public void Initialize()
     {
         isInitialized = true;
-
-        if (spawnPointsBound.TopLeft == null || spawnPointsBound.BottomRight == null)
-        {
-            Debug.LogWarning("Top left and bottom right spawn points bounds are not set in the inspector.");
-            spawnPointsBound.TopLeft = enemySpawnPoints[0];
-            spawnPointsBound.BottomRight = enemySpawnPoints[^1];
-        }
     }
 
     private void Update()
@@ -63,20 +54,9 @@ public class SpawnManager : MonoBehaviour
     {
         var enemyPrefab = levelManager.GetLevelData(currentLevelColor);
 
-        // Get random spawn point and update its position for more randomness
+        // Get random spawn point
         var spawnPointIndex = Random.Range(0, enemySpawnPoints.Count);
         var spawnPoint = (Vector2)enemySpawnPoints[spawnPointIndex].position;
-        spawnPoint += new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * enemySpawnPointUpdateVectorScalar;
-        // Clamp the spawn point between top left and bottom right
-        spawnPoint.x = Mathf.Clamp(spawnPoint.x, spawnPointsBound.TopLeft.position.x, spawnPointsBound.BottomRight.position.x);
-        spawnPoint.y = Mathf.Clamp(spawnPoint.y, spawnPointsBound.BottomRight.position.y, spawnPointsBound.TopLeft.position.y);
-        // Check if spawn point is inside any collider, if yes then don't spawn enemy
-        var colliders = Physics2D.OverlapCircleAll(spawnPoint, 0.5f);
-        if (colliders.Length > 0)
-            return;
-            
-        // Update the spawn point in the list to avoid spawning at the same location
-        enemySpawnPoints[spawnPointIndex].position = spawnPoint;
         
         // Set up enemy
         var enemyGameObject = Instantiate(enemyPrefab.SpawnObject, spawnPoint, Quaternion.identity);
@@ -182,11 +162,4 @@ public class SpawnManager : MonoBehaviour
 
         enemy.OnDeath -= HandleEnemyDeath;
     }
-}
-
-[System.Serializable]
-public class SpawnPointsBound
-{
-    public Transform TopLeft;
-    public Transform BottomRight;
 }

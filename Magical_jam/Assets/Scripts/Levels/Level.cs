@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Characters;
 using Combat;
 using Levels;
 using Unity.VisualScripting;
@@ -44,23 +45,12 @@ public class Level : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private Player player;
     
+    [SerializeField] private LevelColor _currentLevelColor;
+    
     private LevelColor currentColor;
     
     public Player Player => player;
     
-    public Transform[] spawnPoints;
-
-    public AudioClip[] bgmClips;
-
-    [SerializeField] private LevelColor _currentLevelColor;
-    public LevelColor CurrentLevelColor
-    {
-        get => _currentLevelColor;
-        set
-        {
-            _currentLevelColor = value;
-        }
-    }
     // Update the level's color based on the current level color
     // Subscribe to OnLevelColorChanged event
     public void UpdateCurrentColor(LevelColor newColor)
@@ -96,7 +86,7 @@ public class Level : MonoBehaviour
         Transform spawnPoint = playerSpawnPoint;
         player.transform.position = spawnPoint.position;
     }
-
+    
     private void PlayAudio()
     {
         audioSource.clip = GetLevelData(currentColor).BackgroundMusic;

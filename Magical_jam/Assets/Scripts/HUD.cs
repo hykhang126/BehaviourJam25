@@ -6,7 +6,7 @@ using Levels;
 using TMPro;
 using Combat;
 using System;
-using Unity.VisualScripting;
+using Characters;
 
 public class HUD : MonoBehaviour
 {
@@ -19,36 +19,33 @@ public class HUD : MonoBehaviour
         Bottom left is yellow
     */
     [SerializeField] Image colorWheel;
-    [SerializeField] TMP_Text colorText;
 
     [SerializeField] GameObject gameOver;
 
-    [SerializeField] LevelColorManager levelColorManager;
-    [SerializeField] float _levelColorSwapCooldown = 0f;
-
     [SerializeField] Animator healthBarAnimator;
     [SerializeField] Animator healthHeartAnimator;
-    
-    [Header("Health Blip")]
-    HealthBlip healthBlip;
-    [SerializeField] GameObject healthBlipPrefab;
-    [SerializeField] GameObject healthBlipPrefabContainer;
-    [SerializeField] Transform healthBlipEndPos;
 
-    [Header("Level Color")]
-    [SerializeField] LevelColor _currentColor;
+    [SerializeField] float _levelColorSwapCooldown = 0f;
+
+    [SerializeField] LevelColorManager levelColorManager;
+
+    // Make singleton
+    public static HUD instance;
+    private void Awake()
+    {
+        instance = this;
+
+        // Set myself active
+        gameObject.SetActive(true);
+    }
+
+    public LevelColor _currentColor;
+
     // SUBSCRIPTIONS TO EVENT OnColorChange
     public void UpdateCurrentColor(LevelColor newColor)
     {
         _currentColor = newColor;
         UpdateColorWheel();
-    }
-
-    // MAKE SINGLETON
-    public static HUD instance;
-    public void Awake()
-    {
-        instance = this;
     }
 
     // Start is called before the first frame update
@@ -81,12 +78,6 @@ public class HUD : MonoBehaviour
             colorWheel = GetComponentInChildren<Image>();
         }
 
-        if (healthBlip == null)
-        {
-            healthBlip = healthBlipPrefab.GetComponent<HealthBlip>();
-            healthBlip.frequencyTimer.onTimerEnd += OnBlipFrequencyEnd;
-            healthBlip.endPosition = healthBlipEndPos;
-        }
     }
 
     // Update is called once per frame
@@ -98,8 +89,6 @@ public class HUD : MonoBehaviour
             float angle = 90f / _levelColorSwapCooldown * Time.deltaTime;
             RotateColorWheel(angle);
         }
-
-        if (player.GetHealth() > 0f) SendBlipsToRight();
     }
 
     public void GameOver(){
@@ -148,51 +137,35 @@ public class HUD : MonoBehaviour
         {
             case LevelColor.Green:
             targetRotation = Quaternion.Euler(0, 0, -45);
-            colorText.SetText("ENVY");
             break;
             case LevelColor.Blue:
             targetRotation = Quaternion.Euler(0, 0, 45);
-            colorText.SetText("MELANCHOLY");
             break;
             case LevelColor.Red:
             targetRotation = Quaternion.Euler(0, 0, 135);
-            colorText.SetText("RAGE");
             break;
             case LevelColor.Yellow:
             targetRotation = Quaternion.Euler(0, 0, 225);
-            colorText.SetText("SHOCK");
             break;
         }
 
+        // StartCoroutine(SmoothRotate(colorWheel.transform, targetRotation, 2.0f)); // 0.5 seconds for transition
         colorWheel.transform.rotation = targetRotation; // Set the final rotation immediately for now
     }
 
-    public void OnBlipFrequencyEnd()
+    private IEnumerator SmoothRotate(Transform target, Quaternion targetRotation, float duration)
     {
-        var spawnLocation = healthBlipPrefabContainer.transform.position;
-        // Spawn a new blip, also increase the size by 5 times
-        var blip = Instantiate(healthBlipPrefab, spawnLocation, Quaternion.identity);
-        blip.transform.localScale *= 5f; // Increase the size by 5 times
-        blip.transform.SetParent(healthBlipPrefabContainer.transform, true);
-    }
+        Quaternion initialRotation = target.rotation;
+        float elapsedTime = 0f;
 
-    public void SendBlipsToRight()
-    {
-        // Find blip frequency according to player health
-        // 1 blip every 2 second at full health, decreasing with player health
-        // min 0.5 second at 1 health
-        float blipFrequency = 2f;
-        healthBlip.frequencyBetweenBlips = blipFrequency * (player.GetHealth() / player.GetMaxHealth());
-        healthBlip.frequencyBetweenBlips = Mathf.Clamp(
-            healthBlip.frequencyBetweenBlips, 
-            0.5f, 
-            healthBlip.frequencyBetweenBlips);
-        // Update the blip frequency timer
-        if (healthBlip.frequencyTimer.IsRunning()) 
-            healthBlip.frequencyTimer.UpdateTime(healthBlip.frequencyBetweenBlips);
-        else
-            healthBlip.frequencyTimer.SetTime(healthBlip.frequencyBetweenBlips);
-        healthBlip.frequencyTimer.Tick(Time.deltaTime);
+        while (elapsedTime < duration)
+        {
+            target.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        target.rotation = targetRotation; // Ensure final rotation is exact
     }
 
     public void SetHeartAnimationTrigger(string triggerName)

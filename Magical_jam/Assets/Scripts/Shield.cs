@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-using Enemies;
+using Characters;
 using System;
 
 public class Shield : MonoBehaviour

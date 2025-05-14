@@ -1,11 +1,11 @@
 ﻿using System;
-using Enemies;
+using Characters;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Utility
 {
-    public class Kite : MonoBehaviour
+    public class Kite : Weapon
     {
         [SerializeField] private Collider2D kiteCollider;
         [SerializeField] private float kiteSpeed;

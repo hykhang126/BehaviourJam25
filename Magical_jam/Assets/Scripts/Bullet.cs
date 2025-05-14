@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using Enemies;
+using Characters;
 
 public class Bullet : MonoBehaviour
 {
