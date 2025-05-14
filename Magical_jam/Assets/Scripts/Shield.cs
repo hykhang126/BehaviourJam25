@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-using Enemies;
+using Characters;
 using System;
 
 public class Shield : MonoBehaviour
@@ -40,6 +40,23 @@ public class Shield : MonoBehaviour
 
         // Disable collisions between the shield and player/bullet layers
         Physics2D.IgnoreLayerCollision(playerLayer, sc.gameObject.layer, true); // Ignore shield-player collision
+    }
+
+    public void ToggleShield(bool toggle)
+    {
+        if (toggle)
+        {
+            EnableShield();
+            if (spriteRenderer)
+            {
+                spriteRenderer.enabled = true;
+            }
+        }
+        else
+        {
+            DisableShield();
+            TurnOffShieldSprite();
+        }
     }
 
     public void DisableShield()

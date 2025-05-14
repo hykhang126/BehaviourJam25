@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Enemies;
+using Characters;
 using Levels;
 using UnityEngine;
 using Utility;
@@ -16,7 +16,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Level levelManager;
     [SerializeField] private Transform enemyContainer;
     [SerializeField] private List<Transform> enemySpawnPoints;
-    [SerializeField] private float enemySpawnPointUpdateVectorScalar;
     [SerializeField] private Transform weaponProjectileContainer;
     [SerializeField] private List<SewerGrate> sewerGrates;
     
@@ -55,14 +54,13 @@ public class SpawnManager : MonoBehaviour
     {
         var enemyPrefab = levelManager.GetLevelData(currentLevelColor);
 
-        // Get random spawn point and update its position for more randomness
+        // Get random spawn point
         var spawnPointIndex = Random.Range(0, enemySpawnPoints.Count);
         var spawnPoint = (Vector2)enemySpawnPoints[spawnPointIndex].position;
-        spawnPoint += new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * enemySpawnPointUpdateVectorScalar;
-        enemySpawnPoints[spawnPointIndex].position = spawnPoint;
         
         // Set up enemy
-        var enemy = Instantiate(enemyPrefab.SpawnObject, spawnPoint, Quaternion.identity).GetComponent<Enemy>();
+        var enemyGameObject = Instantiate(enemyPrefab.SpawnObject, spawnPoint, Quaternion.identity);
+        var enemy = enemyGameObject.GetComponent<Enemy>();
         enemy.Initialize(levelManager.Player, weaponProjectileContainer);
         enemy.transform.SetParent(enemyContainer);
         enemy.OnDeath += HandleEnemyDeath;

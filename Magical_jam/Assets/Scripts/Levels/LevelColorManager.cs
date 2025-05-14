@@ -23,10 +23,9 @@ namespace Combat
             public float LastLevelStartTime;
         }
         
-        [SerializeField] private float _levelColorSwapCooldown = 5;
+        public float levelColorSwapCooldown = 5;
         [SerializeField] private bool _areLevelColorsRandomized;
         [SerializeField] private List<LevelColor> _levelColorOrder;
-        [SerializeField] private int _minNumberOfLevelsLoaded = 3;
         
         private int _currentLevelDataIndex;
         
@@ -37,8 +36,11 @@ namespace Combat
         {
             _levelData.Clear();
             _upcomingLevelColors.Clear();
+
+            // Intialize first level color
+            OnLevelColorChanged?.Invoke(LevelColor.Red);    // TODO: why is this hardcoded?
             
-            AddUpcomingLevels(_minNumberOfLevelsLoaded);
+            AddInitialLevelsBasedOnOrder(1);
             GoToNextLevel();
         }
         
@@ -50,18 +52,19 @@ namespace Combat
             }
             
             if (Time.time - _levelData[_currentLevelDataIndex].LastLevelStartTime >=
-                _levelColorSwapCooldown)
+                levelColorSwapCooldown)
             {
-                GoToNextLevel();
                 AddUpcomingLevel();
+                GoToNextLevel();
             }
         }
         
-        private void AddUpcomingLevels(int numberOfLevelsToLoad)
+        private void AddInitialLevelsBasedOnOrder(int numberOfLevelsToLoad)
         {
             for (var i = 0; i < numberOfLevelsToLoad; i++)
             {
-                AddUpcomingLevel();
+                LevelColor levelToAdd = _levelColorOrder[i % _levelColorOrder.Count];
+                _upcomingLevelColors.Enqueue(levelToAdd);
             }
         }
 
@@ -93,9 +96,11 @@ namespace Combat
         {
             var nextLevelColor = _upcomingLevelColors.Dequeue();
             var nextLevelDataIndex = _levelData.FindIndex(x => x.LevelColor == nextLevelColor);
-            _currentLevelDataIndex = nextLevelDataIndex;
 
-            OnLevelColorChanged?.Invoke(nextLevelColor);
+            if (_currentLevelDataIndex == nextLevelDataIndex)
+                return;
+
+            _currentLevelDataIndex = nextLevelDataIndex;
             
             if (nextLevelDataIndex == -1)
             {
@@ -105,8 +110,13 @@ namespace Combat
                     LastLevelStartTime = Time.time,
                 });
                 _currentLevelDataIndex = _levelData.Count - 1;
+                // Update event
+                OnLevelColorChanged?.Invoke(nextLevelColor);
                 return;
             }
+
+            // Update event
+            OnLevelColorChanged?.Invoke(nextLevelColor);
             
             var nextLevelDataToUpdate = _levelData[nextLevelDataIndex];
             nextLevelDataToUpdate.LastLevelStartTime = Time.time;

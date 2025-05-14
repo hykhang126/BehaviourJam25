@@ -339,7 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lavaPoolCollider: {fileID: 6953902773774515921}
   maxDamage: 1
-  destroyTime: 7
+  destroyTime: 3
 --- !u!50 &6953678207042582589
 Rigidbody2D:
   serializedVersion: 5

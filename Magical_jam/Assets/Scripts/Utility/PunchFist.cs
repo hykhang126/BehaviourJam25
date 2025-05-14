@@ -1,16 +1,17 @@
 ﻿using System;
-using Enemies;
+using Characters;
 using UnityEngine;
 
 namespace Utility
 {
-    public class PunchFist : MonoBehaviour
+    public class PunchFist : Weapon
     {
         public event Action OnFinished;
         
         [SerializeField] private Enemy enemyOwner;
         [SerializeField] private Rigidbody2D punchFistRigidbody;
         [SerializeField] private Collider2D punchFistCollider;
+        [SerializeField] private Collider2D punchFistTriggerCollider;
         [SerializeField] private AnimationCurve movementAnimationCurve;
         [SerializeField] private float duration;
         [SerializeField] private float distance;
@@ -30,6 +31,8 @@ namespace Utility
             punchStartTime = Time.time;
             startPosition = transform.position;
             endPosition = startPosition + normalizedTrajectoryToPlayer * distance;
+            
+            Physics2D.IgnoreCollision(punchFistCollider, player.PlayerCollider);
         }
 
         private void Update()
@@ -61,6 +64,11 @@ namespace Utility
             isPunching = false;
             transform.position = startPosition;
             OnFinished?.Invoke();
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            Debug.Log("Collision with: " + collision.gameObject.name);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
