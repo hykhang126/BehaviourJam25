@@ -19,7 +19,7 @@ namespace Characters
         [Header("Player Sprite Logic")]
         [SerializeField] private Shield shield;
         [SerializeField] private Gun attachedGun;
-        [SerializeField] private SpriteRenderer playerBunSpriteRenderer;
+        [SerializeField] private SpriteRenderer playerArmSpriteRenderer;
 
         [Header("Player Color")]
         [SerializeField] private LevelColor _currentColor;
@@ -113,9 +113,9 @@ namespace Characters
                 Debug.LogError("SpriteRenderer component not found in the children of the player object.");
             }
 
-            if (playerBunSpriteRenderer == null)
+            if (playerArmSpriteRenderer == null)
             {
-                Debug.LogError("Player bun sprite renderer not found in the children of the player object.");
+                Debug.LogError("Player arm sprite renderer not found in the children of the player object.");
             }
 
             health = MAX_HEALTH;
@@ -242,16 +242,16 @@ namespace Characters
             isInvincible = invincible;
         }
 
-        // Set player's bun visibility
-        public void SetBunVisibility(bool visible)
+        // Set player's arm visibility
+        public void SetArmVisibility(bool visible)
         {
-            if (playerBunSpriteRenderer != null)
+            if (playerArmSpriteRenderer != null)
             {
-                playerBunSpriteRenderer.enabled = visible;
+                playerArmSpriteRenderer.enabled = visible;
             }
             else
             {
-                Debug.LogError("Player bun sprite renderer not found in the children of the player object.");
+                Debug.LogError("Player arm sprite renderer not found in the children of the player object.");
             }
         }
 

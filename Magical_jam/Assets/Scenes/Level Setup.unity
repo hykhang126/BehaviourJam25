@@ -168,9 +168,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: beeb5adfc261f844ab12b35068694b80, type: 2}
   - {fileID: 2100000, guid: 612bfe29b997c044182e4b93bc5cda9a, type: 2}
   - {fileID: 2100000, guid: a17ef6ca252c25f47b21904bf7a9def9, type: 2}
+  mapRenderers: []
   level: {fileID: 1099521733}
   _currentColor: 0
-  mapRenderer: {fileID: 1125731389}
 --- !u!1 &65305343
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,8 +518,8 @@ MonoBehaviour:
   m_RefResolutionX: 256
   m_RefResolutionY: 192
   m_CropFrame: 4
-  m_GridSnapping: 1
-  m_FilterMode: 1
+  m_GridSnapping: 2
+  m_FilterMode: 0
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
@@ -7764,14 +7764,10 @@ MonoBehaviour:
   - {fileID: 1573449508}
   - {fileID: 407886200}
   - {fileID: 528595323}
-  enemySpawnPointUpdateVectorScalar: 5
   weaponProjectileContainer: {fileID: 419149627}
   sewerGrates:
   - {fileID: 445329458}
   - {fileID: 1601886599}
-  spawnPointsBound:
-    TopLeft: {fileID: 568259272}
-    BottomRight: {fileID: 682566467}
 --- !u!4 &424619780
 Transform:
   m_ObjectHideFlags: 0
@@ -8815,8 +8811,6 @@ MonoBehaviour:
   audioSource: {fileID: 1099521734}
   playerSpawnPoint: {fileID: 1252395825}
   player: {fileID: 1502041038}
-  spawnPoints: []
-  bgmClips: []
   _currentLevelColor: 0
 --- !u!82 &1099521734
 AudioSource:

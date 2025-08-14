@@ -76,7 +76,6 @@ public class PlayerController : MonoBehaviour
         }
         dashTime = dashCooldown; // Reset the cooldown timer
         animator.SetBool("Dashing", true); // Trigger the dash animation
-        player.CheckIfDashing(true);
         player.SetShieldBool("Dashing", true);
         player.SetIsInvincible(true); // Set the hit state to true
         player.SetArmVisibility(false);
@@ -115,7 +114,6 @@ public class PlayerController : MonoBehaviour
         if (dashVector.magnitude <= 0.01f)
         {
             animator.SetBool("Dashing", false); // Reset the dash animation when not dashing
-            player.CheckIfDashing(false);
             player.SetShieldBool("Dashing", false); // Reset the shield trigger when not dashing
             player.SetIsInvincible(false); // Reset the hit state when not dashing
             player.SetArmVisibility(true); // Show the arm when not dashing
