@@ -784,10 +784,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _levelColorSwapCooldown: 5
+  levelColorSwapCooldown: 5
   _areLevelColorsRandomized: 0
   _levelColorOrder: 01000000020000000300000004000000
-  _minNumberOfLevelsLoaded: 3
 --- !u!1001 &426269687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -941,9 +940,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4a50ebad498ae4888eeb12f3f6f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 1411518244}
+  mapMats: []
   level: {fileID: 1624063118}
   _currentColor: 0
+  mapRenderer: {fileID: 0}
 --- !u!1 &629609053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,7 +1131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &901658027
 Grid:
   m_ObjectHideFlags: 0
@@ -1535,7 +1535,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -5919277
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -382471,14 +382471,12 @@ MonoBehaviour:
   player: {fileID: 1502041038}
   spawnPoints:
   - {fileID: 1823765704}
-  spawnManagers: []
   bgmClips:
   - {fileID: 8300000, guid: a6e62798f3f4a6a44bdd97e3237dc693, type: 3}
   - {fileID: 8300000, guid: 2bcc8070ba37fbc498c0e33661cd0fde, type: 3}
   - {fileID: 8300000, guid: af0ba49e81dbc39498b33aa7fdda5415, type: 3}
   - {fileID: 8300000, guid: af0ba49e81dbc39498b33aa7fdda5415, type: 3}
   - {fileID: 8300000, guid: af0ba49e81dbc39498b33aa7fdda5415, type: 3}
-  _currentColorIndex: 0
   _currentLevelColor: 0
 --- !u!82 &1624063119
 AudioSource:

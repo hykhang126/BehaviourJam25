@@ -129,45 +129,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: health_heart_0
+      name: health_heart_beat_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 14
-        height: 13
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 737c69b72778521d0800000000000000
-      internalID: -3376143419874818249
+      spriteID: b53d5916a04714847ae498a4b7fce587
+      internalID: -1917069627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: health_heart_1
+      name: health_heart_beat_1
       rect:
         serializedVersion: 2
         x: 14
         y: 0
         width: 14
-        height: 13
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: af27d690082e73480800000000000000
-      internalID: -8919411497442118918
+      spriteID: 380590dcefa95a349890e6e85bab3fd2
+      internalID: 1566616617
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      health_heart_0: -3376143419874818249
-      health_heart_1: -8919411497442118918
+      health_heart_beat_0: -1917069627
+      health_heart_beat_1: 1566616617
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

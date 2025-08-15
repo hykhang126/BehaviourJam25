@@ -137,10 +137,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 19
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 20
+        height: 29
+      alignment: 9
+      pivot: {x: 0.55, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -157,12 +157,12 @@ TextureImporter:
       name: player_idle_1
       rect:
         serializedVersion: 2
-        x: 19
+        x: 20
         y: 0
-        width: 19
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 20
+        height: 29
+      alignment: 9
+      pivot: {x: 0.55, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -179,12 +179,12 @@ TextureImporter:
       name: player_idle_2
       rect:
         serializedVersion: 2
-        x: 38
+        x: 40
         y: 0
-        width: 19
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 20
+        height: 29
+      alignment: 9
+      pivot: {x: 0.55, y: -0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -193,6 +193,28 @@ TextureImporter:
       bones: []
       spriteID: 6d35e0bd590d89da0800000000000000
       internalID: -5937766766644145194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_idle_3
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 20
+        height: 29
+      alignment: 9
+      pivot: {x: 0.55, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 191196af6e152cd4cbde97799f0be91e
+      internalID: -979529570
       vertices: []
       indices: 
       edges: []
@@ -214,6 +236,7 @@ TextureImporter:
       player_idle_0: -5115618752126089108
       player_idle_1: -5050664382621690000
       player_idle_2: -5937766766644145194
+      player_idle_3: -979529570
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

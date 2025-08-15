@@ -40,5 +40,11 @@ namespace Core
         }
 
         public bool IsRunning() { return time > 0f; }
+
+        public void UpdateTime(float _time)
+        {
+            time = (_time < time) ? _time : time;
+        }
+
     }
 }
