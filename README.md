@@ -1,2 +1,2 @@
-# BehaviourJam25
-For Behaviour game jam 2025
+# Psychocycle
+Started for Behaviour game jam 2025
