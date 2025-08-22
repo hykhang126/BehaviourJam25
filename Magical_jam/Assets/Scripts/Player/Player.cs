@@ -169,7 +169,6 @@ namespace Characters
             playerWeaponAnimController.ToggleGun(_currentColor is LevelColor.Red);
             shield.ToggleShield(_currentColor is LevelColor.Blue);
             melee.ToggleMelee(_currentColor is LevelColor.Green);
-            attachedKite.ToggleKite(_currentColor is LevelColor.Yellow);
 
             // Check if moving to trigger gun and shield bash animation
             playerWeaponAnimController.SetFloatAnimation("Speed", moveSpeed);
@@ -275,15 +274,6 @@ namespace Characters
                     // Perform action for green color
                     melee.gameObject.SetActive(true);
                     melee.Attack();
-                    break;
-                // Yellow is kite
-                case LevelColor.Yellow:
-                    // Perform action for yellow color
-                    TryMoveKite(Input.mousePosition);
-                    break;
-                // Black is flashlight
-                case LevelColor.Black:
-                    // Perform action for black color
                     break;
                 default:
                     Debug.Log("No action defined for this color.");

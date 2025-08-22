@@ -129,8 +129,8 @@ public class HUD : MonoBehaviour
 
     private void UpdateColorWheel()
     {
-        // Rotate the wheel 90 degrees based on the current color with a smooth transition
-        // Top left is green, top right is blue, bottom right is red, bottom left is yellow
+        // Rotate the wheel 120 degrees based on the current color with a smooth transition
+        // Top left is green, top right is blue, bottom is red
         Quaternion targetRotation = Quaternion.identity;
 
         switch (_currentColor)
@@ -143,9 +143,6 @@ public class HUD : MonoBehaviour
             break;
             case LevelColor.Red:
             targetRotation = Quaternion.Euler(0, 0, 135);
-            break;
-            case LevelColor.Yellow:
-            targetRotation = Quaternion.Euler(0, 0, 225);
             break;
         }
 

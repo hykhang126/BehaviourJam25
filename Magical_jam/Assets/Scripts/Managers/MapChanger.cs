@@ -59,10 +59,6 @@ public class MapChanger : MonoBehaviour
             case LevelColor.Green:
                 mapRenderer.material = mapMats[2];
                 break;
-            case LevelColor.Yellow:
-                mapRenderer.material = mapMats[3];
-                break;
-            case LevelColor.Black:
             case LevelColor.None:
             default:
                 Debug.LogError("Invalid color selected.");
