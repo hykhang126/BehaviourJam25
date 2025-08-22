@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7277709363797054526}
   - component: {fileID: 7549041778833700098}
+  - component: {fileID: 8401433004866362306}
   - component: {fileID: 3773818598775845539}
   - component: {fileID: 1643819292734749714}
-  - component: {fileID: 8401433004866362306}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -67,6 +67,21 @@ MonoBehaviour:
   isHit: 0
   hitDuration: 1
   isInvincible: 0
+--- !u!114 &8401433004866362306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909555274014226511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b94c0d68e0545e4ba3130c510e8614a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  dashSpeed: 1
+  dashCooldown: 1.5
 --- !u!50 &3773818598775845539
 Rigidbody2D:
   serializedVersion: 5
@@ -140,21 +155,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9, y: 1.13}
   m_EdgeRadius: 0
---- !u!114 &8401433004866362306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909555274014226511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b94c0d68e0545e4ba3130c510e8614a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  dashSpeed: 1
-  dashCooldown: 1.5
 --- !u!1 &2238289332604660821
 GameObject:
   m_ObjectHideFlags: 0

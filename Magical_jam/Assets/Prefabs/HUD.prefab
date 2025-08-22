@@ -230,7 +230,7 @@ Canvas:
   m_GameObject: {fileID: 813798517796598648}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -298,15 +298,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   colorWheel: {fileID: 1145905086866540607}
-  colorText: {fileID: 5439304143262858139}
   gameOver: {fileID: 2349426691492598655}
-  levelColorManager: {fileID: 0}
-  _levelColorSwapCooldown: 0
   healthBarAnimator: {fileID: 0}
   healthHeartAnimator: {fileID: 2111992327839830864}
-  healthBlipPrefab: {fileID: 662387636821028033, guid: b76ee05164e478c438f408e13f6843f1, type: 3}
-  healthBlipPrefabContainer: {fileID: 0}
-  healthBlipEndPos: {fileID: 1154628406929671167}
+  _levelColorSwapCooldown: 0
+  levelColorManager: {fileID: 0}
   _currentColor: 0
 --- !u!1 &2349426691492598655
 GameObject:
@@ -816,7 +812,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

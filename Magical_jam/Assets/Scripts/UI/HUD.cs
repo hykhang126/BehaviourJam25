@@ -41,7 +41,7 @@ public class HUD : MonoBehaviour
 
     public LevelColor _currentColor;
 
-    // SUBSCRIPTIONS TO EVENT OnColorChange
+    // SUBSCRIPTIONS TO EVENT OnLevelColorChanged
     public void UpdateCurrentColor(LevelColor newColor)
     {
         _currentColor = newColor;
