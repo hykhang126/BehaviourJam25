@@ -1,14 +1,8 @@
-using System;
 using Characters;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
-
-using Combat;
-using Levels;
-
+[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
     Player player;

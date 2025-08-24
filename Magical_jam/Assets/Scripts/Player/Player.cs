@@ -37,31 +37,20 @@ namespace Characters
         public bool isInvincible;
 
         public Collider2D PlayerCollider => characterCollider;
-    
-        PlayerController playerController;
 
-        Melee melee;
+        private Melee melee;
 
-        Rigidbody2D rb;
+        private Rigidbody2D rb;
 
-        Animator animator;
+        private Animator animator;
 
-        PlayerWeaponAnimCon playerWeaponAnimController;
+        private SpriteRenderer spriteRenderer;
 
-        SpriteRenderer spriteRenderer;
-
-        float blinkDuration;
+        private float blinkDuration;
 
         // Start is called before the first frame update
         void Start()
         {
-            // Initialize the player controller
-            playerController = GetComponent<PlayerController>();
-            if (playerController == null)
-            {
-                playerController = gameObject.AddComponent<PlayerController>();
-            }
-
             melee = GetComponentInChildren<Melee>();
             if (melee == null)
             {
@@ -91,11 +80,6 @@ namespace Characters
             if (animator == null)
             {
                 Debug.LogError("Animator component not found in the children of the player object.");
-            }
-
-            if (playerWeaponAnimController == null)
-            {
-                playerWeaponAnimController = GetComponentInChildren<PlayerWeaponAnimCon>();
             }
 
             if (HUD == null)
@@ -166,12 +150,12 @@ namespace Characters
             playerArm.rotation = Quaternion.Euler(0f, playerBodyRotation.y, armRotationZ);
         
             // Update weapons
-            playerWeaponAnimController.ToggleGun(_currentColor is LevelColor.Red);
+            attachedGun.ToggleGun(_currentColor is LevelColor.Red);
             shield.ToggleShield(_currentColor is LevelColor.Blue);
             melee.ToggleMelee(_currentColor is LevelColor.Green);
 
             // Check if moving to trigger gun and shield bash animation
-            playerWeaponAnimController.SetFloatAnimation("Speed", moveSpeed);
+            attachedGun.SetFloatAnimation("Speed", moveSpeed);
             shield.SetShieldFloat("Speed", moveSpeed);
 
             // Update HUD logic
@@ -289,7 +273,7 @@ namespace Characters
                 return;
             }
         
-            playerWeaponAnimController.SetTriggerAnimation("Shoot");
+            attachedGun.SetTriggerAnimation("Shoot");
             attachedGun.Shoot(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition), GetType().ToString());
         }
     
@@ -312,7 +296,7 @@ namespace Characters
                 return;
             }
         
-            playerWeaponAnimController.SetTriggerAnimation("Shoot");
+            attachedGun.SetTriggerAnimation("Shoot");
             attachedKite.Move(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition));
         }
 

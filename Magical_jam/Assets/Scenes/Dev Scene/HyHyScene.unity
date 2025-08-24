@@ -253,7 +253,7 @@ MonoBehaviour:
         m_CallState: 2
   levelColorSwapCooldown: 15
   _areLevelColorsRandomized: 0
-  _levelColorOrder: 010000000200000003000000
+  _levelColorOrder: 02000000
 --- !u!4 &65305345
 Transform:
   m_ObjectHideFlags: 0
@@ -7744,7 +7744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &424619779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7799,6 +7799,10 @@ PrefabInstance:
     - target: {fileID: 813798517796598648, guid: 65381d9088b70264694e3bc55310952a, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 813798517796598648, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2176979467084559427, guid: 65381d9088b70264694e3bc55310952a, type: 3}
       propertyPath: m_Pivot.x
@@ -24742,7 +24746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084780455}
   m_Layer: 0
-  m_Name: -Level-
+  m_Name: =Level=
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24824,10 +24828,6 @@ PrefabInstance:
       propertyPath: HUD
       value: 
       objectReference: {fileID: 1879837259}
-    - target: {fileID: 7549041778833700098, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
-      propertyPath: playerCamera
-      value: 
-      objectReference: {fileID: 93682129}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
