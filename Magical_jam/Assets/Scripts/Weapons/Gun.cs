@@ -38,7 +38,10 @@ public class Gun : MonoBehaviour
         {
             return;
         }
+        // Reload
         reloadTime = Time.time + reloadCooldown;
+        // Animation
+        SetTriggerAnimation("Shoot");
 
         var trajectoryVector = mousePosition - bulletSpawnPoint.transform.position;
         trajectoryVector.z = 0f;

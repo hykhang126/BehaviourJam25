@@ -255,9 +255,7 @@ namespace Characters
                     break;
                 // Green is melee
                 case LevelColor.Green:
-                    // Perform action for green color
-                    melee.gameObject.SetActive(true);
-                    melee.Attack();
+                    TryMelee();
                     break;
                 default:
                     Debug.Log("No action defined for this color.");
@@ -273,7 +271,6 @@ namespace Characters
                 return;
             }
         
-            attachedGun.SetTriggerAnimation("Shoot");
             attachedGun.Shoot(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition), GetType().ToString());
         }
     
@@ -287,6 +284,19 @@ namespace Characters
 
             shield.EnableShield();
         }
+        
+        private void TryMelee()
+        {
+            if (!melee)
+            {
+                Debug.LogError($"No melee attached to player {gameObject.name}.");
+                return;
+            }
+
+            melee.shouldFlipMeleeCapsuleCenter();
+            melee.gameObject.SetActive(true); // Enable the melee object
+            melee.Attack();
+        }
 
         private void TryMoveKite(Vector3 mouseScreenPointPosition)
         {
@@ -295,12 +305,12 @@ namespace Characters
                 Debug.LogError($"No gun attached to player {gameObject.name}.");
                 return;
             }
-        
+
             attachedGun.SetTriggerAnimation("Shoot");
             attachedKite.Move(playerCamera.ScreenToWorldPoint(mouseScreenPointPosition));
         }
 
-        void OnCollisionEnter2D(Collision2D collision)
+        public void OnCollisionEnter2D(Collision2D collision)
         {
             Debug.Log("Collision with: " + collision.gameObject.name);
         }

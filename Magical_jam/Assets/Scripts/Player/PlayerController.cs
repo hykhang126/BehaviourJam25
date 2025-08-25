@@ -5,18 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    Player player;
-    PlayerControls controls;
-    Vector2 move;
-    Rigidbody2D rb;
-    Animator animator;
+    private Player player;
+    private PlayerControls controls;
+    private Vector2 move;
+    private Rigidbody2D rb;
+    private Animator animator;
+    private float dashTime;
+    private Vector2 dashVector = Vector2.zero;
+    private bool autoFire = false;
+
     public float speed = 10f;
     public float dashSpeed = 2f;
-    public float dashCooldown = 3f; // Cooldown time between dashes in seconds
-    private float dashTime;
-    private Vector2 dashVector = Vector2.zero; // Vector to store the dash direction
+    public float dashCooldown = 3f;
 
-    void Awake()
+    public void Awake()
     {
         player = GetComponent<Player>();
         if (player == null)
@@ -49,6 +51,9 @@ public class PlayerController : MonoBehaviour
 
         // Action (Fire)
         controls.Player.Fire.performed += ctx => FireAction();
+
+        // Auto Fire
+        controls.Player.AutoFire.performed += ctx => autoFire = !autoFire;
     }
 
     private void OnEnable()
@@ -62,7 +67,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Dash
-    void Dash()
+    private void Dash()
     {
         if (dashTime > 0f || move == Vector2.zero) // Check if dash is on cooldown
         {
@@ -78,12 +83,15 @@ public class PlayerController : MonoBehaviour
     }
 
     // Action depending on the color
-    void FireAction()
+    private void FireAction()
     {
-        if (player) player.FireAction();
+        if (player)
+        {
+            player.FireAction();
+        }
     }
-    
-    void FixedUpdate()
+
+    public void FixedUpdate()
     {
         Vector2 movement = speed * Time.deltaTime * new Vector2(move.x, move.y) + dashVector;
         // clamp postion to -100 to 100
@@ -115,5 +123,11 @@ public class PlayerController : MonoBehaviour
         // Update the speed parameter in the animator
         animator.SetFloat("Speed", move.magnitude); // Set the speed parameter based on movement input
         player.SetPlayerSpeed(move.magnitude); // Set the player's speed based on movement input
+
+        // Auto Fire
+        if (autoFire)
+        {
+            FireAction();
+        }
     }
 }

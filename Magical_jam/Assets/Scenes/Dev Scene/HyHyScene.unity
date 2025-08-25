@@ -253,7 +253,7 @@ MonoBehaviour:
         m_CallState: 2
   levelColorSwapCooldown: 15
   _areLevelColorsRandomized: 0
-  _levelColorOrder: 02000000
+  _levelColorOrder: 01000000
 --- !u!4 &65305345
 Transform:
   m_ObjectHideFlags: 0
@@ -24795,6 +24795,10 @@ PrefabInstance:
     - target: {fileID: 909555274014226511, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989616614844165598, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
+      propertyPath: reloadCooldown
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7277709363797054526, guid: c6be6aa83e2306e41b8d77ef62cccc28, type: 3}
       propertyPath: m_LocalPosition.x

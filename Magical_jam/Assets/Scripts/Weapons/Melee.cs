@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Characters;
 
@@ -16,7 +14,8 @@ public class Melee : MonoBehaviour
     private bool projectileToggle;
     bool isAttacking;
     
-    void Awake(){
+    void Awake()
+    {
         player = GetComponentInParent<Player>();
 
         animator = GetComponent<Animator>();
@@ -28,15 +27,18 @@ public class Melee : MonoBehaviour
         isAttacking = false;
     }
 
-    public bool getisAttacking(){
+    public bool getisAttacking()
+    {
         return isAttacking;
     }
 
-    public void shouldFlipMeleeCapsuleCenter(){
+    public void shouldFlipMeleeCapsuleCenter()
+    {
         // Check mouse position to see if we should flip the sprite
     }
 
-    public void Attack(){
+    public void Attack()
+    {
         if(isAttacking) return; // Prevents multiple attacks at once
         animator.SetTrigger("Melee"); // Trigger the attack animation
         isAttacking = true;
@@ -51,7 +53,8 @@ public class Melee : MonoBehaviour
         }
     }
 
-    public void EndAttack(){
+    public void EndAttack()
+    {
         isAttacking = false;
 
         // Disable this object

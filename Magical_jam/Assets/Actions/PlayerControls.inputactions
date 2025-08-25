@@ -33,9 +33,36 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "AutoFire",
+                    "type": "Button",
+                    "id": "7fa28c95-3270-48a4-a493-5854b4be775c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "42831482-c8c1-49d8-9f9c-7913e324cc81",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Previous",
+                    "type": "Button",
+                    "id": "24376246-5289-4bae-be21-916ca19484fe",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Next",
+                    "type": "Button",
+                    "id": "4d7101dd-4ee6-4cf4-99c3-7542939d6efd",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -265,17 +292,6 @@
                 },
                 {
                     "name": "",
-                    "id": "9b72ac55-89ee-408a-928e-192f293ee901",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "beab1717-2a02-4d18-87e3-3d126818741c",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -304,6 +320,39 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bb1080b9-f602-4d04-9fb1-8e1d39968697",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Previous",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08df0de2-0a5d-4de1-a6a1-2419da15c48c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93fa3735-5b40-4642-8c44-e7eadfbcadc8",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "AutoFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
