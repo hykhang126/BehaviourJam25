@@ -6,13 +6,9 @@ using Characters;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class Shield : MonoBehaviour
+public class Shield : Weapon
 {
     private Collider2D sc;
-
-    private Animator animator;
-
-    private SpriteRenderer spriteRenderer;
 
     private Rigidbody2D rb;
 
@@ -23,26 +19,15 @@ public class Shield : MonoBehaviour
     public float shieldDamage = 10f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         sc = GetComponent<Collider2D>();
         if (sc == null)
         {
             Debug.LogError("Collider2D component not found on the shield object.");
         }
-
-        animator = GetComponent<Animator>();
-        if (animator == null)
-        {
-            Debug.LogError("Animator component not found on the shield object.");
-        }
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null)
-        {
-            Debug.LogError("SpriteRenderer component not found on the shield object.");
-        }
-        spriteRenderer.enabled = false; // Initially disable the sprite renderer
 
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
@@ -69,12 +54,12 @@ public class Shield : MonoBehaviour
         if (toggle)
         {
             EnableShield();
-            TurnOnShieldSprite();
+            EnableSprite();
         }
         else
         {
             DisableShield();
-            TurnOffShieldSprite();
+            DisableSprite();
         }
     }
 
@@ -96,33 +81,6 @@ public class Shield : MonoBehaviour
         }
 
         sc.enabled = true; // Enable the shield collider
-    }
-
-    // Turn off shield sprite
-    public void TurnOffShieldSprite()
-    {
-        if (spriteRenderer)
-        {
-            spriteRenderer.enabled = false; // Disable the sprite renderer
-        }
-    }
-
-    // Turn off shield sprite
-    public void TurnOnShieldSprite()
-    {
-        if (spriteRenderer)
-        {
-            spriteRenderer.enabled = true; // Enable the sprite renderer
-        }
-    }
-
-    // Set trigger for shield animation
-    public void SetShieldTrigger(string triggerName)
-    {
-        if (animator != null && triggerName != null)
-        {
-            animator.SetTrigger(triggerName); // Set the trigger for the shield animation
-        }
     }
 
     // Set bool for shield animation
@@ -150,9 +108,5 @@ public class Shield : MonoBehaviour
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(10);
         }
-    }
-
-    void Update()
-    {
     }
 }

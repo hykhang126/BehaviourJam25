@@ -293,7 +293,7 @@ namespace Characters
                 return;
             }
 
-            melee.shouldFlipMeleeCapsuleCenter();
+            melee.ShouldFlipMeleeCapsuleCenter();
             melee.gameObject.SetActive(true); // Enable the melee object
             melee.Attack();
         }

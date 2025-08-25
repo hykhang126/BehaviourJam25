@@ -1,11 +1,9 @@
 using UnityEngine;
 using Characters;
 
-public class Melee : MonoBehaviour
+public class Melee : Weapon
 {
     Player player;
-
-    Animator animator;
 
     [SerializeField] GameObject meleeCapsuleCenter;
 
@@ -27,12 +25,12 @@ public class Melee : MonoBehaviour
         isAttacking = false;
     }
 
-    public bool getisAttacking()
+    public bool GetisAttacking()
     {
         return isAttacking;
     }
 
-    public void shouldFlipMeleeCapsuleCenter()
+    public void ShouldFlipMeleeCapsuleCenter()
     {
         // Check mouse position to see if we should flip the sprite
     }
@@ -75,17 +73,5 @@ public class Melee : MonoBehaviour
             // End attack animation as soon as we toggle off
             EndAttack();
         }
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

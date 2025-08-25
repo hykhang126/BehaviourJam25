@@ -1,9 +1,7 @@
 using Characters;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SpriteRenderer))]
-public class Gun : MonoBehaviour
+public class Gun : Weapon
 {
     [Header("Gun Setup")]
     [SerializeField] private Player player;
@@ -12,23 +10,9 @@ public class Gun : MonoBehaviour
     [SerializeField] private float reloadCooldown = 0.5f;
     [SerializeField] private float reloadTime;
 
-    private Animator animator;
-
-    private SpriteRenderer spriteRenderer;
-
-    void Start()
+    protected override void Start()
     {
-        animator = GetComponent<Animator>();
-        if (animator == null)
-        {
-            Debug.LogError("Animator component not found on the gun object.");
-        }
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null)
-        {
-            Debug.LogError("SpriteRenderer component not found on the gun object.");
-        }
+        base.Start();
     }
 
     public void Shoot(Vector3 mousePosition, string bulletOwner)
@@ -65,39 +49,11 @@ public class Gun : MonoBehaviour
     {
         if (toggle)
         {
-            EnableGun();
+            EnableSprite();
         }
         else
         {
-            DisableGun();
+            DisableSprite();
         }
-    }
-
-    public void DisableGun()
-    {
-        if (spriteRenderer == null)
-            return;
-        spriteRenderer.enabled = false; // Disable the sprite renderer
-    }
-
-    public void EnableGun()
-    {
-        if (spriteRenderer == null)
-            return;
-        spriteRenderer.enabled = true; // Enable the sprite renderer
-    }
-
-    public void SetTriggerAnimation(string triggerName)
-    {
-        if (animator == null)
-            return;
-        animator.SetTrigger(triggerName); // Trigger the animation
-    }
-
-    public void SetFloatAnimation(string floatName, float value)
-    {
-        if (animator == null)
-            return;
-        animator.SetFloat(floatName, value); // Set the float parameter for the animation
     }
 }
