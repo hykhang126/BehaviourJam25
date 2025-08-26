@@ -3,8 +3,6 @@ using UnityEngine;
 using Characters;
 
 [RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Shield : Weapon
 {
@@ -83,25 +81,7 @@ public class Shield : Weapon
         sc.enabled = true; // Enable the shield collider
     }
 
-    // Set bool for shield animation
-    public void SetShieldBool(string value, bool state)
-    {
-        if (animator != null && value != null)
-        {
-            animator.SetBool(value, state); // Set the bool for the shield animation
-        }
-    }
-
-    // Set float for shield animation
-    public void SetShieldFloat(string value, float state)
-    {
-        if (animator != null && value != null)
-        {
-            animator.SetFloat(value, state); // Set the float for the shield animation
-        }
-    }
-
-    //Collision for static colliders
+    //Collision for colliders
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))

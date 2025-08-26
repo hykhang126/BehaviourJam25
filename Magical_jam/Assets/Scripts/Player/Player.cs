@@ -156,7 +156,7 @@ namespace Characters
 
             // Check if moving to trigger gun and shield bash animation
             attachedGun.SetFloatAnimation("Speed", moveSpeed);
-            shield.SetShieldFloat("Speed", moveSpeed);
+            shield.SetFloatAnimation("Speed", moveSpeed);
 
             // Update HUD logic
             // Whenever player is hit, trigger the heart animation
@@ -324,7 +324,7 @@ namespace Characters
         {
             if (shield != null && value != null)
             {
-                shield.SetShieldBool(value, state); // Set the trigger for the shield animation
+                shield.SetBoolAnimation(value, state); // Set the trigger for the shield animation
             }
         }
     }
