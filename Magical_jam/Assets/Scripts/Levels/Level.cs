@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 using Characters;
 using Combat;
 using Levels;
-using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    [Serializable]
     public struct LevelData
     {
         public LevelColor LevelColor;
@@ -35,11 +38,12 @@ public class Level : MonoBehaviour
 
     [Header("Level Setup")]
     [SerializeField] private LevelColorManager _levelColorManager;
-    public SpawnManager spawnManager;
+    [SerializeField] private SpawnManager spawnManager;
     [SerializeField] private List<LevelData> enemyData;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private Player player;
+    [SerializeField] private LevelInfoSO levelInfo;
     public Player Player => player;
     private LevelColor currentColor;
 
@@ -84,7 +88,41 @@ public class Level : MonoBehaviour
             Debug.LogWarning("No audio clip is assigned to the AudioSource!");
         }
     }
-    
+
+    public int GetNumberOfEnemiesDefeated(LevelColor color)
+    {
+        return color switch
+        {
+            LevelColor.Red => levelInfo.redEnemiesKillCount,
+            LevelColor.Blue => levelInfo.blueEnemiesKillCount,
+            LevelColor.Green => levelInfo.greenEnemiesKillCount,
+            _ => levelInfo.totalEnemiesKillCount,
+        };
+    }
+
+    public void UpdateEnemyKilledCount(LevelColor color)
+    {
+        // Update the SOs first
+        switch (color)
+        {
+            case LevelColor.Red:
+                levelInfo.redEnemiesKillCount++;
+                break;
+            case LevelColor.Blue:
+                levelInfo.blueEnemiesKillCount++;
+                break;
+            case LevelColor.Green:
+                levelInfo.greenEnemiesKillCount++;
+                break;
+            default:
+                break;
+        }
+        levelInfo.totalEnemiesKillCount++;
+
+        // Notify Upgrade manager about the enemy killed count update
+        UpgradeManager.Instance.CheckEnemyKilledCount(color);
+    }
+
     // Start
     public void Start()
     {

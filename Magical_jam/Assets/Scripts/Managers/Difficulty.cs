@@ -1,25 +1,39 @@
 using System;
 using UnityEngine;
 
+using Levels;
+
 namespace Combat
 {
     public abstract class Difficulty
     {
-        [SerializeField] protected int enemyCount;
-        [SerializeField] protected float spawnRate;
-        [SerializeField] protected float playerDamage;
+        [SerializeField] protected float enemyCountMultiplier;
+        [SerializeField] protected float spawnRateMultiplier;
+        [SerializeField] protected float playerDamageMultiplier;
         [SerializeField] protected int[] numberOfEnemiesToDefeatPerDifficultyStage;
         [SerializeField] protected int currentStageDifficultyIndex;
 
-        public void IncreaseDifficultyStage()
+        public void CheckIfShouldIncreaseDifficultyStage(LevelColor color)
+        {
+            if (Level.Instance.GetNumberOfEnemiesDefeated(color)
+                >= numberOfEnemiesToDefeatPerDifficultyStage[currentStageDifficultyIndex])
+            {
+                IncreaseDifficultyStage(color);
+            }
+        }
+
+        public void IncreaseDifficultyStage(LevelColor color)
         {
             if (currentStageDifficultyIndex < numberOfEnemiesToDefeatPerDifficultyStage.Length - 1)
             {
                 currentStageDifficultyIndex++;
-                // x1.5 enemyCCount, spawnRate & playerDamage
-                enemyCount = Mathf.RoundToInt(enemyCount * 1.5f);
-                spawnRate *= 1.5f;
-                playerDamage *= 1.5f;
+                // x1.5 enemyCount, spawnRate & playerDamage
+                enemyCountMultiplier *= 1.5f;
+                spawnRateMultiplier *= 1.5f;
+                playerDamageMultiplier *= 1.5f;
+
+                // GIVE PLAYER UPGRADE POINT WHEN DIFFICULTY CHANGES
+                UpgradeManager.Instance.AwardUpgradePoint(color);
             }
         }
 
@@ -31,9 +45,9 @@ namespace Combat
     {
         public override void Initialize()
         {
-            enemyCount = 5;
-            spawnRate = 1.5f;
-            playerDamage = 10f;
+            enemyCountMultiplier = 1f;
+            spawnRateMultiplier = 1f;
+            playerDamageMultiplier = 1f;
         }
     }
 
@@ -42,9 +56,9 @@ namespace Combat
     {
         public override void Initialize()
         {
-            enemyCount = 7;
-            spawnRate = 1.2f;
-            playerDamage = 12f;
+            enemyCountMultiplier = 1f;
+            spawnRateMultiplier = 1f;
+            playerDamageMultiplier = 1f;
         }
     }
 
@@ -53,9 +67,9 @@ namespace Combat
     {
         public override void Initialize()
         {
-            enemyCount = 10;
-            spawnRate = 1.0f;
-            playerDamage = 15f;
+            enemyCountMultiplier = 1f;
+            spawnRateMultiplier = 1f;
+            playerDamageMultiplier = 1f;
         }
     }
 }

@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 65305345}
   - component: {fileID: 65305344}
   m_Layer: 0
-  m_Name: LevelColorManager
+  m_Name: ColorManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
         m_CallState: 2
   levelColorSwapCooldown: 15
   _areLevelColorsRandomized: 0
-  _levelColorOrder: 01000000
+  _levelColorOrder: 0100000002000000
 --- !u!4 &65305345
 Transform:
   m_ObjectHideFlags: 0
@@ -8776,7 +8776,7 @@ GameObject:
   - component: {fileID: 1099521736}
   - component: {fileID: 1099521734}
   m_Layer: 0
-  m_Name: Level Manager
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8796,9 +8796,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelColorManager: {fileID: 65305344}
   spawnManager: {fileID: 424619779}
+  enemyData:
+  - LevelColor: 1
+    HUDColor: {r: 1, g: 0, b: 0, a: 0}
+    SpawnObject: {fileID: 2800850533861119925, guid: 20d587c84dcd6ee40b835dffbf0a7155, type: 3}
+    BackgroundMusic: {fileID: 8300000, guid: 3ca6d9171900f8aa18f05ee9d8628c46, type: 3}
+    SpawnCooldown: 2
+    MaxEnemies: 10
+  - LevelColor: 2
+    HUDColor: {r: 0, g: 0.54191947, b: 1, a: 0}
+    SpawnObject: {fileID: 2800850533861119925, guid: e13e217569d3c054a8a5ff56ad8668df, type: 3}
+    BackgroundMusic: {fileID: 8300000, guid: 4e72f73477fa3ca078751e040e11d0ba, type: 3}
+    SpawnCooldown: 2
+    MaxEnemies: 10
   audioSource: {fileID: 1099521734}
   playerSpawnPoint: {fileID: 1252395825}
   player: {fileID: 1502041038}
+  levelInfo: {fileID: 11400000, guid: 39ce9d47ac51ec94ea70c9475492e15d, type: 2}
 --- !u!82 &1099521734
 AudioSource:
   m_ObjectHideFlags: 0

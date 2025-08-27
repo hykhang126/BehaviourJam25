@@ -2,6 +2,7 @@ using UnityEngine;
 
 using Characters;
 using Combat;
+using Levels;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -36,11 +37,43 @@ public class UpgradeManager : MonoBehaviour
     }
     /// SINGLETON
 
+    public void AwardUpgradePoint(LevelColor color)
+    {
+        switch (color)
+        {
+            case LevelColor.Red:
+                redUpgradePoints++;
+                break;
+            case LevelColor.Blue:
+                blueUpgradePoints++;
+                break;
+            case LevelColor.Green:
+                greenUpgradePoints++;
+                break;
+        }
+    }
+
+    public void CheckEnemyKilledCount(LevelColor color)
+    {
+        switch (color)
+        {
+            case LevelColor.Red:
+                redDifficulty.CheckIfShouldIncreaseDifficultyStage(color);
+                break;
+            case LevelColor.Blue:
+                blueDifficulty.CheckIfShouldIncreaseDifficultyStage(color);
+                break;
+            case LevelColor.Green:
+                greenDifficulty.CheckIfShouldIncreaseDifficultyStage(color);
+                break;
+            default:
+                Debug.LogWarning("Unknown level color: " + color);
+                break;
+        }
+    }
+
     void Start()
     {
-        redDifficulty = new RedDifficulty();
-        blueDifficulty = new BlueDifficulty();
-        greenDifficulty = new GreenDifficulty();
         redDifficulty.Initialize();
         blueDifficulty.Initialize();
         greenDifficulty.Initialize();
