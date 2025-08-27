@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Levels;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = System.Random;

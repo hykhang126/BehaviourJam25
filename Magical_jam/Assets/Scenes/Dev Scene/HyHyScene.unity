@@ -8773,6 +8773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1099521735}
   - component: {fileID: 1099521733}
+  - component: {fileID: 1099521736}
   - component: {fileID: 1099521734}
   m_Layer: 0
   m_Name: Level Manager
@@ -8795,35 +8796,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelColorManager: {fileID: 65305344}
   spawnManager: {fileID: 424619779}
-  enemyData:
-  - LevelColor: 3
-    HUDColor: {r: 0.0150627885, g: 0.24528301, b: 0, a: 0}
-    SpawnObject: {fileID: 2800850533861119925, guid: 14c5776e8e73d9c46b41060e8a2bd3fe, type: 3}
-    BackgroundMusic: {fileID: 8300000, guid: ade318400aeed20489cb975b5c3b232a, type: 3}
-    SpawnCooldown: 2
-    MaxEnemies: 50
-  - LevelColor: 2
-    HUDColor: {r: 0, g: 0.025579704, b: 0.5471698, a: 0}
-    SpawnObject: {fileID: 2800850533861119925, guid: e13e217569d3c054a8a5ff56ad8668df, type: 3}
-    BackgroundMusic: {fileID: 8300000, guid: 4e72f73477fa3ca078751e040e11d0ba, type: 3}
-    SpawnCooldown: 2
-    MaxEnemies: 50
-  - LevelColor: 1
-    HUDColor: {r: 0.4433962, g: 0, b: 0, a: 0}
-    SpawnObject: {fileID: 2800850533861119925, guid: 20d587c84dcd6ee40b835dffbf0a7155, type: 3}
-    BackgroundMusic: {fileID: 8300000, guid: 3ca6d9171900f8aa18f05ee9d8628c46, type: 3}
-    SpawnCooldown: 2
-    MaxEnemies: 50
-  - LevelColor: 4
-    HUDColor: {r: 0.5377358, g: 0.39346603, b: 0, a: 0}
-    SpawnObject: {fileID: 2800850533861119925, guid: 6a855adb6acf5b740b1bb74818aa5798, type: 3}
-    BackgroundMusic: {fileID: 8300000, guid: 5a3999eff6f80cc21b01bea9f61b23fb, type: 3}
-    SpawnCooldown: 2
-    MaxEnemies: 50
   audioSource: {fileID: 1099521734}
   playerSpawnPoint: {fileID: 1252395825}
   player: {fileID: 1502041038}
-  _currentLevelColor: 0
 --- !u!82 &1099521734
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8937,6 +8912,40 @@ Transform:
   - {fileID: 1252395825}
   m_Father: {fileID: 2084780455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1099521736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099521732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592a789edcce1734199a297f55f71764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1502041038}
+  redDifficulty:
+    enemyCount: 0
+    spawnRate: 0
+    playerDamage: 0
+    numberOfEnemiesToDefeatPerDifficultyStage: 010000000200000003000000
+    currentStageDifficultyIndex: 0
+  blueDifficulty:
+    enemyCount: 0
+    spawnRate: 0
+    playerDamage: 0
+    numberOfEnemiesToDefeatPerDifficultyStage: 
+    currentStageDifficultyIndex: 0
+  greenDifficulty:
+    enemyCount: 0
+    spawnRate: 0
+    playerDamage: 0
+    numberOfEnemiesToDefeatPerDifficultyStage: 
+    currentStageDifficultyIndex: 0
+  redUpgradePoints: 0
+  blueUpgradePoints: 0
+  greenUpgradePoints: 0
 --- !u!1 &1125731388
 GameObject:
   m_ObjectHideFlags: 0

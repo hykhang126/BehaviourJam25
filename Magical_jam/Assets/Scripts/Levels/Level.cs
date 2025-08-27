@@ -1,16 +1,11 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Characters;
 using Combat;
 using Levels;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Level : MonoBehaviour
 {
-    [Serializable]
     public struct LevelData
     {
         public LevelColor LevelColor;
@@ -20,7 +15,7 @@ public class Level : MonoBehaviour
         public float SpawnCooldown;
         public int MaxEnemies;
     }
-    
+
     /// <summary>
     /// SINGLETON
     /// </summary>
@@ -38,36 +33,24 @@ public class Level : MonoBehaviour
     }
     /// SINGLETON
 
+    [Header("Level Setup")]
     [SerializeField] private LevelColorManager _levelColorManager;
-    [SerializeField] public SpawnManager spawnManager;
+    public SpawnManager spawnManager;
     [SerializeField] private List<LevelData> enemyData;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private Player player;
-    
-    [SerializeField] private LevelColor _currentLevelColor;
-    
-    private LevelColor currentColor;
-    
     public Player Player => player;
-    
+    private LevelColor currentColor;
+
     // Update the level's color based on the current level color
     // Subscribe to OnLevelColorChanged event
     public void UpdateCurrentColor(LevelColor newColor)
-    { 
-        _currentLevelColor = newColor;
+    {
         currentColor = newColor;
         spawnManager.SetLevelColor(newColor);
-        
-        PlayAudio();
-    }
 
-    public void Start()
-    {        
-        _levelColorManager.Initialize();
-        spawnManager.Initialize();
-        
-        SpawnPlayer();
+        PlayAudio();
     }
 
     private void OnDestroy()
@@ -80,13 +63,13 @@ public class Level : MonoBehaviour
     {
         return enemyData.Find(x => x.LevelColor == levelColor);
     }
-    
+
     private void SpawnPlayer()
     {
         Transform spawnPoint = playerSpawnPoint;
         player.transform.position = spawnPoint.position;
     }
-    
+
     private void PlayAudio()
     {
         audioSource.clip = GetLevelData(currentColor).BackgroundMusic;
@@ -100,5 +83,14 @@ public class Level : MonoBehaviour
         {
             Debug.LogWarning("No audio clip is assigned to the AudioSource!");
         }
+    }
+    
+    // Start
+    public void Start()
+    {
+        _levelColorManager.Initialize();
+        spawnManager.Initialize();
+
+        SpawnPlayer();
     }
 }
