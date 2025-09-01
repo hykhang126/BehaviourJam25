@@ -13,16 +13,19 @@ namespace Combat
         [SerializeField] protected int[] numberOfEnemiesToDefeatPerDifficultyStage;
         [SerializeField] protected int currentStageDifficultyIndex;
 
-        public void CheckIfShouldIncreaseDifficultyStage(LevelColor color)
+        public bool CheckIfShouldIncreaseDifficultyStage(LevelColor color)
         {
             if (Level.Instance.GetNumberOfEnemiesDefeated(color)
                 >= numberOfEnemiesToDefeatPerDifficultyStage[currentStageDifficultyIndex])
             {
                 IncreaseDifficultyStage(color);
+                return true;
             }
+
+            return false;
         }
 
-        public void IncreaseDifficultyStage(LevelColor color)
+        private void IncreaseDifficultyStage(LevelColor color)
         {
             if (currentStageDifficultyIndex < numberOfEnemiesToDefeatPerDifficultyStage.Length - 1)
             {

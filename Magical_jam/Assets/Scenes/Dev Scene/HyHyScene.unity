@@ -253,7 +253,7 @@ MonoBehaviour:
         m_CallState: 2
   levelColorSwapCooldown: 15
   _areLevelColorsRandomized: 0
-  _levelColorOrder: 0100000002000000
+  _levelColorOrder: 02000000
 --- !u!4 &65305345
 Transform:
   m_ObjectHideFlags: 0
@@ -8813,6 +8813,7 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 1252395825}
   player: {fileID: 1502041038}
   levelInfo: {fileID: 11400000, guid: 39ce9d47ac51ec94ea70c9475492e15d, type: 2}
+  currentColor: 0
 --- !u!82 &1099521734
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8940,21 +8941,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1502041038}
   redDifficulty:
-    enemyCount: 0
-    spawnRate: 0
-    playerDamage: 0
+    enemyCountMultiplier: 0
+    spawnRateMultiplier: 0
+    playerDamageMultiplier: 0
     numberOfEnemiesToDefeatPerDifficultyStage: 010000000200000003000000
     currentStageDifficultyIndex: 0
   blueDifficulty:
-    enemyCount: 0
-    spawnRate: 0
-    playerDamage: 0
-    numberOfEnemiesToDefeatPerDifficultyStage: 
+    enemyCountMultiplier: 0
+    spawnRateMultiplier: 0
+    playerDamageMultiplier: 0
+    numberOfEnemiesToDefeatPerDifficultyStage: 000000000000000000000000
     currentStageDifficultyIndex: 0
   greenDifficulty:
-    enemyCount: 0
-    spawnRate: 0
-    playerDamage: 0
+    enemyCountMultiplier: 0
+    spawnRateMultiplier: 0
+    playerDamageMultiplier: 0
     numberOfEnemiesToDefeatPerDifficultyStage: 
     currentStageDifficultyIndex: 0
   redUpgradePoints: 0

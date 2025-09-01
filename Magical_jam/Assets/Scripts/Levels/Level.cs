@@ -45,7 +45,7 @@ public class Level : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private LevelInfoSO levelInfo;
     public Player Player => player;
-    private LevelColor currentColor;
+    public LevelColor currentColor;
 
     // Update the level's color based on the current level color
     // Subscribe to OnLevelColorChanged event

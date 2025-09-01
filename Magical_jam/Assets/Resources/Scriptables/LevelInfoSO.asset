@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e470140ee1767f448d3053bb1f6cf62, type: 3}
   m_Name: LevelInfoSO
   m_EditorClassIdentifier: 
+  redEnemiesKillCount: 0
+  blueEnemiesKillCount: 1104
+  greenEnemiesKillCount: 0
+  totalEnemiesKillCount: 1104

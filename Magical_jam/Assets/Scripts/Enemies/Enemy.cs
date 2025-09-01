@@ -1,16 +1,15 @@
 using System;
-using Combat;
-using Levels;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+
+using Levels;
 
 namespace Characters
 {
     public abstract class Enemy : Character
     {
         public event Action<Enemy> OnDeath;
-        
+
         [Header(nameof(Enemy))]
         [SerializeField] protected NavMeshAgent navMeshAgent;
         [SerializeField] private LevelColor levelColor;
@@ -31,7 +30,7 @@ namespace Characters
         public LevelColor LevelColor => levelColor;
         public SpriteRenderer SpriteRenderer => GetComponentInChildren<SpriteRenderer>();
         public float AttackDamage => attackDamage;
-        
+
         public virtual void Initialize(Player player, Transform weaponProjectileContainer)
         {
             this.player = player;
@@ -42,63 +41,63 @@ namespace Characters
                 Debug.LogError("Player is not active.");
                 Destroy(this);
             }
-            
+
             lastAttackTime = Time.time;
             currentState = EnemyState.Attacking;
         }
-        
+
         private void Start()
         {
             navMeshAgent.speed = moveSpeed;
             navMeshAgent.updateRotation = false;
             navMeshAgent.updateUpAxis = false;
         }
-        
+
         private void FixedUpdate()
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-            
+
             if (!player)
             {
                 Debug.LogError("Player is not active.");
                 Destroy(this);
             }
-            
+
             if (health <= 0)
             {
                 Death();
             }
-            
+
             if (currentState is EnemyState.Dormant or EnemyState.Dead)
             {
                 characterRigidbody.linearVelocity = Vector2.zero;
                 gameObject.SetActive(false);
                 return;
             }
-            
+
             gameObject.SetActive(true);
             ToggleProjectiles(true);
             playerPosition = player.transform.position;
-            
+
             if (!IsNearPlayer())
             {
                 MoveTowardsPlayer();
                 return;
             }
-            
+
             characterRigidbody.linearVelocity = Vector2.zero;
             TryAttackPlayer();
         }
 
         protected virtual void ToggleProjectiles(bool toggle)
         {
-            
+
         }
-        
+
         protected virtual void MoveTowardsPlayer()
         {
-            navMeshAgent.SetDestination(playerPosition);
-            
+            // navMeshAgent.SetDestination(playerPosition);
+
             // Flip sprite depending on player position
             characterSpriteRenderer.flipX = playerPosition.x < transform.position.x;
         }
@@ -119,7 +118,7 @@ namespace Characters
             player.TakeDamage(attackDamage);
             lastAttackTime = Time.time;
         }
-        
+
         public void TakeDamage(float damageTaken)
         {
             health -= damageTaken;
@@ -136,11 +135,17 @@ namespace Characters
             ToggleProjectiles(currentState is EnemyState.Attacking);
             gameObject.SetActive(currentState is EnemyState.Attacking);
         }
-        
+
         public void Death()
         {
+            // Update enemy kill count logic
+            Level.Instance.UpdateEnemyKilledCount(Level.Instance.currentColor);
+
+            // Update enemy object
             characterRigidbody.freezeRotation = false;
+            characterCollider.enabled = false;
             currentState = EnemyState.Dead;
+            
             // Destroy the enemy object after a delay
             Destroy(gameObject, 2f);
             OnDeath?.Invoke(this);
