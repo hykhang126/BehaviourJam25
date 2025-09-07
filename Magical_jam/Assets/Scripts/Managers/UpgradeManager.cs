@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 using Characters;
 using Combat;
@@ -16,6 +17,7 @@ public class UpgradeManager : MonoBehaviour
     public GreenDifficulty greenDifficulty;
 
     [Header("Upgrade points")]
+    public Transform upgradePointsUI;
     public int redUpgradePoints;
     public int blueUpgradePoints;
     public int greenUpgradePoints;
@@ -34,9 +36,26 @@ public class UpgradeManager : MonoBehaviour
         {
             Destroy(gameObject);  // Prevents duplicates
         }
+
+        // Null checks
+        if (!upgradePointsUI)
+        {
+            Debug.LogError("Upgrade Points UI is not assigned in the UpgradeManager.");
+        }
     }
     /// SINGLETON
 
+    private IEnumerator ShowUpgradePointsUICoroutine(Transform uiElement, float duration = 3f)
+    {
+        // Move the UI element to the player's position
+        uiElement.gameObject.SetActive(true);
+
+        // Wait for a short duration
+        yield return new WaitForSeconds(duration);
+
+        // Move the UI element back to its original position
+        uiElement.gameObject.SetActive(false);
+    }
     public void AwardUpgradePoint(LevelColor color)
     {
         switch (color)
@@ -51,6 +70,10 @@ public class UpgradeManager : MonoBehaviour
                 greenUpgradePoints++;
                 break;
         }
+
+        // Start coutine to show upgrade points UI, then move it back to original position
+        float waitTime = 3f;
+        StartCoroutine(ShowUpgradePointsUICoroutine(upgradePointsUI, waitTime));
     }
 
     public void CheckEnemyKilledCount(LevelColor color)

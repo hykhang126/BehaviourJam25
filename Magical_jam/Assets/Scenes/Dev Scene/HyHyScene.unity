@@ -253,7 +253,7 @@ MonoBehaviour:
         m_CallState: 2
   levelColorSwapCooldown: 15
   _areLevelColorsRandomized: 0
-  _levelColorOrder: 02000000
+  _levelColorOrder: 0200000001000000
 --- !u!4 &65305345
 Transform:
   m_ObjectHideFlags: 0
@@ -7800,22 +7800,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
-    - target: {fileID: 813798517796598648, guid: 65381d9088b70264694e3bc55310952a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1730032683524330319, guid: 65381d9088b70264694e3bc55310952a, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-    - target: {fileID: 1730032683524330319, guid: 65381d9088b70264694e3bc55310952a, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-    - target: {fileID: 1730032683524330319, guid: 65381d9088b70264694e3bc55310952a, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2176979467084559427, guid: 65381d9088b70264694e3bc55310952a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7896,6 +7880,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2349426691492598655, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4561116347701430897, guid: 65381d9088b70264694e3bc55310952a, type: 3}
       propertyPath: player
       value: 
@@ -7908,11 +7896,48 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 93682129}
+    - target: {fileID: 6404581646851794588, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404581646851794588, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404581646851794588, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404581646851794588, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404581646851794588, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 87.78999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404581646851794588, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 81.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404581646851794588, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -43.89499
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404581646851794588, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 47.999992
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+--- !u!224 &426269688 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6404581646851794588, guid: 65381d9088b70264694e3bc55310952a, type: 3}
+  m_PrefabInstance: {fileID: 426269687}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &445329456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8956,8 +8981,9 @@ MonoBehaviour:
     enemyCountMultiplier: 0
     spawnRateMultiplier: 0
     playerDamageMultiplier: 0
-    numberOfEnemiesToDefeatPerDifficultyStage: 
+    numberOfEnemiesToDefeatPerDifficultyStage: 000000000000000000000000
     currentStageDifficultyIndex: 0
+  upgradePointsUI: {fileID: 426269688}
   redUpgradePoints: 0
   blueUpgradePoints: 0
   greenUpgradePoints: 0
